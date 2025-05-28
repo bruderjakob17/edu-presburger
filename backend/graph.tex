@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage[x11names, svgnames, rgb]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{snakes,arrows,shapes}
+\usepackage{amsmath}
+%
+%
+
+%
+
+%
+
+\begin{document}
+\pagestyle{empty}
+%
+%
+%
+
+\enlargethispage{100cm}
+% Start of code
+% \begin{tikzpicture}[anchor=mid,>=latex',line join=bevel,]
+\begin{tikzpicture}[>=latex',line join=bevel,]
+  \pgfsetlinewidth{1bp}
+%%
+\begin{scope}
+  \pgfsetstrokecolor{black}
+  \definecolor{strokecol}{rgb}{1.0,1.0,1.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,1.0,1.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw (0.0bp,0.0bp) -- (0.0bp,103.7bp) -- (313.3bp,103.7bp) -- (313.3bp,0.0bp) -- cycle;
+\end{scope}
+\begin{scope}
+  \pgfsetstrokecolor{black}
+  \definecolor{strokecol}{rgb}{1.0,1.0,1.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,1.0,1.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw (0.0bp,0.0bp) -- (0.0bp,103.7bp) -- (313.3bp,103.7bp) -- (313.3bp,0.0bp) -- cycle;
+\end{scope}
+\begin{scope}
+  \pgfsetstrokecolor{black}
+  \definecolor{strokecol}{rgb}{1.0,1.0,1.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,1.0,1.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw (0.0bp,0.0bp) -- (0.0bp,103.7bp) -- (313.3bp,103.7bp) -- (313.3bp,0.0bp) -- cycle;
+\end{scope}
+  \pgfsetcolor{black}
+  % Edge: 0 -> 1
+  \draw [->] (131.58bp,25.6bp) .. controls (140.18bp,25.6bp) and (150.01bp,25.6bp)  .. (170.8bp,25.6bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (151.27bp,33.85bp) node {$\left[\begin{array}{c}0\\0\end{array}\right]$};
+  % Edge: 1 -> 2
+  \draw [->] (222.53bp,25.6bp) .. controls (231.13bp,25.6bp) and (240.96bp,25.6bp)  .. (261.75bp,25.6bp);
+  \draw (242.22bp,33.85bp) node {$\left[\begin{array}{c}0\\0\end{array}\right]$};
+  % Edge: 2 -> 2
+  \draw [->] (280.18bp,50.269bp) .. controls (277.56bp,68.662bp) and (280.06bp,87.2bp)  .. (287.7bp,87.2bp) .. controls (293.79bp,87.2bp) and (296.61bp,75.428bp)  .. (295.22bp,50.269bp);
+  \draw (287.7bp,95.45bp) node {$\left[\begin{array}{c}0\\0\end{array}\right],\,\left[\begin{array}{c}0\\1\end{array}\right],\,\left[\begin{array}{c}1\\0\end{array}\right],\,\left[\begin{array}{c}1\\1\end{array}\right]$};
+  % Edge: i0 -> 0
+  \draw [->] (42.919bp,25.6bp) .. controls (50.654bp,25.6bp) and (59.722bp,25.6bp)  .. (79.72bp,25.6bp);
+  % Node: 1
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (196.75bp,25.6bp) ellipse (21.6bp and 21.6bp);
+  \draw (196.75bp,25.6bp) ellipse (25.6bp and 25.6bp);
+  \draw (196.75bp,25.6bp) node {$1$};
+\end{scope}
+  % Node: 2
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (287.7bp,25.6bp) ellipse (21.6bp and 21.6bp);
+  \draw (287.7bp,25.6bp) ellipse (25.6bp and 25.6bp);
+  \draw (287.7bp,25.6bp) node {$2$};
+\end{scope}
+  % Node: 0
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (105.8bp,25.6bp) ellipse (21.6bp and 21.6bp);
+  \draw (105.8bp,25.6bp) ellipse (25.6bp and 25.6bp);
+  \draw (105.8bp,25.6bp) node {$0$};
+\end{scope}
+%
+\end{tikzpicture}
+% End of code
+
+%
+\end{document}
+%
+
+

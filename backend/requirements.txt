@@ -13,3 +13,4 @@ starlette==0.46.2
 typing-inspection==0.4.1
 typing_extensions==4.13.2
 libmata @ git+https://github.com/verifit/mata@devel#subdirectory=bindings/python
+dot2tex

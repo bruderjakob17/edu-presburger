@@ -6,7 +6,6 @@ from processing import string_to_automaton
 
 app = FastAPI()
 
-
 @app.post("/automaton/pdf")
 async def automaton_pdf(request: Request):
     src = (await request.body()).decode("utf-8")

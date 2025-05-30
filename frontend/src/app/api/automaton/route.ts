@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const body = await request.text();
-    const API_BASE_URL = "http://91.99.103.129:8000";
+    const API_BASE_URL = "http://localhost:8000";
     const response = await fetch(`${API_BASE_URL}/automaton/pdf`, {
       method: 'POST',
       headers: {

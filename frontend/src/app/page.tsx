@@ -180,7 +180,7 @@ CONST: /[0-9]+/
             <div className="border rounded-lg overflow-hidden">
               <object data={pdfURL} type="application/pdf" width="100%" height="600">
                 <p>
-                  Your browser can't display embedded PDFs.
+                  Your browser cant display embedded PDFs.
                   <a href={pdfURL} className="text-blue-500 hover:text-blue-600 ml-2">Download it instead.</a>
                 </p>
               </object>

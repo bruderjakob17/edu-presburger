@@ -134,25 +134,32 @@ def bit_vector_latex_map(n):
     return result
 
 def replace_dot_labels_with_latex(dot_str: str, n: int) -> str:
-    # 1) invert your bit_vector_latex_map
     raw_map = {v: k for k, v in bit_vector_latex_map(n).items()}
 
-    # 2) for each integer, wrap in $…$ but only escape quotes
     latex_map = {}
     for i, raw in raw_map.items():
-        wrapped = f"${raw}$"
-        # only escape " so our "…"-quoted DOT literal stays valid
-        escaped = wrapped.replace('"', r'\"')
-        latex_map[i] = escaped
+        latex_map[i] = raw  # don't add $ here
 
     def _repl(m):
-        idx = int(m.group(1))
-        tex = latex_map.get(idx, str(idx))
-        # keep a dummy label so Graphviz will still produce a place for it
-        return f'label=" " texlbl="{tex}"'
+        raw_vals = m.group(1).split(',')
+        texlbls = []
 
-    # swap out every label="3" → label=" " texlbl="$…$"
-    return re.sub(r'label="(\d+)"', _repl, dot_str)
+        for val in raw_vals:
+            val = val.strip()
+            if '\\begin{array}' in val:  # already LaTeX
+                texlbls.append(val)
+            else:
+                try:
+                    idx = int(val)
+                    tex = latex_map.get(idx, val)
+                except ValueError:
+                    tex = val
+                texlbls.append(tex)
+
+        joined = ',\\,'.join(texlbls)
+        return f'label=" " texlbl="$' + joined + '$"'
+
+    return re.sub(r'label="([^"]+)"', _repl, dot_str)
 #∃z(x= 4z) ∧∃w(y= 4w)
 
 
@@ -187,8 +194,11 @@ def string_to_automaton(string):
         aut = determinize(aut)
     aut = mata_nfa.minimize(aut)
     dot_string = aut.to_dot_str()
-    dot_string = replace_dot_labels_with_latex(dot_string, len(variables))
+    print(dot_string)
     dot_string = combine_parallel_edges(dot_string)
+    print(dot_string)
+    dot_string = replace_dot_labels_with_latex(dot_string, len(variables))
+    print(dot_string)
     dot_string = prettify_dot(dot_string)
     #payload = parse_graphviz_to_json(dot_string)
     #print("step1 done")

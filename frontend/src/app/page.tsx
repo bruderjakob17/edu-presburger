@@ -5,17 +5,25 @@ import Script from 'next/script';
 import GraphvizViewer from './components/GraphvizViewer';
 import ExampleSolutions from './components/ExampleSolutions';
 
+// Add ExampleSolution type at the top (or import from ExampleSolutions if you prefer)
+type ExampleSolution = {
+  path_int: number[];
+  path_bits: string[];
+  variables: string[];
+  var_bits: { [key: string]: string };
+  var_ints: { [key: string]: number };
+};
+
 export default function Home() {
   const [input, setInput] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [dotString, setDotString] = useState<string>();
   const [variables, setVariables] = useState<string[]>([]);
-  const [exampleSolutions, setExampleSolutions] = useState<any[]>([]);
+  const [exampleSolutions, setExampleSolutions] = useState<ExampleSolution[]>([]);
   const [showHelp, setShowHelp] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [kSolutions, setKSolutions] = useState(3);
-  const [forceExpandExample, setForceExpandExample] = useState(false);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -37,7 +45,6 @@ export default function Home() {
     setError(null);
     setDotString(undefined);
     setExampleSolutions([]);
-    if (forceExpand) setForceExpandExample(true);
     try {
       const requestBody = {
         formula: (formulaOverride ?? input).trim(),
@@ -60,7 +67,6 @@ export default function Home() {
           .replace(/ /g, '\u00A0');
         console.log('Error message received:', JSON.stringify(errorMsg));
         setError(errorMsg);
-        setForceExpandExample(false);
         return;
       }
 
@@ -69,14 +75,12 @@ export default function Home() {
       setDotString(data.dot);
       setVariables(data.variables || []);
       setExampleSolutions(data.example_solutions || []);
-      setForceExpandExample(false);
     } catch (err) {
       const errorMsg = (err instanceof Error ? err.message : 'An error occurred')
         .replace(/\t/g, '    ')
         .replace(/ /g, '\u00A0');
       console.log('Error message received:', JSON.stringify(errorMsg));
       setError(errorMsg);
-      setForceExpandExample(false);
     } finally {
       setLoading(false);
     }

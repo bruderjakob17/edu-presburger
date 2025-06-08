@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const { formula, variable_order = [], k_solutions = 3 } = await request.json();
 
     // 2️⃣  Forward all fields including k_solutions
-    const backendRes = await fetch('https://thesis-hhd5.onrender.com:8000/automaton/dot', {
+    const backendRes = await fetch('https://thesis-hhd5.onrender.com/automaton/dot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ formula, variable_order, k_solutions }),
@@ -23,8 +23,8 @@ export async function POST(request: Request) {
 
     const data = await backendRes.json();
     return NextResponse.json(data);
-  } catch (err) {
-    console.error('Proxy failed:', err);
-    return NextResponse.json({ error: 'Failed to process automaton' }, { status: 500 });
+  } catch (error) {
+    console.error('API route error:', error);
+    return new NextResponse('Failed to fetch from backend', { status: 500 });
   }
 }

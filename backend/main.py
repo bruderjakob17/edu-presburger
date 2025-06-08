@@ -3,10 +3,19 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from lark import UnexpectedInput
 from typing import List
-
-from processing import formula_to_dot  # <- now expects (formula, variable_order)
+from processing import formula_to_dot
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# CORS middleware configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://thesis-frontend-up2l.onrender.com"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class FormulaRequest(BaseModel):
     formula: str

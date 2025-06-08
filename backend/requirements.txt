@@ -44,3 +44,4 @@ tzdata==2025.2
 uvicorn==0.34.2
 wcwidth==0.2.13
 wheel==0.45.1
+gunicorn

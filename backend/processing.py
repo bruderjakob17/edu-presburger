@@ -5,6 +5,7 @@ from typing import List, Tuple
 
 from lark import UnexpectedInput
 
+from collections import deque
 import syntax_tree_visualizier  # type: ignore
 import parser  # type: ignore
 import expander  # type: ignore
@@ -184,6 +185,24 @@ def convert_int_labels_to_bitstrings(dot: str, width: int) -> str:
     return _LABEL_ATTR.sub(_repl, dot)
 
 
+def optimize_dot_start_arrow(dot_string: str) -> str:
+    # Ensure layout settings are preserved
+    # Remove existing i0 node + arrow if present
+    dot_string = re.sub(r'node\s*\[shape=none, label=""\];\s*i0\s*->\s*0\s*;', '', dot_string)
+
+    # Add optimized start node and arrow
+    start_arrow = """
+    i0 [shape=point, width=0.01, height=0.01, style=invis];
+    i0 -> 0 [arrowhead=normal, style=solid, weight=0];
+    """
+
+    # Find last closing brace to insert before it
+    dot_string = dot_string.strip()
+    if dot_string.endswith('}'):
+        dot_string = dot_string[:-1] + start_arrow + "\n}"
+
+    return dot_string
+
 ###############################################################################
 # New step 1: merge parallel edges                                             #
 ###############################################################################
@@ -296,6 +315,58 @@ def simplify_automaton_labels(dot: str) -> str:
     return label_re.sub(_replace, dot)
 
 ###############################################################################
+def parse_dot_edges(dot_string):
+    edge_pattern = re.compile(r'(\w+)\s*->\s*(\w+)')
+    graph = defaultdict(list)
+    nodes = set()
+
+    for match in edge_pattern.finditer(dot_string):
+        src, dst = match.groups()
+        graph[src].append(dst)
+        nodes.update([src, dst])
+
+    # Find potential roots (nodes without incoming edges)
+    all_destinations = {dst for dests in graph.values() for dst in dests}
+    roots = list(nodes - all_destinations)
+
+    return graph, roots, list(nodes)
+
+
+def compute_depth_and_breadth(graph, roots):
+    max_depth = 0
+    max_breadth = 0
+
+    visited = set()
+    queue = deque()
+
+    for root in roots:
+        queue.append((root, 0))  # (node, depth)
+
+    level_count = defaultdict(int)
+
+    while queue:
+        node, depth = queue.popleft()
+        if node in visited:
+            continue
+        visited.add(node)
+
+        max_depth = max(max_depth, depth)
+        level_count[depth] += 1
+        max_breadth = max(max_breadth, level_count[depth])
+
+        for neighbor in graph.get(node, []):
+            queue.append((neighbor, depth + 1))
+
+    return max_depth, max_breadth
+
+def decide_rankdir_from_structure(dot_string):
+    graph, roots, nodes = parse_dot_edges(dot_string)
+    depth, breadth = compute_depth_and_breadth(graph, roots)
+
+    if depth < breadth * 1.2:
+        return "TB"  # Tall and narrow → vertical
+    else:
+        return "LR"  # Wide or balanced → horizontal
 
 def add_rankdir_auto(dot: str) -> str:
     """
@@ -305,34 +376,32 @@ def add_rankdir_auto(dot: str) -> str:
     """
     lines = dot.strip().splitlines()
 
-    # 1. Try to extract bounding box
-    width = height = None
-    for line in lines:
-        if 'bb="' in line:
-            match = re.search(r'bb="0,0,(\d+),(\d+)"', line)
-            if match:
-                width = int(match.group(1))
-                height = int(match.group(2))
-            break
-
     # 2. Count nodes
     node_lines = [line for line in lines if re.match(r'^\s*\d+\s+\[', line)]
     node_count = len(node_lines)
 
     # 3. Decide layout direction
-    rankdir = "LR" if width and height and width > height else "TB"
-
+    rankdir = decide_rankdir_from_structure(dot)
+    #layout = "neato" #if node_count < 10 else "neato"
+    #print(node_count)
+    layout = "dot"
+    size = "16,9"
+    ratio = "fill" if node_count > 10 else "auto"
+    #rankdir = "LR"
     # 4. Insert layout instructions
     for i, line in enumerate(lines):
         if line.strip().startswith("digraph"):
             # Insert after "digraph G {"
             insert_lines = [
-                f'layout=dot;',
+                f'layout={layout};',
                 f'rankdir={rankdir};',
-                'size="12,8";'
+                f'size="{size}";',
+                #f'margin={margin};',
+                f'ratio={ratio};',
+                #'size="16,9";'
             ]
-            if node_count >= 5:  # apply ratio=fill only if graph is "big enough"
-                insert_lines.insert(0, 'ratio=fill;')
+            #if node_count >= 5:  # apply ratio=fill only if graph is "big enough"
+            #insert_lines.insert(0, 'ratio=fill;')
             for j, content in enumerate(insert_lines):
                 lines.insert(i + 1 + j, content)
             break
@@ -373,6 +442,8 @@ def formula_to_dot(formula: str, variable_order, k_solutions):
     dot = merge_parallel_edges(dot)
     dot = simplify_automaton_labels(dot)
     dot = add_rankdir_auto(dot)
+    dot = optimize_dot_start_arrow(dot)
+    #print(dot)
     return variables, dot, example_solutions
 
 

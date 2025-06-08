@@ -277,7 +277,7 @@ CONST: /[0-9]+/
               </div>
             )}
             <div className="border rounded-lg overflow-hidden">
-              <div className="w-full aspect-[3/2]">
+              <div className="w-full aspect-[16/9]">
                 <GraphvizViewer dot={dotString} />
               </div>
             </div>

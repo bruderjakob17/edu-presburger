@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+node_modules/
+.next/
 /.pnp
 .pnp.*
 .yarn/*
@@ -76,3 +78,8 @@ build/
 
 # IntelliJ IDEA project files
 .idea/
+
+# PyCache
+__pycache__/
+
+

@@ -1,0 +1,4 @@
+{
+  "/api/automaton/dot/route": "app/api/automaton/dot/route.js",
+  "/page": "app/page.js"
+}

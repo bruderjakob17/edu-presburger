@@ -1,0 +1,26 @@
+[project]
+name = "presburger_converter"
+version = "0.1.0" # You might want to update this version number as your project evolves
+description = "A converter for Presburger arithmetic formulas" # You can refine this description
+authors = [
+  { name = "Johannes Michalke", email = "johannes.michalke@tum.de" } # Fill in your name and email
+]
+readme = "README.md" # If you have a README.md, include it
+requires-python = ">=3.8" # Adjust this based on your minimum Python version
+
+dependencies = [
+  "lark==1.2.2",
+  "graphviz==0.20.3",
+  # For the git dependency, we list it here directly.
+  # Pip will handle the Git URL from pyproject.toml when installing.
+  "libmata @ git+https://github.com/verifit/mata@56a4259c64d619906acd2ac2aed2b3cd26cad345#subdirectory=bindings/python",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"] # Setuptools is a common build backend
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+# This tells setuptools to automatically find packages in your project.
+# Assuming your Python modules are directly under 'presburger_converter/'
+where = ["."] # Search for packages in the current directory (presburger_converter)

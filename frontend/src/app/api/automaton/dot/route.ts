@@ -26,6 +26,6 @@ export async function POST(request: Request) {
     return NextResponse.json(data);
   } catch (error) {
     console.error('API route error:', error);
-    return new NextResponse('Failed to fetch from backend', { status: 500 });
+    return new NextResponse('Failed to fetch from presburger_converter', { status: 500 });
   }
 }

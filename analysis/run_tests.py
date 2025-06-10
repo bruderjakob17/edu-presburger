@@ -6,29 +6,20 @@ import re
 import argparse
 import os
 from multiprocessing import Process, Queue
-from backend.processing import formula_to_dot
+from presburger_converter import test_formula
 
 def get_script_dir():
     return os.path.dirname(os.path.abspath(__file__))
 
-def count_states_in_dot(dot_string):
-    return len(re.findall(r'^\s*\d+\s+\[label=', dot_string, re.MULTILINE))
-
-
-# 🔁 Moved to top-level so it can be pickled
 def formula_worker(q, expr):
     try:
         start = time.perf_counter()
-        print("called formula_to_dot")
-        _, dot_string, num_states = formula_to_dot(expr, [], 0)
-        print(dot_string)
+        dot_string, num_states = test_formula(expr)
         duration = (time.perf_counter() - start) * 1000
-        #num_states = count_states_in_dot(dot_string)
         q.put((duration, num_states))
     except Exception as e:
         print(f"Error processing {expr}: {e}")
         q.put(("n/a", "n/a"))
-
 
 def run_formula_with_timeout(expr, timeout_sec=10):
     q = Queue()

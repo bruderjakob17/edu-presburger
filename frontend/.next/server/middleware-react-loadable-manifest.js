@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST='{"../node_modules/@hpcc-js/wasm/dist/index.js -> ./duckdb.js":{"id":717,"files":["static/chunks/0843d5d7.c04a93ce5b69d40b.js"]}}';

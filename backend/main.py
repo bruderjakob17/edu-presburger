@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, Response
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -8,14 +10,18 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# CORS middleware configuration
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://thesis-frontend-up2l.onrender.com"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Read environment
+APP_ENV = os.getenv("APP_ENV", "development")
+
+# CORS middleware configuration (only in production)
+if APP_ENV == "production":
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["https://thesis-frontend-up2l.onrender.com"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 class FormulaRequest(BaseModel):
     formula: str

@@ -36,7 +36,8 @@
     | sum "+" product                              -> add
     | sum "-" product                              -> sub
 
-?product: CONST VAR                                -> mult
+?product: CONST VAR         -> mult
+        | "-" CONST VAR     -> neg_mult
         | factor
 
 ?factor: "-" factor          -> unary_minus

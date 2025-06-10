@@ -3,9 +3,11 @@
 from lark import Lark, Transformer, v_args
 from ast_nodes import *
 from lark import UnexpectedInput
+import os
 
 # Load grammar
-with open("grammar.lark") as file:
+grammar_path = os.path.join(os.path.dirname(__file__), "grammar.lark")
+with open(grammar_path) as file:
     grammar = file.read()
 
 parser = Lark(grammar, start="start")
@@ -32,6 +34,9 @@ class ASTTransformer(Transformer):
 
     def mult(self, const, var):
         return Mult(int(const), str(var))
+
+    def neg_mult(self, const, var):
+        return Mult(-int(const), str(var))
 
     # Terms
     def add(self, left, right):

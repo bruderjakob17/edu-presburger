@@ -1,7 +1,7 @@
 # syntax_tree_visualizer.py
 
 from graphviz import Digraph
-from ast_nodes import *
+import ast_nodes
 
 def syntax_tree_to_dot(ast, filename="syntax_tree"):
     dot = Digraph(comment='Syntax Tree')

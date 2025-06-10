@@ -5,9 +5,10 @@ export async function POST(request: Request) {
   try {
     // 1️⃣  Parse the incoming JSON only once
     const { formula, variable_order = [], k_solutions = 3 } = await request.json();
-
+    // https://thesis-hhd5.onrender.com/automaton/dot
+    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
     // 2️⃣  Forward all fields including k_solutions
-    const backendRes = await fetch('https://thesis-hhd5.onrender.com/automaton/dot', {
+    const backendRes = await fetch(`${BACKEND_URL}/automaton/dot`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ formula, variable_order, k_solutions }),

@@ -7,10 +7,12 @@ from lark import UnexpectedInput
 
 from collections import deque
 import syntax_tree_visualizier  # type: ignore
-import parser  # type: ignore
+import parser
 import expander  # type: ignore
-from automaton_builder import build_automaton, is_deterministic, determinize  # type: ignore
+import automaton_builder # type: ignore
+from automaton_builder import build_automaton, is_deterministic, determinize  # Import specific functions
 import libmata.nfa.nfa as mata_nfa  # type: ignore
+from ast_nodes import *  # Import AST nodes directly
 
 from solutions import find_shortest_paths, describe_paths
 
@@ -22,8 +24,8 @@ from solutions import find_shortest_paths, describe_paths
 
 def int_to_bitstring(i: int, width: int) -> str:
     """
-    Return *width*-bit two’s-complement binary representation of *i*
-    *little-endian* (LSB-first) so it matches the automaton’s encoding.
+    Return *width*-bit two's-complement binary representation of *i*
+    *little-endian* (LSB-first) so it matches the automaton's encoding.
     """
     return f"{i:0{width}b}"[::-1]          # <— reverse to LSB-first
 
@@ -259,7 +261,7 @@ def merge_parallel_edges(dot: str) -> str:
 def _merge_patterns(patterns):
     """
     Repeatedly merge sub-labels that differ in exactly one position,
-    replacing that position with ‘*’, until no further merges are possible.
+    replacing that position with '*, until no further merges are possible.
     """
     patterns = set(patterns)
     changed = True
@@ -411,20 +413,34 @@ def add_rankdir_auto(dot: str) -> str:
 # Pipeline                                                                     #
 ###############################################################################
 
+def test_formula(formula: str):
+    tree = parser.parse_formula(formula)
+    pure_tree = expander.expand_shorthands(tree)
+    aut, variables = build_automaton(pure_tree)
+    if not is_deterministic(aut):
+        aut = determinize(aut)
+    aut = mata_nfa.minimize(aut)
+    num_states = len(aut.get_reachable_states())
+    dot = aut.to_dot_str()
+    return dot, num_states
+
 
 def formula_to_dot(formula: str, variable_order, k_solutions):
     tree = parser.parse_formula(formula)  # may raise UnexpectedInput
     pure_tree = expander.expand_shorthands(tree)
-    syntax_tree_visualizier.syntax_tree_to_dot(tree, filename="syntax_tree")
+    #syntax_tree_visualizier.syntax_tree_to_dot(tree, filename="syntax_tree")
 
     aut, variables = build_automaton(pure_tree)
     if not is_deterministic(aut):
         aut = determinize(aut)
     aut = mata_nfa.minimize(aut)
+    #num_states = len(aut.get_reachable_states())
+    #comment out for benchmarks
     example_solutions = find_shortest_paths(aut, k_solutions)
     dot = aut.to_dot_str()
     dot = convert_int_labels_to_bitstrings(dot, len(variables))
     if variable_order:
+        # comment out for benchmarks
         example_solutions = describe_paths(variables, example_solutions, variable_order)
         if set(variable_order) != set(variables):
             raise AssertionError(
@@ -438,30 +454,13 @@ def formula_to_dot(formula: str, variable_order, k_solutions):
         dot = reorder_bitstring_labels(dot, mapping, len(variables))
         variables = variable_order[:]
     else:
+        # comment out for benchmarks
         example_solutions = describe_paths(variables, example_solutions)
     dot = merge_parallel_edges(dot)
     dot = simplify_automaton_labels(dot)
     dot = add_rankdir_auto(dot)
     dot = optimize_dot_start_arrow(dot)
     #print(dot)
+    #comment out for benchmarks
+    #return variables, dot, num_states
     return variables, dot, example_solutions
-
-
-###############################################################################
-# CLI / demo                                                                   #
-###############################################################################
-
-
-def main() -> None:
-    example = "(EX z. x = 4z) AND (EX w. y = 4w)"  # sample input
-    vars_, dot_out = formula_to_dot(example)
-
-    # Write DOT file next to script for inspection.
-    out_path = os.path.join(os.path.dirname(__file__), "graph.dot")
-    with open(out_path, "w", encoding="utf-8") as fh:
-        fh.write(dot_out)
-    print(f"Wrote DOT ({len(vars_)} variables) to {out_path}")
-
-
-if __name__ == "__main__":
-    main()

@@ -8,8 +8,6 @@ import itertools
 import libmata.nfa.nfa as mata_nfa
 from libmata.alphabets import *
 
-from visual_cleanup import relabel_and_aggregate, int_to_lsbf
-
 config = mata_nfa.store()
 
 def setup(k):
@@ -365,6 +363,9 @@ def is_deterministic(aut : mata_nfa.Nfa):
 
 def lsbf_to_int(bits):
     return sum(bit << i for i, bit in enumerate(bits))
+
+def int_to_lsbf(n, width):
+    return tuple((n >> i) & 1 for i in range(width))
 
 def encode(k):
     if k < 0:

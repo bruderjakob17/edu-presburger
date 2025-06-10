@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
-=======
 fastapi==0.115.2
 uvicorn==0.34.2
 pydantic==2.11.5
 lark==1.2.2
->>>>>>> Stashed changes

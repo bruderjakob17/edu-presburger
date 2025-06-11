@@ -35,7 +35,6 @@ async def automaton_dot(req: FormulaRequest):
     formula = req.formula
     new_variable_order = req.variable_order
     k_solutions = req.k_solutions
-    print(req)
     try:
         aut, dot_string, original_variable_order, new_variable_order = formula_to_dot(formula, new_variable_order)
         example_solutions = find_example_solutions(aut, k_solutions, original_variable_order, new_variable_order)

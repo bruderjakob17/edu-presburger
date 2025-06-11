@@ -1,0 +1,43 @@
+There are three types of files.
+tests, test_results, and plot_data.
+
+There are three types of tests: For quantifier depth, for constant size and for junction count.
+
+depth has the following naming convention:
+name = depth_<position>_<range_start>_<range_stop>_<constant_size>_<variable_count>_<junction_count>_<mode>_<sample_size>
+    where position is either "inside" or "outside"
+          range_start and range_stop are the range of the quantifier depth
+          constant_size is the midpoint of the interval of the constant in the expression
+          variable_count is the number of variables in the expression
+          junction_count is the number of junctions in the expression
+          mode is either "random", "or" or "and"
+          sample_size is the number of samples to be taken
+accordingly the files are named
+plots: <y-axis>_vs_{name}
+    where y-axis is either "time" or "states"
+test_results: results_{name}.csv
+tests: test_{name}.csv
+
+constant has the following naming convention:
+name = constant_<variable_count>_<junction_count>_<mode>_<sample_size>
+    where variable_count is the number of variables in the expression
+          junction_count is the number of junctions in the expression
+          mode is either "random", "or" or "and"
+          sample_size is the number of samples to be taken
+accordingly the files are named
+plots: <y-axis>_vs_{name}
+    where y-axis is either "time" or "states"
+test_results: results_{name}.csv
+tests: test_{name}.csv
+
+junction has the following naming convention:
+name = junctions_<variable_count>_<constant_size>_<mode>_<sample_size>
+    where variable_count is the number of variables in the expression
+          constant_size is the midpoint of the interval of the constant in the expression
+          mode is either "random", "or" or "and"
+          sample_size is the number of samples to be taken
+accordingly the files are named
+plots: <y-axis>_vs_{name}
+    where y-axis is either "time" or "states"
+test_results: results_{name}.csv
+tests: test_{name}.csv

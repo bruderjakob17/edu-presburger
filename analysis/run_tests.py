@@ -21,7 +21,7 @@ def formula_worker(q, expr):
         print(f"Error processing {expr}: {e}")
         q.put(("n/a", "n/a"))
 
-def run_formula_with_timeout(expr, timeout_sec=10):
+def run_formula_with_timeout(expr, timeout_sec):
     q = Queue()
     p = Process(target=formula_worker, args=(q, expr))
     p.start()
@@ -38,7 +38,7 @@ def run_formula_with_timeout(expr, timeout_sec=10):
         return "n/a", "n/a"
 
 
-def run_tests_from_csv(csv_path, output_csv):
+def run_tests_from_csv(csv_path, output_csv, timeout):
     # Make paths relative to script directory
     script_dir = get_script_dir()
     csv_path = os.path.join(script_dir, csv_path)
@@ -55,7 +55,7 @@ def run_tests_from_csv(csv_path, output_csv):
         print(expr)
         print(f"[{idx+1}/{total}] Testing formula...")
 
-        time_ms, num_states = run_formula_with_timeout(expr)
+        time_ms, num_states = run_formula_with_timeout(expr, timeout)
 
         if time_ms == "n/a":
             print(f"⚠️ Timeout or error in row {idx}")

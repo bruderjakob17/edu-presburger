@@ -1,0 +1,31 @@
+expression,count,constant,variable_count,depth,mode
+A a. (1a +2b +2c <= 5) AND (3a +3b -3c = 10),2,5,3,1,random
+A a. (-2a +3b +2c > 4) OR (-2a +2b -3c > 7),2,5,3,1,random
+A a. (3a +3b -2c <= 4) OR (-1a +1b -3c = 1),2,5,3,1,random
+A a. (-1a +3b +3c = 10) OR (1a +1b -1c > 5),2,5,3,1,random
+A a. (2a -1b -2c > 6) OR (-1a +3b -2c > 3),2,5,3,1,random
+A a. (3a -2b +2c = 5) OR (2a +3b -2c = 5),2,5,3,1,random
+A a. (-3a -3b +1c = 4) AND (-1a -3b -1c >= 8),2,5,3,1,random
+A a. (2a +3b +2c < 7) AND (-3a +2b -3c > 7),2,5,3,1,random
+A a. (3a -2b +2c <= 3) OR (1a -2b +3c > 9),2,5,3,1,random
+A a. (-2a +1b +2c < 6) AND (3a +2b +3c < 6),2,5,3,1,random
+A a. E b. (2a -1b +1c >= 9) AND (2a -1b -3c > 10),2,5,3,2,random
+A a. E b. (1a +1b -3c >= 1) AND (-1a +3b -1c < 9),2,5,3,2,random
+A a. E b. (1a +2b +3c <= 0) AND (2a +3b -1c <= 1),2,5,3,2,random
+A a. E b. (-3a +2b +1c = 1) AND (-1a -3b -2c >= 5),2,5,3,2,random
+A a. E b. (3a +3b +1c >= 7) OR (2a -2b +2c > 3),2,5,3,2,random
+A a. E b. (3a +1b -3c >= 3) AND (2a -1b -2c < 6),2,5,3,2,random
+A a. E b. (-1a -1b +3c >= 9) OR (3a +3b -2c <= 0),2,5,3,2,random
+A a. E b. (2a +2b -2c >= 3) AND (2a +3b -1c = 6),2,5,3,2,random
+A a. E b. (3a +1b -3c < 5) AND (1a +3b +1c >= 4),2,5,3,2,random
+A a. E b. (-2a -1b -3c >= 9) OR (3a -2b -1c <= 5),2,5,3,2,random
+A a. E b. A c. (1a -3b +3c = 8) AND (-1a -2b +2c = 6),2,5,3,3,random
+A a. E b. A c. (-1a -1b +1c >= 7) AND (-1a +1b +1c > 3),2,5,3,3,random
+A a. E b. A c. (2a +2b +1c >= 10) OR (-2a +3b +1c <= 6),2,5,3,3,random
+A a. E b. A c. (-3a -2b +1c >= 8) AND (-1a +2b -1c > 2),2,5,3,3,random
+A a. E b. A c. (1a -1b +1c < 0) AND (-3a +3b -1c = 2),2,5,3,3,random
+A a. E b. A c. (2a +2b -3c >= 7) AND (-2a -2b +1c = 5),2,5,3,3,random
+A a. E b. A c. (-1a +1b +3c > 1) OR (1a -3b +3c >= 8),2,5,3,3,random
+A a. E b. A c. (2a -1b -2c > 10) AND (-2a +3b -2c <= 6),2,5,3,3,random
+A a. E b. A c. (-3a +3b -1c < 6) AND (-3a +3b -2c < 6),2,5,3,3,random
+A a. E b. A c. (-2a +2b -3c = 8) AND (1a -3b -3c > 7),2,5,3,3,random

@@ -23,7 +23,15 @@ export async function POST(request: Request) {
     }
 
     const data = await backendRes.json();
-    return NextResponse.json(data);
+    // Return all fields from the backend response
+    return NextResponse.json({
+      dot: data.dot,
+      variables: data.variables,
+      example_solutions: data.example_solutions,
+      mata: data.mata,
+      num_states: data.num_states,
+      num_final_states: data.num_final_states
+    });
   } catch (error) {
     console.error('API route error:', error);
     return new NextResponse('Failed to fetch from presburger_converter', { status: 500 });

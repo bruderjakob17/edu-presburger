@@ -3,8 +3,8 @@ import os
 from analysis.data_processing import process_csv
 from analysis.run_tests import run_tests_from_csv
 from analysis.generate_tests import generate_test_dataframe
-import re
 import pandas as pd
+import re
 
 def append_plot_snippet(
     tex_path: str,
@@ -17,7 +17,8 @@ def append_plot_snippet(
     depths: list,
     modes: list,
     position: str,
-    timeout: int
+    timeout: int,
+    data_type: str
 ):
     # 1) Read document
     with open(tex_path, 'r', encoding='utf-8') as f:
@@ -49,30 +50,37 @@ def append_plot_snippet(
     else:
         raise ValueError(f"Unknown test type: {test_for}")
 
-    # 4.5) Compute averages and dump new CSVs
-    # ---------------------------------------
-    # States
-    states_csv = f"plots/{test_for}/states_vs_{name}.csv"
+    # 4.5) Filtering description
+    filter_desc_map = {
+        "raw": "no filtering",
+        "outlier": "outliers removed",
+        "collapsed": "collapsed formulas removed",
+        "both": "outliers and collapsed formulas removed"
+    }
+    filter_note = filter_desc_map.get(data_type, "unknown filtering")
+
+    # 5) Compute averages and dump new CSVs
+    states_csv = f"plots/{test_for}/{name}/states_vs_{name}_{data_type}.csv"
+    time_csv   = f"plots/{test_for}/{name}/time_vs_{name}_{data_type}.csv"
+
     df_s = pd.read_csv(states_csv)
     avg_s = df_s.groupby(x_field)["num_states"].mean().reset_index()
-    avg_states_csv = f"plots/{test_for}/avg_states_vs_{name}.csv"
+    avg_states_csv = f"plots/{test_for}/{name}/avg_states_vs_{name}_{data_type}.csv"
     avg_s.to_csv(avg_states_csv, index=False)
 
-    # Time
-    time_csv = f"plots/{test_for}/time_vs_{name}.csv"
     df_t = pd.read_csv(time_csv)
     avg_t = df_t.groupby(x_field)["time_ms"].mean().reset_index()
-    avg_time_csv = f"plots/{test_for}/avg_time_vs_{name}.csv"
+    avg_time_csv = f"plots/{test_for}/{name}/avg_time_vs_{name}_{data_type}.csv"
     avg_t.to_csv(avg_time_csv, index=False)
 
-    # 5) Common caption tail
+    # 6) Common caption tail
     common = (
         f"variables={var_ct}, constant midpoint={const_mid}, mode={mode}, "
         f"timeout={timeout}\\,s. Constants sampled from "
-        f"$[{const_mid-10},{const_mid+10}]$."
+        f"$[{const_mid-10},{const_mid+10}]$. ({filter_note})"
     )
 
-    # 6) Snippet for states‐figure (with avg-line)
+    # 7) Snippet for states‐figure (with avg-line)
     fig_states = f"""
 \\section*{{{index}. {test_for.capitalize()} / {mode.upper()} / C={const_mid}}}
 \\begin{{figure}}[H]
@@ -109,7 +117,7 @@ def append_plot_snippet(
 \\end{{figure}}
 """.strip()
 
-    # 7) Snippet for time‐figure (with avg-line)
+    # 8) Snippet for time‐figure (with avg-line)
     fig_time = f"""
 \\begin{{figure}}[H]
   \\centering
@@ -145,7 +153,7 @@ def append_plot_snippet(
 \\end{{figure}}
 """.strip()
 
-    # 8) Insert according to what to test_against
+    # 9) Insert depending on test_against
     if test_against == "states":
         insertion = fig_states + "\n\n"
     elif test_against == "time":
@@ -157,7 +165,7 @@ def append_plot_snippet(
 
     new_content = content.replace("\\end{document}", insertion + "\\end{document}")
 
-    # 9) Write back
+    # 10) Write back
     with open(tex_path, 'w', encoding='utf-8') as f:
         f.write(new_content)
 
@@ -174,7 +182,7 @@ def compile_latex(tex_path: str):
             check=True
         )
 
-def construct_and_run_tests(test_for: str, test_against: str, count_values: list, c_values: list, variable_counts: list, depths: list, modes: list, position: str, sample_size: int, timeout: int):
+def construct_and_run_tests(test_for: str, test_against: str, count_values: list, c_values: list, c_variance: int, variable_counts: list, depths: list, variable_is_depth: bool, modes: list, position: str, sample_size: int, timeout: int, data_filter: list, coefficient_range: range):
     # For depth tests
     range_start = min(depths)
     range_stop = max(depths)
@@ -196,36 +204,38 @@ def construct_and_run_tests(test_for: str, test_against: str, count_values: list
     # Build paths
     test_path = f"tests/{test_for}/test_{name}.csv"
     test_result_path = f"test_results/{test_for}/results_{name}.csv"
-    plot_path_states = f"plots/{test_for}/states_vs_{name}.csv"
-    plot_path_time = f"plots/{test_for}/time_vs_{name}.csv"
+    plot_path_states = f"plots/{test_for}/{name}/states_vs_{name}"
+    plot_path_time = f"plots/{test_for}/{name}/time_vs_{name}"
 
     # Ensure output directories exist
     os.makedirs(os.path.dirname(test_path), exist_ok=True)
+    os.makedirs(os.path.dirname(test_result_path), exist_ok=True)
     os.makedirs(os.path.dirname(plot_path_states), exist_ok=True)
 
     # Generate and run tests
-    generate_test_dataframe(position, test_path, count_values, c_values, variable_counts, depths, modes, sample_size)
+    generate_test_dataframe(position, test_path, count_values, c_values, c_variance, variable_counts, depths, variable_is_depth, modes, sample_size, coefficient_range)
     run_tests_from_csv(test_path, test_result_path,  timeout)
 
     # Process CSV for LaTeX plots
-    if test_against in ["states", "both"]:
-        process_csv(test_result_path, plot_path_states, test_for, "num_states")
-    if test_against in ["time", "both"]:
-        process_csv(test_result_path, plot_path_time, test_for, "time_ms")
-
-    append_plot_snippet(
-        tex_path="tests.tex",
-        test_for=test_for,
-        test_against=test_against,
-        name=name,
-        count_values=count_values,
-        c_values=c_values,
-        variable_counts=variable_counts,
-        depths=depths,
-        modes= modes,
-        position= position,
-        timeout= timeout
-    )
+    for data_type in data_filter:
+        if test_against in ["states", "both"]:
+            process_csv(test_result_path, plot_path_states, test_for, "num_states", data_type)
+        if test_against in ["time", "both"]:
+            process_csv(test_result_path, plot_path_time, test_for, "time_ms", data_type)
+        append_plot_snippet(
+            tex_path="tests.tex",
+            test_for=test_for,
+            test_against=test_against,
+            name=name,
+            count_values=count_values,
+            c_values=c_values,
+            variable_counts=variable_counts,
+            depths=depths,
+            modes= modes,
+            position= position,
+            timeout= timeout,
+            data_type = data_type
+        )
     compile_latex("tests.tex")
     print("Compilation complete! See tests.pdf.")
 
@@ -235,36 +245,35 @@ def construct_and_run_tests(test_for: str, test_against: str, count_values: list
 if __name__ == "__main__":
     from multiprocessing import freeze_support
     freeze_support()
-    timeout = 60  # stays constant
-    sample_size = 30  # unless noted
-    variable_counts = [3]  # fixed for suites 1-3 & 5
-    count_values = [1,2,3,4,5,6,7,8,9,10,11,12]  # “3-way” junction baseline
-    c_values = [10]  # ±10
-    depths = [0]  # one ∀/∃ layer baseline
-    modes = ["random"]  # balanced 50 / 50
-    position = "inside"  # atomic-level quantifiers
-    test_for = "junctions"  # could also be "constant" or "depth"
-    test_against = "both"  # could also be "states" or "time"
-    #test_for = "junctions"  # could also be "constant" or "junctions"
-    #test_against = "both"   # could also be "states" or "time"
-    #count_values = [1,2,3,4,5]  # junction count
-    #c_values = [10]              # constant size midpoint
-    #variable_counts = [5]        # number of variables
-    #depths = [0]                 # quantifier depth
-    #timeout = 60
-    #modes = ["or"]
-    #position = "inside"          # "outside" only for depth tests
-    #sample_size = 10           # number of samples per test
+    timeout = 300  # max time per test in seconds
+    sample_size = 10  # number of samples per test
+    variable_counts = [4]  # number of variables in each formula
+    count_values = [2]  # number of junctions
+    c_values = [5]  # constant midpoint
+    c_variance = 5 # how much the constant can vary around the midpoint
+    depths = [1,2,3,4]  #  ∀/∃ layers baseline
+    variable_is_depth = False # if True, depth is set to variable_count - 1, only iterate through variable_count
+    modes = ["and"]  # could be "random", "or" or "and"
+    position = "outside"  # atomic-level quantifiers
+    test_for = "depth"  # could be "junctions", "constant" or "depth"
+    test_against = "both"  # could be "both", "states" or "time"
+    data_filter = ["raw"] # could be "outlier", "collapsed", "raw" or "both"
+    coefficient_range = range(-3, 4)  # Coefficients picked randomly from this range
+
 
     construct_and_run_tests(
         test_for=test_for,
         test_against=test_against,
         count_values=count_values,
         c_values=c_values,
+        c_variance = c_variance,
         variable_counts=variable_counts,
         depths=depths,
+        variable_is_depth=variable_is_depth,
         modes=modes,
         position=position,
         sample_size=sample_size,
-        timeout=timeout
+        timeout=timeout,
+        data_filter=data_filter,
+        coefficient_range=coefficient_range
     )

@@ -1,0 +1,41 @@
+expression,count,constant,variable_count,depth,mode,time_ms,num_states,outcome
+A a. (-1a +1b +3c +1d <= 7) AND (-2a -1b +3c -3d <= 1),2,5,4,1,and,27.9,1,ok
+A a. (3a -1b -3c -2d > 9) AND (1a +1b +3c -1d <= 5),2,5,4,1,and,69.18,1,ok
+A a. (2a +2b +3c +2d <= 1) AND (2a +2b +2c +1d > 3),2,5,4,1,and,11.82,1,ok
+A a. (1a -2b -3c -2d = 5) AND (2a +3b -3c -3d >= 0),2,5,4,1,and,26.85,1,ok
+A a. (2a +1b +2c -3d = 5) AND (2a -2b -1c +3d <= 5),2,5,4,1,and,28.14,1,ok
+A a. (-1a -3b +3c -3d <= 9) AND (-1a -3b +3c +2d = 3),2,5,4,1,and,17.72,1,ok
+A a. (-2a -3b -2c -1d > 4) AND (3a -2b +3c +2d = 10),2,5,4,1,and,201.33,1,ok
+A a. (-2a +1b +2c +3d = 0) AND (-2a +1b +1c -1d > 5),2,5,4,1,and,15.86,1,ok
+A a. (3a -3b -1c -2d >= 3) AND (-2a -2b +3c -2d = 4),2,5,4,1,and,22.54,1,ok
+A a. (-1a -3b +1c -3d >= 0) AND (1a -1b -3c +2d = 7),2,5,4,1,and,20.27,1,ok
+A a. E b. (1a -3b -3c -1d >= 9) AND (-2a -3b +2c +1d < 9),2,5,4,2,and,405.29,1,ok
+A a. E b. (-1a +3b +3c -3d <= 6) AND (2a +1b +1c -3d = 0),2,5,4,2,and,9933.58,1,ok
+A a. E b. (1a +2b +3c +3d <= 6) AND (-3a +1b +1c +2d >= 8),2,5,4,2,and,15.33,1,ok
+A a. E b. (-2a +3b -2c +1d > 1) AND (-2a -3b +3c +2d <= 4),2,5,4,2,and,124.28,1,ok
+A a. E b. (1a -3b -1c -1d >= 5) AND (-2a +3b +3c +2d = 5),2,5,4,2,and,470.23,1,ok
+A a. E b. (1a +2b +3c +3d = 5) AND (-1a -1b -3c -3d < 7),2,5,4,2,and,106.95,1,ok
+A a. E b. (-1a +1b -1c -3d < 1) AND (3a -2b -2c +1d > 7),2,5,4,2,and,,,timeout
+A a. E b. (-2a -1b +2c +1d >= 9) AND (-1a -3b -2c +2d > 10),2,5,4,2,and,992.13,11,ok
+A a. E b. (-1a +2b -1c +2d <= 10) AND (-3a -1b +2c -3d <= 5),2,5,4,2,and,68.74,1,ok
+A a. E b. (3a +3b -1c -2d < 6) AND (-3a -2b -2c -1d = 10),2,5,4,2,and,,,timeout
+A a. E b. A c. (-1a -3b +3c +1d > 8) AND (3a -1b +2c +1d < 10),2,5,4,3,and,35758.46,1,ok
+A a. E b. A c. (3a +3b +1c +2d = 9) AND (-1a +2b -3c +2d = 8),2,5,4,3,and,,,timeout
+A a. E b. A c. (-2a +3b +2c +3d >= 3) AND (3a -2b -2c +1d > 6),2,5,4,3,and,,,timeout
+A a. E b. A c. (-3a -1b +1c -1d < 1) AND (-2a -2b +1c -3d >= 5),2,5,4,3,and,14.03,1,ok
+A a. E b. A c. (-3a -1b +2c -3d <= 2) AND (1a +2b -2c -3d < 9),2,5,4,3,and,27.72,1,ok
+A a. E b. A c. (-1a -3b +2c -3d <= 6) AND (2a -3b +3c +2d >= 9),2,5,4,3,and,11258.84,1,ok
+A a. E b. A c. (1a +2b +1c +3d = 0) AND (2a -1b +2c +2d <= 6),2,5,4,3,and,10604.84,1,ok
+A a. E b. A c. (-3a -2b +1c -1d >= 5) AND (-2a -2b -3c +1d <= 8),2,5,4,3,and,471.24,1,ok
+A a. E b. A c. (-1a +1b -1c +2d < 10) AND (2a +3b +1c -2d > 7),2,5,4,3,and,7512.8,1,ok
+A a. E b. A c. (-1a +1b -2c +3d < 8) AND (-3a +1b -2c -2d > 1),2,5,4,3,and,102.9,1,ok
+A a. E b. A c. E d. (3a +1b +1c +3d >= 0) AND (1a -2b -3c -2d = 9),2,5,4,4,and,15.94,1,ok
+A a. E b. A c. E d. (2a +3b +3c -2d >= 7) AND (-3a -2b -1c -3d = 5),2,5,4,4,and,,,timeout
+A a. E b. A c. E d. (2a -3b -3c +2d > 4) AND (2a -2b -2c +1d <= 3),2,5,4,4,and,3530.92,1,ok
+A a. E b. A c. E d. (3a +2b -3c -1d < 2) AND (-1a -1b -3c +1d < 1),2,5,4,4,and,3607.43,1,ok
+A a. E b. A c. E d. (-1a +1b +3c +1d >= 7) AND (1a -1b +3c -1d = 5),2,5,4,4,and,168.17,1,ok
+A a. E b. A c. E d. (-1a -2b -3c +2d < 2) AND (1a -2b -1c +2d > 8),2,5,4,4,and,49.1,1,ok
+A a. E b. A c. E d. (-2a +2b +3c +2d <= 7) AND (-1a -2b -3c -2d >= 8),2,5,4,4,and,33.99,1,ok
+A a. E b. A c. E d. (-2a +3b +1c -1d < 3) AND (3a -3b +2c -2d <= 1),2,5,4,4,and,73.89,1,ok
+A a. E b. A c. E d. (1a -3b -2c -3d <= 9) AND (-1a +3b +3c +2d >= 8),2,5,4,4,and,265609.14,1,ok
+A a. E b. A c. E d. (1a -1b +1c -2d < 1) AND (-2a -2b -2c -2d = 0),2,5,4,4,and,367.89,1,ok

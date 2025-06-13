@@ -1,0 +1,151 @@
+expression,count,constant,variable_count,depth,mode
+(2a -2b -1c > 15),1,10,3,0,and
+(-1a +1b -2c < 10),1,10,3,0,and
+(3a -2b +3c = 2),1,10,3,0,and
+(-2a +1b +3c >= 3),1,10,3,0,and
+(-2a +2b +2c = 13),1,10,3,0,and
+(-1a -3b -1c > 1),1,10,3,0,and
+(-1a -1b +3c < 20),1,10,3,0,and
+(-2a -1b +3c > 0),1,10,3,0,and
+(-1a -2b -2c >= 12),1,10,3,0,and
+(-2a -1b +3c <= 15),1,10,3,0,and
+(-3a +2b -2c >= 16) AND (-2a +1b -2c > 10),2,10,3,0,and
+(2a -1b +1c >= 4) AND (1a -3b -1c > 16),2,10,3,0,and
+(2a +1b +3c < 4) AND (-2a +3b -2c > 0),2,10,3,0,and
+(-3a +3b -2c >= 9) AND (2a +1b -2c <= 16),2,10,3,0,and
+(-1a +1b +1c <= 19) AND (2a +2b +2c >= 6),2,10,3,0,and
+(-1a +2b +3c = 6) AND (2a +1b +1c >= 6),2,10,3,0,and
+(2a -1b +3c <= 0) AND (-1a +3b -2c < 11),2,10,3,0,and
+(3a +3b -1c = 16) AND (-3a -3b -1c < 7),2,10,3,0,and
+(3a -3b +3c <= 8) AND (-3a +2b -1c > 17),2,10,3,0,and
+(-2a -1b +1c > 8) AND (2a +1b -1c <= 9),2,10,3,0,and
+(-3a +2b +1c = 15) AND (1a +2b +2c < 14) AND (-1a -1b +2c < 6),3,10,3,0,and
+(3a +2b -2c > 20) AND (2a -2b +3c >= 8) AND (-1a -1b +1c <= 17),3,10,3,0,and
+(-1a +1b +3c = 15) AND (-2a -1b +1c < 7) AND (-1a -3b -1c = 9),3,10,3,0,and
+(2a +3b +2c > 0) AND (2a -3b +2c <= 10) AND (2a -3b -3c >= 19),3,10,3,0,and
+(3a -2b +2c < 12) AND (3a -1b +3c > 14) AND (-1a -3b -1c < 18),3,10,3,0,and
+(-2a -3b -3c > 10) AND (-3a +2b -3c = 2) AND (2a +3b -1c > 18),3,10,3,0,and
+(-3a -3b -2c = 17) AND (-1a -2b -1c > 0) AND (-3a -2b +2c = 3),3,10,3,0,and
+(2a -3b -2c >= 14) AND (-2a +2b -1c <= 12) AND (-1a -2b -3c <= 12),3,10,3,0,and
+(-3a +1b -3c > 17) AND (-1a -1b +1c = 7) AND (3a +3b -1c < 18),3,10,3,0,and
+(1a -2b +1c <= 15) AND (-1a +1b +2c > 6) AND (-3a +2b +3c = 5),3,10,3,0,and
+(-2a -3b +2c <= 14) AND (-1a -3b -3c = 12) AND (-2a +3b -2c <= 17) AND (1a -2b +2c > 13),4,10,3,0,and
+(2a +3b +1c > 10) AND (-2a -3b +3c <= 3) AND (3a -2b -1c < 9) AND (1a +1b -1c > 16),4,10,3,0,and
+(2a +1b +1c = 19) AND (-2a +1b -3c > 6) AND (2a +2b +2c <= 11) AND (-2a +1b +2c <= 2),4,10,3,0,and
+(-1a +1b -2c >= 6) AND (3a -1b -1c <= 18) AND (1a +2b +3c = 13) AND (1a -2b +3c < 20),4,10,3,0,and
+(1a +2b -3c = 2) AND (3a -3b -2c <= 16) AND (1a +2b -1c > 15) AND (2a +3b -2c = 12),4,10,3,0,and
+(3a -2b +1c = 11) AND (-1a +3b +1c < 5) AND (-2a +2b +3c <= 15) AND (3a +3b -1c <= 13),4,10,3,0,and
+(-2a -2b -3c > 15) AND (-2a -3b +2c > 18) AND (2a +1b -1c = 11) AND (2a -1b -3c > 14),4,10,3,0,and
+(-2a -2b +2c < 20) AND (2a -2b -3c >= 14) AND (2a -1b -2c = 7) AND (3a +2b +2c > 6),4,10,3,0,and
+(1a +1b -3c <= 16) AND (-2a +2b +3c <= 2) AND (-2a -2b -2c <= 19) AND (1a +1b +1c > 6),4,10,3,0,and
+(-1a +2b -2c > 14) AND (-1a +1b +3c = 6) AND (-2a -3b -2c >= 9) AND (-1a -2b -3c > 16),4,10,3,0,and
+(2a -2b -1c > 8) AND (1a -3b +3c = 6) AND (3a +2b -3c = 9) AND (2a +3b -3c <= 19) AND (-2a +3b +3c < 14),5,10,3,0,and
+(-1a +3b -3c <= 11) AND (-2a -1b +3c >= 16) AND (-3a +2b +2c >= 17) AND (2a +3b -3c >= 2) AND (-1a -3b -2c <= 2),5,10,3,0,and
+(1a +2b +2c = 15) AND (1a +1b -3c <= 17) AND (-3a -1b -3c > 13) AND (-3a -2b +3c = 6) AND (-3a -1b +1c >= 13),5,10,3,0,and
+(3a -1b +2c < 0) AND (-1a +1b +2c >= 18) AND (2a -2b -1c = 8) AND (-1a -1b -3c = 6) AND (-3a +1b +2c <= 14),5,10,3,0,and
+(-1a +3b +1c >= 2) AND (-3a -3b -3c = 8) AND (-1a -3b +2c > 19) AND (-2a +1b -2c < 10) AND (-1a +3b -2c >= 16),5,10,3,0,and
+(1a +3b -2c > 20) AND (2a -1b +3c >= 17) AND (1a +1b -2c < 3) AND (-1a -3b -3c < 10) AND (-1a +1b -3c >= 12),5,10,3,0,and
+(3a +3b +2c < 2) AND (3a +2b -1c >= 11) AND (-3a +3b +3c >= 5) AND (2a -3b +3c >= 19) AND (-2a +1b -2c >= 9),5,10,3,0,and
+(-3a -1b -3c = 12) AND (-2a -2b +3c <= 4) AND (-2a +3b +2c > 1) AND (-2a +2b -1c >= 8) AND (-2a -3b -3c > 16),5,10,3,0,and
+(2a +2b +3c = 5) AND (2a -3b -3c > 16) AND (3a +3b +3c < 15) AND (-3a +3b -1c = 17) AND (-3a +1b -1c < 12),5,10,3,0,and
+(1a +2b +1c > 11) AND (-3a -1b +3c <= 4) AND (2a +3b +3c < 11) AND (3a -2b +2c = 16) AND (-1a +2b +2c > 12),5,10,3,0,and
+(1a -3b +1c <= 2) AND (-1a -3b +1c >= 15) AND (3a +3b +2c > 14) AND (2a -3b -1c <= 3) AND (-1a +1b +2c < 12) AND (2a -2b -3c <= 19),6,10,3,0,and
+(-1a +2b +1c >= 12) AND (-2a -1b +2c < 14) AND (3a -3b -3c <= 16) AND (-2a -1b -2c >= 12) AND (-3a -1b -1c >= 12) AND (-1a +3b -1c = 10),6,10,3,0,and
+(-1a -1b -1c = 18) AND (1a -1b +1c >= 6) AND (2a -1b -2c = 0) AND (2a +3b +2c = 0) AND (-2a -2b -3c >= 3) AND (3a -1b -3c < 7),6,10,3,0,and
+(-3a -3b +1c <= 17) AND (-3a +1b -2c >= 20) AND (-2a +3b -2c < 9) AND (-1a +2b +1c < 19) AND (2a +2b -2c <= 3) AND (1a +3b +1c > 5),6,10,3,0,and
+(-2a +2b +2c > 14) AND (-3a -3b +2c < 3) AND (2a -3b -1c <= 14) AND (-3a -3b -2c >= 10) AND (-3a +3b -3c < 10) AND (-3a -1b -2c = 9),6,10,3,0,and
+(-3a +1b -2c = 19) AND (-3a -1b -2c <= 20) AND (1a +2b -2c >= 1) AND (-2a +1b +1c <= 2) AND (2a +2b -3c >= 11) AND (1a -2b -3c > 15),6,10,3,0,and
+(3a +2b -3c = 14) AND (-2a +2b +1c < 13) AND (2a -2b +3c = 5) AND (-1a -1b +3c < 12) AND (1a +1b +2c < 0) AND (3a -2b -3c > 5),6,10,3,0,and
+(-3a +1b -2c >= 20) AND (3a -3b -1c < 11) AND (1a -1b +3c >= 1) AND (3a +1b -2c <= 2) AND (1a -3b -1c < 6) AND (-2a -3b +1c > 12),6,10,3,0,and
+(3a +2b -2c >= 8) AND (2a -1b -1c > 14) AND (-3a +3b -1c < 15) AND (-2a -3b +2c > 15) AND (3a -2b -3c < 18) AND (-1a -3b -3c >= 4),6,10,3,0,and
+(-2a -1b -2c <= 4) AND (-3a -2b -2c <= 0) AND (-3a -3b -1c >= 10) AND (3a +3b -3c >= 0) AND (1a -3b +3c >= 5) AND (-1a +1b -2c = 7),6,10,3,0,and
+(-3a -2b -1c < 2) AND (-2a -2b +1c < 0) AND (-1a -1b -1c <= 7) AND (1a -3b +3c <= 6) AND (3a -3b +2c = 16) AND (3a +2b +3c > 2) AND (2a +3b -2c <= 8),7,10,3,0,and
+(-3a +1b +3c = 17) AND (-3a +1b +2c <= 2) AND (-3a +1b -3c >= 5) AND (2a -2b -1c < 2) AND (3a -2b +2c <= 10) AND (1a -3b +3c > 20) AND (3a +3b -2c >= 9),7,10,3,0,and
+(1a +1b -1c <= 17) AND (2a -2b +1c = 4) AND (1a +1b +1c <= 0) AND (1a +2b +2c = 13) AND (-1a +3b -3c >= 2) AND (-2a -1b -3c >= 9) AND (-3a +3b +1c >= 11),7,10,3,0,and
+(1a +3b +3c < 16) AND (-2a -2b +3c = 8) AND (3a +2b -1c >= 18) AND (-1a +3b -3c > 8) AND (-3a +3b +3c <= 6) AND (-3a +2b -3c > 12) AND (3a -1b -1c <= 18),7,10,3,0,and
+(3a -2b -2c >= 1) AND (2a +1b -1c <= 9) AND (-1a -3b +3c <= 3) AND (-3a +2b -3c >= 16) AND (1a +1b +2c <= 1) AND (-3a +3b -3c >= 7) AND (-1a +3b -2c > 4),7,10,3,0,and
+(2a +2b -1c < 12) AND (-1a +3b -2c <= 10) AND (-2a -1b -3c < 3) AND (2a -2b -1c = 11) AND (-2a -1b -1c <= 12) AND (-3a +1b -3c = 4) AND (1a -1b -1c < 13),7,10,3,0,and
+(2a -3b +1c > 14) AND (-1a +2b +1c > 19) AND (3a +2b +2c > 18) AND (1a -1b -1c < 4) AND (-2a +1b -2c < 13) AND (2a -1b -3c < 15) AND (-3a -2b -3c <= 6),7,10,3,0,and
+(1a -3b +3c >= 16) AND (1a -1b +1c <= 0) AND (3a -2b +2c >= 0) AND (3a +3b -1c >= 9) AND (2a +2b +2c < 4) AND (-3a -2b -3c <= 3) AND (-2a -2b +3c > 3),7,10,3,0,and
+(1a -2b +1c <= 8) AND (1a +1b -3c <= 9) AND (-2a -2b +1c > 13) AND (1a +1b -1c > 14) AND (2a -2b +3c < 12) AND (-3a +1b -3c > 5) AND (-3a +2b +1c <= 14),7,10,3,0,and
+(1a -2b +3c <= 15) AND (2a +2b +2c = 13) AND (-2a +1b -1c = 6) AND (3a -1b -2c < 9) AND (1a -1b -1c > 14) AND (-3a -1b -1c >= 19) AND (2a -3b +2c > 17),7,10,3,0,and
+(-1a -2b +3c <= 5) AND (2a +3b -3c <= 10) AND (3a +1b +2c >= 13) AND (-1a -1b +3c <= 16) AND (3a -1b -2c < 19) AND (2a +3b +2c = 11) AND (3a +1b -3c > 3) AND (1a -1b +1c <= 8),8,10,3,0,and
+(-1a -1b -1c > 19) AND (2a -2b -2c < 12) AND (-3a -3b -1c >= 2) AND (1a -3b +3c >= 12) AND (-2a +2b +1c >= 1) AND (1a -3b -2c <= 8) AND (2a +2b +3c < 16) AND (3a +1b -1c = 15),8,10,3,0,and
+(-3a -1b +2c = 18) AND (-1a +1b +1c >= 7) AND (-3a +1b +2c > 13) AND (1a +3b +3c >= 17) AND (3a +3b +1c > 7) AND (1a +2b +1c <= 19) AND (1a -2b +3c < 6) AND (3a -2b -2c = 18),8,10,3,0,and
+(2a -1b +1c < 14) AND (3a -3b +1c < 7) AND (-1a +2b -3c <= 8) AND (1a +2b -2c = 16) AND (2a -1b +1c > 14) AND (-3a +3b -2c > 14) AND (-2a -1b -2c <= 13) AND (-1a +3b +2c > 0),8,10,3,0,and
+(2a +2b +3c < 8) AND (-3a +2b +2c <= 14) AND (-1a -1b -3c < 16) AND (-2a +2b -3c >= 15) AND (3a -3b +1c < 9) AND (-1a -1b -2c > 11) AND (3a +1b -3c = 13) AND (2a -1b +2c > 14),8,10,3,0,and
+(-1a -3b +2c >= 11) AND (-1a +1b -3c < 0) AND (1a -1b +3c < 5) AND (-1a +1b -2c < 17) AND (-2a -1b -3c <= 13) AND (-2a +1b +3c >= 4) AND (-2a -2b -3c = 16) AND (1a +1b +2c <= 13),8,10,3,0,and
+(2a -1b -3c < 0) AND (2a +3b -3c < 14) AND (3a -1b +3c > 0) AND (3a +3b -3c = 20) AND (1a -1b -3c <= 7) AND (-3a -2b -3c >= 11) AND (-3a +1b -2c < 17) AND (-3a -3b +3c > 20),8,10,3,0,and
+(-2a -2b -2c > 13) AND (-3a +1b -2c > 4) AND (-2a -3b -1c >= 4) AND (-3a -2b -2c < 13) AND (-1a +2b -3c <= 12) AND (-1a -3b -3c = 11) AND (-2a -2b +1c > 2) AND (1a +1b -1c >= 8),8,10,3,0,and
+(3a +3b +3c > 11) AND (1a +2b -2c <= 5) AND (-2a -3b +2c < 0) AND (-1a +1b -1c <= 2) AND (-2a -3b +1c = 4) AND (-3a -1b +2c <= 5) AND (-1a -3b +1c <= 1) AND (2a +3b -1c = 18),8,10,3,0,and
+(-3a +3b +1c <= 10) AND (-1a +1b +3c = 7) AND (-2a -2b -2c > 19) AND (-2a +3b -1c > 2) AND (-2a -1b +3c <= 20) AND (1a -2b -3c < 18) AND (1a +1b -1c <= 13) AND (-1a +1b -2c > 8),8,10,3,0,and
+(-2a -3b -3c > 8) AND (2a -2b +1c = 8) AND (2a +3b +1c > 13) AND (-2a -2b +2c = 9) AND (1a +2b -3c < 1) AND (-1a +1b +2c >= 8) AND (3a +2b +1c < 4) AND (-2a +1b -2c >= 9) AND (-2a -1b -1c > 19),9,10,3,0,and
+(-3a +2b -2c >= 17) AND (2a +1b +1c >= 0) AND (-3a +2b -1c <= 12) AND (-2a +1b +3c <= 16) AND (1a +1b +3c <= 7) AND (-2a +3b -1c > 19) AND (2a +2b -1c >= 16) AND (2a -3b -2c <= 5) AND (-1a -1b -3c > 5),9,10,3,0,and
+(1a -1b +3c > 20) AND (1a -3b -2c >= 3) AND (3a -1b +1c <= 16) AND (1a -3b -1c < 13) AND (-2a -1b -1c > 12) AND (-2a +2b -3c >= 17) AND (-1a -1b -3c < 18) AND (1a +3b +2c >= 18) AND (2a -3b +1c > 2),9,10,3,0,and
+(-3a -2b +3c = 3) AND (-3a -2b +3c <= 20) AND (3a -3b -3c > 0) AND (-3a -1b +1c >= 8) AND (3a +1b -3c = 0) AND (-2a -2b -3c = 18) AND (2a +1b -1c <= 12) AND (1a -2b +1c = 10) AND (-2a +3b -3c > 13),9,10,3,0,and
+(1a -3b +2c < 14) AND (1a -2b -3c >= 17) AND (-2a +2b -1c <= 3) AND (2a -3b -2c < 0) AND (-1a +1b -3c > 15) AND (1a +2b +3c > 1) AND (-2a -3b +1c >= 10) AND (1a -2b +3c < 20) AND (-1a -2b +3c < 8),9,10,3,0,and
+(-1a -1b +3c > 19) AND (-1a +2b +3c > 12) AND (1a -3b +2c < 18) AND (-3a -2b -2c >= 2) AND (-1a -3b +2c >= 1) AND (-1a -3b -1c < 10) AND (-2a +1b -1c >= 11) AND (3a +2b -1c <= 13) AND (-2a +1b -3c <= 8),9,10,3,0,and
+(-2a +3b -2c <= 19) AND (2a +2b +2c < 20) AND (-1a -3b -3c < 11) AND (-2a -3b +3c > 20) AND (2a +1b +3c <= 12) AND (3a -2b -1c > 7) AND (-2a +2b -2c < 12) AND (1a -3b -2c >= 17) AND (-2a -1b +1c > 2),9,10,3,0,and
+(-1a -3b -1c < 9) AND (-2a +2b -3c < 9) AND (2a +3b -1c < 17) AND (-3a +1b -3c >= 1) AND (2a +2b -1c <= 11) AND (-2a +3b -1c <= 9) AND (-1a -3b +3c >= 17) AND (2a -1b -1c <= 18) AND (1a -2b +2c >= 20),9,10,3,0,and
+(-2a -2b -2c = 12) AND (1a +3b +1c > 0) AND (2a +3b +3c >= 13) AND (-2a -3b -1c >= 18) AND (-2a +1b -3c > 4) AND (-3a +3b -3c < 20) AND (-2a -3b +1c < 9) AND (2a -1b +2c >= 7) AND (3a +2b +2c < 8),9,10,3,0,and
+(3a +1b +1c = 8) AND (1a +1b +3c < 8) AND (1a -3b +1c <= 2) AND (2a -1b +2c > 2) AND (-2a +1b -2c < 4) AND (-3a +1b +3c = 10) AND (-2a +3b -2c < 19) AND (2a -3b +2c <= 18) AND (3a +1b +3c < 17),9,10,3,0,and
+(-2a +2b +2c < 3) AND (-1a -2b -1c = 3) AND (-1a +2b +3c >= 11) AND (2a +3b +2c = 18) AND (-1a -1b +1c <= 1) AND (2a -1b -3c <= 3) AND (-1a +1b +1c > 7) AND (3a -2b -1c < 1) AND (-2a +3b -3c >= 12) AND (-2a -1b -1c <= 2),10,10,3,0,and
+(-1a +2b -2c = 20) AND (2a +3b -3c < 3) AND (2a -1b +3c = 11) AND (-2a +1b +1c <= 17) AND (2a -1b -1c <= 14) AND (-3a -1b +2c = 3) AND (-3a +1b -3c <= 2) AND (3a -2b -1c >= 11) AND (-3a +3b +3c <= 5) AND (1a +2b -3c > 0),10,10,3,0,and
+(3a -3b -3c = 20) AND (-1a +2b -3c = 10) AND (-2a +1b -2c >= 10) AND (1a -2b +2c = 19) AND (-1a -2b -1c > 0) AND (2a +2b -3c = 14) AND (-3a +3b +1c > 5) AND (-1a +3b -2c = 15) AND (2a -2b +2c = 9) AND (2a -3b -2c > 18),10,10,3,0,and
+(1a +3b +1c >= 1) AND (1a -2b -3c <= 18) AND (2a +2b +3c < 4) AND (1a -1b -1c = 14) AND (-1a -1b +3c < 10) AND (-2a +1b -1c >= 10) AND (-2a -3b -1c = 2) AND (-2a -3b -2c = 7) AND (-1a +2b -2c >= 6) AND (-2a +3b +2c >= 11),10,10,3,0,and
+(-3a +2b -1c <= 16) AND (-2a -2b +2c >= 4) AND (2a -2b -1c <= 5) AND (1a +3b +2c >= 8) AND (1a +3b -2c > 9) AND (1a -1b +2c > 13) AND (2a -3b -1c > 1) AND (2a +3b +1c >= 8) AND (-3a +3b +1c < 14) AND (-2a -1b +2c = 9),10,10,3,0,and
+(-2a -3b +2c <= 5) AND (-3a +3b +2c >= 16) AND (-3a +1b -2c < 2) AND (-2a +3b -3c > 18) AND (2a -3b -3c >= 18) AND (2a +2b +3c > 8) AND (-1a +1b -1c >= 9) AND (-1a -3b +1c > 8) AND (-3a +1b -3c <= 1) AND (2a +3b -2c < 17),10,10,3,0,and
+(-1a +2b +2c <= 0) AND (-1a -1b -1c > 4) AND (-2a -1b +2c = 19) AND (-2a +3b +1c < 19) AND (3a +3b +2c >= 18) AND (-3a -1b +2c = 6) AND (2a -3b -2c > 12) AND (1a -1b -3c <= 5) AND (1a -1b +2c < 4) AND (-3a -3b +3c < 17),10,10,3,0,and
+(2a +3b +1c = 12) AND (-3a -1b -1c >= 15) AND (3a -3b +2c >= 20) AND (3a +1b +2c > 5) AND (-2a +1b +2c <= 4) AND (-2a -2b -2c > 11) AND (2a -3b -1c <= 16) AND (-2a -3b -2c <= 5) AND (-2a -2b +2c < 20) AND (-3a -3b -3c = 18),10,10,3,0,and
+(-2a +3b -2c >= 5) AND (-2a +3b -1c <= 5) AND (3a -1b -2c > 8) AND (2a -3b -3c >= 1) AND (-1a +2b -3c >= 7) AND (1a -3b +1c < 3) AND (-2a +3b -3c = 19) AND (-3a +3b +3c > 16) AND (-1a -1b -3c >= 19) AND (-1a -1b +3c = 2),10,10,3,0,and
+(2a +2b -2c <= 20) AND (-1a +1b -3c = 3) AND (-1a -3b +3c >= 17) AND (-3a -2b +3c = 1) AND (1a -3b -3c > 13) AND (-1a -1b +2c >= 16) AND (-3a -1b -2c <= 4) AND (-2a -1b +3c <= 20) AND (-2a +3b +3c < 2) AND (-2a +2b -2c = 15),10,10,3,0,and
+(3a +3b -1c = 17) AND (1a +2b -3c = 14) AND (2a -2b -3c < 15) AND (3a -1b +3c >= 20) AND (2a +2b +1c < 4) AND (-2a +3b +1c = 15) AND (-3a +3b -1c < 14) AND (3a -3b +1c <= 18) AND (3a -3b -1c < 6) AND (-3a +2b +2c = 1) AND (3a -1b -2c > 19),11,10,3,0,and
+(-2a -2b -3c >= 16) AND (-3a +3b -3c > 20) AND (2a -1b +3c = 3) AND (1a +2b -3c < 18) AND (2a +3b +3c <= 16) AND (2a +1b -1c >= 13) AND (1a +2b +3c > 14) AND (-2a +2b +1c >= 2) AND (-3a -3b -3c <= 14) AND (-3a +3b +1c = 0) AND (-1a -3b -2c <= 17),11,10,3,0,and
+(3a +2b +3c = 19) AND (1a -2b +1c = 14) AND (3a -1b +3c > 5) AND (2a +2b -2c >= 0) AND (-3a -3b +2c <= 20) AND (3a +2b +1c >= 9) AND (-3a +2b -2c <= 18) AND (3a +2b +1c > 3) AND (-1a -1b -2c = 10) AND (-2a -1b -2c > 0) AND (-1a -2b -3c <= 15),11,10,3,0,and
+(-1a -3b -1c < 10) AND (2a +1b +3c < 8) AND (1a -1b +3c = 13) AND (1a +1b -2c = 20) AND (-1a -1b +1c < 7) AND (2a -1b -1c > 8) AND (-3a -1b +1c < 7) AND (2a +3b +3c >= 8) AND (-3a +3b -1c <= 0) AND (1a +3b -1c >= 11) AND (3a +2b -2c >= 13),11,10,3,0,and
+(2a -1b -3c <= 4) AND (-1a +2b -2c = 16) AND (-3a -1b +1c >= 10) AND (-2a +1b +3c = 2) AND (3a +3b +3c = 17) AND (-3a -2b +1c >= 19) AND (-1a -2b -1c < 2) AND (3a +3b -1c > 8) AND (3a -1b +2c <= 12) AND (1a +1b +1c = 8) AND (3a -1b -1c > 4),11,10,3,0,and
+(2a +1b -2c >= 14) AND (3a +3b -1c > 17) AND (2a +3b -1c >= 17) AND (-2a +3b -1c < 16) AND (-2a -3b +1c >= 11) AND (-2a -3b -3c >= 11) AND (-1a +1b -1c = 12) AND (3a -1b -2c > 20) AND (-3a +2b +1c >= 18) AND (-1a -1b +3c > 6) AND (-2a -3b +1c <= 16),11,10,3,0,and
+(-1a -1b +1c < 4) AND (-2a -1b +3c < 15) AND (-2a -1b +2c <= 11) AND (3a +2b -1c < 5) AND (-2a -2b -2c <= 13) AND (2a -2b +1c = 9) AND (-1a -3b -3c = 10) AND (-1a +3b -3c > 2) AND (1a +1b -1c <= 11) AND (-3a +2b -2c > 1) AND (-1a +2b +1c <= 6),11,10,3,0,and
+(-2a +1b +2c >= 16) AND (-2a +1b -1c >= 17) AND (1a -2b -2c < 0) AND (-1a +3b +3c <= 9) AND (2a -3b +2c <= 7) AND (3a -1b -3c > 1) AND (-3a -2b -3c < 14) AND (3a -2b -2c >= 9) AND (1a -2b -2c < 11) AND (3a +2b +3c <= 16) AND (2a -1b -1c < 12),11,10,3,0,and
+(2a +2b +3c > 2) AND (-2a +1b -3c <= 18) AND (-1a -3b -1c = 2) AND (-1a -2b +1c >= 11) AND (3a -2b +2c <= 5) AND (1a -3b +1c >= 14) AND (3a +3b +2c <= 20) AND (1a -3b +3c = 4) AND (1a -2b -1c > 16) AND (2a +2b -1c > 20) AND (-1a +1b -3c <= 1),11,10,3,0,and
+(3a +1b -1c <= 5) AND (3a +3b -1c <= 14) AND (-1a +2b -1c < 15) AND (-3a -1b -1c >= 3) AND (-2a +1b +2c > 8) AND (2a +1b +2c >= 5) AND (3a -3b +3c = 2) AND (-1a -1b +3c < 13) AND (-3a +2b +2c <= 20) AND (2a +1b -1c < 4) AND (3a -1b +2c = 14),11,10,3,0,and
+(-1a +2b -3c < 12) AND (3a +2b +3c > 8) AND (2a +2b +1c = 10) AND (-1a -2b +2c <= 18) AND (3a -2b +2c <= 15) AND (-3a -1b +3c = 8) AND (-1a +2b +2c > 10) AND (2a -2b +2c <= 20) AND (3a +3b -2c >= 8) AND (1a -1b +2c <= 20) AND (-3a -1b +3c < 9) AND (1a -2b +2c > 17),12,10,3,0,and
+(-3a -2b +2c <= 2) AND (-2a -1b +1c > 5) AND (3a +3b +2c > 11) AND (1a +2b -3c > 8) AND (3a -1b -1c = 5) AND (-2a +3b -3c = 12) AND (1a -1b +1c > 7) AND (2a +1b +1c < 3) AND (2a +1b +3c <= 18) AND (-2a -1b -2c = 2) AND (3a +1b -1c = 3) AND (-2a -3b -1c = 5),12,10,3,0,and
+(3a -1b -2c > 16) AND (-2a -3b +2c > 7) AND (2a +3b -2c <= 0) AND (-1a +3b +3c <= 3) AND (-3a +1b -2c <= 16) AND (1a -3b +2c <= 8) AND (1a -1b +3c >= 11) AND (-3a +1b +1c <= 9) AND (2a -1b +3c > 9) AND (-3a +2b -1c <= 20) AND (-1a +2b +2c < 6) AND (2a -3b -3c >= 6),12,10,3,0,and
+(-3a -2b -3c <= 5) AND (1a -1b -3c > 3) AND (-1a +2b -1c < 20) AND (2a +3b -2c = 17) AND (-2a +1b +3c < 2) AND (1a -1b -3c >= 6) AND (3a +2b -1c > 16) AND (3a -1b +2c < 14) AND (1a +2b +3c < 2) AND (2a +3b +1c = 17) AND (-3a -3b +1c = 13) AND (3a +1b -3c > 4),12,10,3,0,and
+(-3a +2b -3c > 8) AND (-2a -2b +2c <= 16) AND (-3a +3b -1c <= 2) AND (-3a +3b +1c <= 20) AND (-2a -1b +2c < 4) AND (3a -2b -1c <= 2) AND (-2a -2b +3c = 12) AND (-2a -3b -1c = 13) AND (-2a +1b -1c = 20) AND (1a -2b +2c < 19) AND (2a +2b +2c >= 16) AND (1a -3b -1c < 12),12,10,3,0,and
+(1a -3b +1c <= 11) AND (1a +2b +1c >= 15) AND (1a -3b -1c <= 12) AND (-2a -1b +1c > 20) AND (3a -2b +3c >= 4) AND (1a -3b +1c < 1) AND (2a -2b -1c >= 20) AND (-3a -3b -3c <= 11) AND (-3a +2b +1c > 15) AND (-3a -1b +3c <= 11) AND (-1a +1b +3c <= 5) AND (-3a +1b -2c >= 14),12,10,3,0,and
+(-3a -1b +1c <= 12) AND (2a +3b -1c > 0) AND (1a -3b +2c > 19) AND (1a +1b +3c > 16) AND (3a -3b +3c <= 16) AND (3a -2b -2c < 6) AND (3a +1b +3c = 11) AND (-2a -1b +2c = 2) AND (1a -2b -1c > 12) AND (-3a -2b -2c > 18) AND (2a -2b +3c <= 15) AND (2a -1b +3c <= 12),12,10,3,0,and
+(-3a -3b -3c <= 15) AND (2a +2b -1c > 19) AND (-1a +1b -2c < 13) AND (-2a -1b -3c <= 0) AND (3a -1b -1c > 6) AND (1a -2b -3c >= 4) AND (2a -3b +3c >= 12) AND (-3a +2b -3c >= 11) AND (2a +2b -3c > 4) AND (-1a -1b -2c <= 12) AND (-2a -3b +1c = 13) AND (-1a -1b +2c < 6),12,10,3,0,and
+(3a -1b -2c < 2) AND (2a -3b -2c = 9) AND (-2a +3b +1c > 3) AND (-3a -2b -2c < 14) AND (-2a -2b +2c = 20) AND (-3a +3b +1c < 18) AND (-3a -2b -1c < 15) AND (1a +1b +2c <= 9) AND (-1a -3b -2c >= 5) AND (-1a +2b -2c >= 0) AND (1a -2b -1c = 18) AND (3a -3b +1c = 0),12,10,3,0,and
+(2a -2b -1c >= 6) AND (-2a -1b -3c >= 4) AND (-3a +1b -3c <= 19) AND (2a -1b +2c >= 14) AND (-2a -1b -3c < 2) AND (-2a +3b +2c = 14) AND (3a +2b +1c < 20) AND (-3a +1b -3c > 10) AND (-3a +2b +2c < 6) AND (1a -2b -3c <= 17) AND (2a -2b -3c > 16) AND (2a +3b +2c > 0),12,10,3,0,and
+(-3a +1b -3c = 16) AND (3a -3b -3c >= 13) AND (1a -3b -2c > 11) AND (3a -1b -2c >= 15) AND (3a -2b -2c > 7) AND (1a +1b +1c <= 3) AND (-2a +3b -2c < 17) AND (1a +1b +1c < 16) AND (-1a +3b +2c > 6) AND (-3a -3b -2c <= 17) AND (1a +3b -2c = 11) AND (1a +1b -2c > 3) AND (-2a -1b +1c = 15),13,10,3,0,and
+(2a -3b -1c = 1) AND (-1a +2b -1c < 19) AND (-3a +1b +3c > 9) AND (2a -1b -2c > 1) AND (1a -1b -2c = 13) AND (-3a +3b -3c < 5) AND (2a -2b -1c <= 6) AND (3a +3b +2c <= 6) AND (-2a -3b +3c < 9) AND (2a +2b -2c < 20) AND (3a -2b +2c < 19) AND (-3a +3b +1c = 5) AND (1a +1b +2c = 15),13,10,3,0,and
+(-1a -3b -3c <= 1) AND (-3a -3b -1c <= 8) AND (2a -1b -3c > 8) AND (-2a -1b -2c < 15) AND (2a -1b -1c < 6) AND (-2a +2b -1c <= 4) AND (1a -3b +3c > 5) AND (1a +2b +3c >= 2) AND (-1a -1b -3c < 16) AND (-1a +3b -2c < 14) AND (-3a -2b -3c = 6) AND (-3a -1b -2c > 14) AND (-3a -2b -2c <= 16),13,10,3,0,and
+(-2a +3b +3c = 6) AND (1a -1b -2c <= 15) AND (3a -1b -2c >= 7) AND (1a +3b -1c = 2) AND (-1a -3b -2c < 16) AND (-1a +1b +2c < 9) AND (-2a -2b -3c < 3) AND (-3a -3b -1c < 19) AND (-1a -1b -2c > 17) AND (3a +3b +3c <= 8) AND (2a -1b +1c < 11) AND (1a +2b -2c <= 19) AND (-3a -3b +1c >= 6),13,10,3,0,and
+(-3a -3b -1c = 2) AND (-1a -1b -1c >= 2) AND (-2a +3b +2c >= 12) AND (2a +1b -2c = 19) AND (-3a -2b -1c = 3) AND (-3a -3b -1c = 2) AND (-1a -3b +3c < 3) AND (3a -1b -1c >= 20) AND (3a -1b +1c = 5) AND (-2a +3b -3c < 14) AND (-3a -1b -1c > 3) AND (1a +1b -2c > 5) AND (2a -2b -2c > 8),13,10,3,0,and
+(-2a -3b -1c >= 16) AND (-1a +3b +2c <= 13) AND (-2a -2b +1c <= 9) AND (3a +1b -2c = 8) AND (3a -2b -2c > 7) AND (1a -2b +2c <= 12) AND (-2a -3b +1c <= 7) AND (-1a +3b -3c >= 10) AND (-2a +3b -3c = 13) AND (-1a +3b +2c > 20) AND (1a -1b -3c = 1) AND (1a +3b +1c <= 6) AND (1a -3b -1c < 7),13,10,3,0,and
+(-1a +3b +1c >= 18) AND (2a +1b -2c > 17) AND (3a +1b -3c < 12) AND (-2a +1b +2c >= 3) AND (-1a +3b -2c = 15) AND (-3a +1b +3c = 8) AND (1a -1b -3c >= 8) AND (-3a +2b +3c > 8) AND (2a +1b +3c > 18) AND (1a +1b -1c <= 2) AND (-2a -1b +1c <= 4) AND (-3a +3b +3c > 8) AND (3a -3b -3c < 17),13,10,3,0,and
+(3a -2b -2c > 15) AND (3a -2b +3c <= 16) AND (-2a +3b +2c >= 6) AND (-2a +1b -3c <= 8) AND (1a -2b +2c = 7) AND (-3a -2b -3c < 17) AND (-2a +1b -2c < 14) AND (3a -2b -2c > 7) AND (2a -3b -3c = 8) AND (3a -1b -2c = 15) AND (1a +1b -3c > 18) AND (1a +2b -3c < 10) AND (1a +3b -2c < 8),13,10,3,0,and
+(-2a -3b -3c = 2) AND (-1a +3b -2c >= 12) AND (-2a -2b -3c <= 1) AND (1a -3b -1c = 1) AND (2a -1b +2c = 0) AND (-2a +2b -1c < 14) AND (2a +3b -3c > 14) AND (-2a +1b -1c = 9) AND (-1a -3b +3c <= 14) AND (2a -1b -1c <= 12) AND (3a +1b -2c < 20) AND (-1a -2b -2c <= 7) AND (3a +3b +1c < 7),13,10,3,0,and
+(-3a -2b -1c > 11) AND (1a +1b +1c >= 8) AND (2a -1b -2c >= 10) AND (-3a +3b -2c = 15) AND (-3a -2b -2c > 20) AND (-3a +2b -2c <= 1) AND (-1a -3b -3c <= 11) AND (1a +3b -1c <= 8) AND (3a -1b +2c = 15) AND (-3a -3b -3c > 0) AND (3a +3b -1c <= 3) AND (1a +3b -1c >= 18) AND (3a -3b -3c > 17),13,10,3,0,and
+(-3a -3b -2c > 15) AND (-3a +2b -1c <= 12) AND (-1a -2b -3c = 3) AND (3a -1b -2c <= 9) AND (1a -2b +1c >= 6) AND (1a -2b -1c >= 11) AND (1a -3b -3c < 3) AND (-2a -3b -2c = 16) AND (1a -2b -3c < 3) AND (1a -3b -3c >= 10) AND (-1a +1b +3c >= 20) AND (-2a +1b -2c > 3) AND (1a -3b +2c <= 15) AND (1a +2b -3c = 8),14,10,3,0,and
+(2a -3b -1c <= 19) AND (1a -2b -3c > 1) AND (2a -3b +1c >= 11) AND (-3a +3b -1c <= 8) AND (-1a +2b -3c = 18) AND (-3a -1b +2c <= 19) AND (1a -3b -1c >= 11) AND (-3a +2b -1c < 19) AND (2a +2b +2c > 6) AND (-3a -2b -3c >= 7) AND (1a -1b +2c < 15) AND (2a -1b +3c <= 2) AND (2a +2b +3c > 15) AND (-1a +1b -2c >= 16),14,10,3,0,and
+(-2a +2b -2c >= 3) AND (1a +1b +3c >= 16) AND (3a +2b +3c <= 15) AND (1a -3b +3c = 9) AND (2a +1b -3c < 11) AND (3a -1b -3c < 16) AND (3a +1b +2c < 10) AND (3a -3b +2c <= 0) AND (-1a +3b -1c <= 4) AND (2a +2b -3c >= 14) AND (-2a -2b -2c > 18) AND (-1a -1b +2c = 6) AND (-1a -2b -3c >= 12) AND (3a +3b +3c = 18),14,10,3,0,and
+(-3a +3b -1c > 18) AND (-2a -2b +2c <= 5) AND (-3a +3b -2c < 6) AND (2a +3b -1c = 17) AND (3a +2b +2c >= 18) AND (2a +2b +2c < 11) AND (3a +3b +3c = 6) AND (-2a -1b +2c = 14) AND (-1a -3b +3c = 13) AND (-3a +1b -3c < 16) AND (1a +2b -2c <= 7) AND (-2a -3b +1c = 13) AND (2a +1b +3c >= 5) AND (3a -2b +2c = 2),14,10,3,0,and
+(2a +2b +2c > 14) AND (-1a +2b +2c = 18) AND (-2a -2b +2c >= 7) AND (-3a +2b +1c > 0) AND (2a +1b +2c >= 10) AND (-1a +3b +3c = 5) AND (2a +3b -1c < 7) AND (-2a -2b -2c = 8) AND (-2a -1b +3c < 2) AND (3a -1b -2c <= 11) AND (-2a -2b -1c >= 17) AND (-1a -3b +2c <= 14) AND (2a +1b +1c > 8) AND (3a -1b -1c > 18),14,10,3,0,and
+(-1a +3b -2c > 2) AND (-1a -2b -3c < 7) AND (1a +2b +3c <= 19) AND (-1a -1b +2c >= 5) AND (-1a -2b +3c <= 14) AND (-2a +3b -1c = 12) AND (3a +1b -2c < 4) AND (1a +3b -3c <= 2) AND (-2a +1b +2c < 4) AND (-3a -2b +1c = 9) AND (3a -1b +2c >= 9) AND (1a -3b +1c = 3) AND (-1a -3b +1c = 19) AND (-3a +1b -1c >= 8),14,10,3,0,and
+(-3a +1b -3c <= 8) AND (3a -2b +2c <= 13) AND (3a -2b +1c < 14) AND (1a +3b -2c <= 2) AND (2a +1b +3c = 9) AND (2a +3b +1c < 1) AND (3a -3b -2c <= 14) AND (3a -3b +3c >= 16) AND (-2a +3b +3c = 11) AND (2a -1b +3c <= 15) AND (1a -2b +2c <= 17) AND (-2a -1b +1c < 3) AND (1a +2b +1c < 16) AND (1a +2b -3c >= 0),14,10,3,0,and
+(-2a -3b +1c >= 0) AND (3a +3b -2c < 20) AND (-3a -2b +3c >= 6) AND (3a -2b +3c = 20) AND (2a -2b -2c > 3) AND (3a -2b -1c = 12) AND (1a -2b -3c >= 9) AND (3a -3b -2c <= 19) AND (-3a +2b +3c < 8) AND (-3a -2b +3c >= 6) AND (-3a +2b -1c >= 7) AND (-2a -1b +3c >= 8) AND (-2a -2b +3c = 7) AND (1a +2b -2c = 12),14,10,3,0,and
+(2a -3b -3c = 19) AND (-2a +3b +1c <= 8) AND (3a +1b -2c <= 5) AND (-1a -1b -1c <= 14) AND (-1a +2b +1c >= 8) AND (3a +1b -1c <= 13) AND (-1a -3b -2c = 3) AND (-1a -3b +3c < 12) AND (-3a +1b -2c = 4) AND (-2a +3b -2c < 14) AND (-3a +1b -3c <= 12) AND (2a -3b +1c < 15) AND (-2a -3b +3c = 2) AND (-3a -3b +2c = 16),14,10,3,0,and
+(-3a -3b -1c <= 7) AND (-3a -3b +1c < 14) AND (-3a -3b -1c >= 14) AND (-3a +2b -1c >= 13) AND (-2a +2b +1c > 0) AND (-3a +2b +3c = 3) AND (-1a +2b -1c > 15) AND (-3a +3b -2c >= 20) AND (-2a -3b -1c > 12) AND (-1a +1b -1c = 1) AND (-3a +2b -1c <= 15) AND (-1a +1b -3c <= 12) AND (2a +3b -3c < 15) AND (3a +2b +1c < 1),14,10,3,0,and
+(-1a -1b +3c = 9) AND (-1a +1b -2c > 4) AND (-2a +3b +1c >= 20) AND (1a -3b -3c < 13) AND (-3a -3b +1c <= 0) AND (2a +1b +1c <= 7) AND (-1a +2b +3c < 9) AND (1a +2b +1c < 19) AND (3a +3b +3c < 9) AND (-1a -3b -3c >= 18) AND (-3a +3b +3c <= 8) AND (2a +2b +1c = 14) AND (-2a -2b -1c >= 2) AND (-1a -1b +3c <= 16) AND (-3a -3b +2c = 18),15,10,3,0,and
+(3a -2b -2c < 6) AND (3a -1b -2c >= 15) AND (-3a +2b +3c = 8) AND (-1a +3b +3c = 2) AND (3a -2b -2c = 15) AND (3a +2b +3c = 10) AND (3a +1b +1c >= 0) AND (-3a +1b +3c >= 8) AND (-1a +1b +2c = 11) AND (-1a +2b +3c >= 20) AND (1a +1b -2c < 9) AND (-2a +1b +3c = 0) AND (-2a +3b +2c > 17) AND (-2a -1b +2c >= 12) AND (-1a +2b +2c <= 9),15,10,3,0,and
+(-1a +3b -1c >= 13) AND (-1a +2b -1c > 1) AND (3a -2b -1c > 16) AND (1a -1b -1c < 5) AND (1a +3b -2c = 1) AND (3a -1b +2c > 19) AND (2a +1b +1c > 14) AND (2a +2b +2c = 7) AND (-2a +1b +1c < 5) AND (2a -3b -3c > 8) AND (-2a -3b +1c >= 0) AND (1a +1b +2c < 19) AND (-2a -2b -1c = 20) AND (-1a -2b -3c <= 9) AND (-3a -2b +3c > 10),15,10,3,0,and
+(2a +1b +2c > 0) AND (-3a +2b -1c >= 17) AND (-1a +1b +1c = 6) AND (-2a +1b +2c >= 12) AND (1a +2b -2c <= 3) AND (-3a -3b -1c = 3) AND (2a -3b -3c = 3) AND (-1a -2b +1c < 7) AND (2a -3b -2c = 3) AND (1a +1b +1c >= 18) AND (-2a -3b +2c < 6) AND (-2a -1b -3c <= 10) AND (3a +1b +1c > 18) AND (-2a +2b -1c = 19) AND (1a -2b +1c >= 15),15,10,3,0,and
+(-1a -3b +1c = 3) AND (1a -1b -1c = 8) AND (-1a -1b +3c >= 2) AND (1a +3b -2c < 19) AND (3a -3b -2c < 15) AND (-3a -1b -1c >= 2) AND (2a -1b +2c <= 4) AND (-2a +3b +2c < 12) AND (3a -1b -2c < 13) AND (2a +2b -1c = 8) AND (-1a +1b -2c >= 5) AND (-3a -2b +2c > 10) AND (2a -2b +2c >= 11) AND (-3a -3b +3c >= 20) AND (1a +2b +3c < 13),15,10,3,0,and
+(3a +1b -2c < 16) AND (1a +3b -3c >= 20) AND (3a +3b +1c = 12) AND (-3a +1b -3c = 3) AND (-1a -1b +2c <= 16) AND (3a +2b -2c >= 1) AND (1a -2b -3c < 1) AND (-3a -1b +2c < 13) AND (-2a +2b +1c < 7) AND (2a -3b +2c = 9) AND (1a +3b -2c > 10) AND (-3a +1b -2c < 8) AND (2a +3b -3c = 4) AND (-3a -1b -2c >= 1) AND (-2a -1b +2c = 7),15,10,3,0,and
+(1a -1b -1c >= 14) AND (2a -3b +1c <= 8) AND (-1a +3b +3c = 17) AND (3a +1b -1c >= 12) AND (-1a -1b -1c >= 5) AND (2a -1b +2c >= 8) AND (3a -1b +2c < 7) AND (-1a -3b -2c < 5) AND (-2a -1b -1c = 0) AND (-1a +2b -2c >= 20) AND (1a -2b +3c >= 17) AND (-3a -2b +2c < 10) AND (-3a +2b -3c <= 16) AND (1a -1b -2c <= 20) AND (-1a +2b +1c >= 2),15,10,3,0,and
+(-2a -1b +3c >= 9) AND (2a -1b -3c < 7) AND (3a -2b +1c >= 11) AND (3a -1b -1c <= 5) AND (1a -1b -3c = 14) AND (-2a -3b -1c >= 10) AND (2a +2b -2c >= 9) AND (1a -1b +2c > 6) AND (-1a -1b +1c > 0) AND (-1a -1b +2c < 3) AND (-1a +3b -1c = 18) AND (-1a -1b -3c >= 3) AND (-3a -3b +2c >= 19) AND (2a +3b +2c <= 13) AND (2a -1b -1c < 12),15,10,3,0,and
+(-3a -2b +1c < 13) AND (-2a +2b -1c > 17) AND (-1a +3b +1c <= 3) AND (-1a +3b -2c >= 11) AND (1a +1b -3c <= 19) AND (3a -1b -1c > 3) AND (-2a -2b -1c > 17) AND (2a -2b -2c <= 5) AND (3a +3b +2c > 8) AND (-3a +1b +1c = 4) AND (3a +2b -2c < 2) AND (-1a +2b -2c = 13) AND (3a +3b -3c = 14) AND (2a +1b +1c > 16) AND (3a -3b -2c > 10),15,10,3,0,and
+(-2a +2b +2c > 13) AND (3a +1b -3c < 5) AND (1a -2b +1c < 3) AND (-2a -2b -2c < 15) AND (-2a -1b +2c <= 15) AND (-1a +3b +2c < 12) AND (-3a -3b +1c > 18) AND (-2a +1b +1c = 13) AND (1a +1b +3c >= 5) AND (1a +2b -3c > 19) AND (-3a -1b -3c >= 15) AND (-2a -3b +3c <= 3) AND (1a -3b +1c <= 0) AND (1a +3b +2c >= 15) AND (3a -3b -1c < 14),15,10,3,0,and

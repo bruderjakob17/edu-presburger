@@ -1,0 +1,31 @@
+expression,count,constant,variable_count,depth,mode,time_ms,num_states,outcome
+A a. (1a +2b +2c <= 5) AND (3a +3b -3c = 10),2,5,3,1,random,13.6,1,ok
+A a. (-2a +3b +2c > 4) OR (-2a +2b -3c > 7),2,5,3,1,random,11.49,4,ok
+A a. (3a +3b -2c <= 4) OR (-1a +1b -3c = 1),2,5,3,1,random,7.68,1,ok
+A a. (-1a +3b +3c = 10) OR (1a +1b -1c > 5),2,5,3,1,random,12.24,6,ok
+A a. (2a -1b -2c > 6) OR (-1a +3b -2c > 3),2,5,3,1,random,15.22,7,ok
+A a. (3a -2b +2c = 5) OR (2a +3b -2c = 5),2,5,3,1,random,55.5,1,ok
+A a. (-3a -3b +1c = 4) AND (-1a -3b -1c >= 8),2,5,3,1,random,8.63,1,ok
+A a. (2a +3b +2c < 7) AND (-3a +2b -3c > 7),2,5,3,1,random,26.22,1,ok
+A a. (3a -2b +2c <= 3) OR (1a -2b +3c > 9),2,5,3,1,random,8.84,20,ok
+A a. (-2a +1b +2c < 6) AND (3a +2b +3c < 6),2,5,3,1,random,11.28,1,ok
+A a. E b. (2a -1b +1c >= 9) AND (2a -1b -3c > 10),2,5,3,2,random,11.35,1,ok
+A a. E b. (1a +1b -3c >= 1) AND (-1a +3b -1c < 9),2,5,3,2,random,32.47,1,ok
+A a. E b. (1a +2b +3c <= 0) AND (2a +3b -1c <= 1),2,5,3,2,random,14.0,1,ok
+A a. E b. (-3a +2b +1c = 1) AND (-1a -3b -2c >= 5),2,5,3,2,random,37.39,1,ok
+A a. E b. (3a +3b +1c >= 7) OR (2a -2b +2c > 3),2,5,3,2,random,7.67,1,ok
+A a. E b. (3a +1b -3c >= 3) AND (2a -1b -2c < 6),2,5,3,2,random,10.52,1,ok
+A a. E b. (-1a -1b +3c >= 9) OR (3a +3b -2c <= 0),2,5,3,2,random,7.2,4,ok
+A a. E b. (2a +2b -2c >= 3) AND (2a +3b -1c = 6),2,5,3,2,random,24.07,1,ok
+A a. E b. (3a +1b -3c < 5) AND (1a +3b +1c >= 4),2,5,3,2,random,24.53,1,ok
+A a. E b. (-2a -1b -3c >= 9) OR (3a -2b -1c <= 5),2,5,3,2,random,6.64,1,ok
+A a. E b. A c. (1a -3b +3c = 8) AND (-1a -2b +2c = 6),2,5,3,3,random,12.9,1,ok
+A a. E b. A c. (-1a -1b +1c >= 7) AND (-1a +1b +1c > 3),2,5,3,3,random,8.44,1,ok
+A a. E b. A c. (2a +2b +1c >= 10) OR (-2a +3b +1c <= 6),2,5,3,3,random,8.68,1,ok
+A a. E b. A c. (-3a -2b +1c >= 8) AND (-1a +2b -1c > 2),2,5,3,3,random,9.46,1,ok
+A a. E b. A c. (1a -1b +1c < 0) AND (-3a +3b -1c = 2),2,5,3,3,random,9.59,1,ok
+A a. E b. A c. (2a +2b -3c >= 7) AND (-2a -2b +1c = 5),2,5,3,3,random,15.74,1,ok
+A a. E b. A c. (-1a +1b +3c > 1) OR (1a -3b +3c >= 8),2,5,3,3,random,38.15,1,ok
+A a. E b. A c. (2a -1b -2c > 10) AND (-2a +3b -2c <= 6),2,5,3,3,random,40.92,1,ok
+A a. E b. A c. (-3a +3b -1c < 6) AND (-3a +3b -2c < 6),2,5,3,3,random,10.91,1,ok
+A a. E b. A c. (-2a +2b -3c = 8) AND (1a -3b -3c > 7),2,5,3,3,random,608.9,1,ok

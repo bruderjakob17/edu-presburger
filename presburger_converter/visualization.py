@@ -370,25 +370,37 @@ def add_rankdir_auto(dot: str) -> str:
     node_count = len(node_lines)
 
     # 3. Decide layout direction
-    rankdir = decide_rankdir_from_structure(dot)
-    #layout = "neato" #if node_count < 10 else "neato"
-    #print(node_count)
+    # 3. Decide layout direction
+    #rankdir = decide_rankdir_from_structure(dot)
+    # layout = "neato" #if node_count < 10 else "neato"
+    # print(node_count)
     layout = "dot"
     size = "16,9"
     ratio = "fill" if node_count > 10 else "auto"
+    rankdir = "LR" if node_count < 10 else decide_rankdir_from_structure(dot)
+    padding = "0"
+    if node_count <= 3:
+        padding = "1.2"
     #rankdir = "LR"
     # 4. Insert layout instructions
     for i, line in enumerate(lines):
         if line.strip().startswith("digraph"):
             # Insert after "digraph G {"
-            insert_lines = [
-                f'layout={layout};',
-                f'rankdir={rankdir};',
-                f'size="{size}";',
-                #f'margin={margin};',
-                f'ratio={ratio};',
-                #'size="16,9";'
-            ]
+            if node_count < 4:
+                insert_lines = [
+                    f'layout={layout};',
+                    f'rankdir={rankdir};',
+                    f'size="{size}";',
+                    f'ratio={ratio};',
+                    f'graph [pad="{padding}"];',
+                ]
+            else:
+                insert_lines = [
+                    f'layout={layout};',
+                    f'rankdir={rankdir};',
+                    f'ratio={ratio};',
+                    f'size="{size}";',
+                ]
             #if node_count >= 5:  # apply ratio=fill only if graph is "big enough"
             #insert_lines.insert(0, 'ratio=fill;')
             for j, content in enumerate(insert_lines):

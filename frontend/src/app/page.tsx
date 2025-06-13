@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Script from 'next/script';
 import GraphvizViewer from './components/GraphvizViewer';
 import ExampleSolutions from './components/ExampleSolutions';
@@ -19,31 +19,54 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [dotString, setDotString] = useState<string>();
+  const [mataString, setMataString] = useState<string>();
   const [variables, setVariables] = useState<string[]>([]);
   const [exampleSolutions, setExampleSolutions] = useState<ExampleSolution[]>([]);
   const [showHelp, setShowHelp] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [kSolutions, setKSolutions] = useState(3);
+  const [numStates, setNumStates] = useState<number>(0);
+  const [numFinalStates, setNumFinalStates] = useState<number>(0);
+  const scrollPositionRef = useRef(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Effect to restore scroll position after loading completes
+  useEffect(() => {
+    if (!loading && dotString) {
+      // Small delay to ensure the graph is fully rendered
+      setTimeout(() => {
+        window.scrollTo(0, scrollPositionRef.current);
+      }, 100);
+    }
+  }, [loading, dotString]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         const content = e.target?.result as string;
         setInput(content);
         setKSolutions(3);
-        // Use the content directly in the request instead of waiting for state update
-        handleBuild([], 3, false, content);
+        // Always build with the new content, regardless of previous state
+        await handleBuild([], 3, false, content);
+        // Clear the file input after successful upload
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
       };
       reader.readAsText(file);
     }
   };
 
   const handleBuild = async (variableOrder: string[] = [], kOverride?: number, forceExpand?: boolean, formulaOverride?: string) => {
+    // Save current scroll position before any state changes
+    scrollPositionRef.current = window.scrollY;
+    
     setLoading(true);
     setError(null);
     setDotString(undefined);
+    setMataString(undefined);
     setExampleSolutions([]);
     try {
       const requestBody = {
@@ -73,8 +96,11 @@ export default function Home() {
       const data = await response.json();
       console.log('API response:', data);
       setDotString(data.dot);
+      setMataString(data.mata);
       setVariables(data.variables || []);
       setExampleSolutions(data.example_solutions || []);
+      setNumStates(data.num_states);
+      setNumFinalStates(data.num_final_states);
     } catch (err) {
       const errorMsg = (err instanceof Error ? err.message : 'An error occurred')
         .replace(/\t/g, '    ')
@@ -94,7 +120,7 @@ export default function Home() {
     e.preventDefault();
   };
 
-  const handleDrop = (e: React.DragEvent, targetIndex: number) => {
+  const handleDrop = async (e: React.DragEvent, targetIndex: number) => {
     e.preventDefault();
     if (draggedIndex === null) return;
 
@@ -104,7 +130,7 @@ export default function Home() {
 
     setVariables(newVariables);
     setDraggedIndex(null);
-    handleBuild(newVariables);
+    await handleBuild(newVariables);
   };
 
   const handleFormulaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -120,14 +146,40 @@ export default function Home() {
     });
   };
 
+  const handleDownloadDot = () => {
+    if (!dotString) return;
+    const blob = new Blob([dotString], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'automaton.dot';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleDownloadMata = () => {
+    if (!mataString) return;
+    const blob = new Blob([mataString], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'automaton.mata';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
-    <main className="min-h-screen p-4">
+    <main className="min-h-screen p-8">
       <Script
         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         strategy="beforeInteractive"
       />
       
-      <div className="max-w-[90%] mx-auto space-y-8">
+      <div className="max-w-[85%] mx-auto space-y-8">
         <h1 className="text-3xl font-bold text-center">Presburger Arithmetical Expression to Automaton</h1>
         
         <div className="space-y-4">
@@ -156,9 +208,26 @@ export default function Home() {
                 accept=".txt"
                 onChange={handleFileUpload}
                 className="hidden"
+                ref={fileInputRef}
               />
             </label>
             <span className="text-sm text-gray-500">Upload a .txt file containing your formula</span>
+            {dotString && (
+              <div className="ml-auto flex gap-2">
+                <button
+                  onClick={handleDownloadDot}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  Download .dot
+                </button>
+                <button
+                  onClick={handleDownloadMata}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  Download .mata
+                </button>
+              </div>
+            )}
           </div>
           
           {/* Help Section */}
@@ -262,7 +331,7 @@ CONST: /[0-9]+/
             {variables.length > 0 && (
               <div className="flex flex-col gap-2 my-4">
                 <span className="font-semibold text-gray-700">Variable order (drag to reorder):</span>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   {variables.map((v, i) => (
                     <div
                       key={v}
@@ -277,6 +346,14 @@ CONST: /[0-9]+/
                       {v}
                     </div>
                   ))}
+                  <div className="ml-auto flex items-center gap-2">
+                    <div className="px-3 py-2 bg-blue-100 text-blue-800 rounded font-mono border border-blue-200">
+                      <span className="font-semibold">States:</span> {numStates}
+                    </div>
+                    <div className="px-3 py-2 bg-green-100 text-green-800 rounded font-mono border border-green-200">
+                      <span className="font-semibold">Final:</span> {numFinalStates}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

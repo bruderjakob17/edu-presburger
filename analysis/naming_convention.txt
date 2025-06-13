@@ -13,8 +13,9 @@ name = depth_<position>_<range_start>_<range_stop>_<constant_size>_<variable_cou
           mode is either "random", "or" or "and"
           sample_size is the number of samples to be taken
 accordingly the files are named
-plots: <y-axis>_vs_{name}
+plots: <y-axis>_vs_{name}_<data_filter>
     where y-axis is either "time" or "states"
+    where data_filter is "raw", "outlier", "collapsed" or "both"
 test_results: results_{name}.csv
 tests: test_{name}.csv
 
@@ -25,8 +26,9 @@ name = constant_<variable_count>_<junction_count>_<mode>_<sample_size>
           mode is either "random", "or" or "and"
           sample_size is the number of samples to be taken
 accordingly the files are named
-plots: <y-axis>_vs_{name}
+plots: <y-axis>_vs_{name}_<data_filter>
     where y-axis is either "time" or "states"
+    where data_filter is "raw", "outlier", "collapsed" or "both"
 test_results: results_{name}.csv
 tests: test_{name}.csv
 
@@ -37,7 +39,8 @@ name = junctions_<variable_count>_<constant_size>_<mode>_<sample_size>
           mode is either "random", "or" or "and"
           sample_size is the number of samples to be taken
 accordingly the files are named
-plots: <y-axis>_vs_{name}
+plots: <y-axis>_vs_{name}_<data_filter>
     where y-axis is either "time" or "states"
+    where data_filter is "raw", "outlier", "collapsed" or "both"
 test_results: results_{name}.csv
 tests: test_{name}.csv

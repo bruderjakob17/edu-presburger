@@ -1,15 +1,22 @@
-#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import concurrent.futures as cf
+import multiprocessing as mp
+import os
+import time
+from pathlib import Path
+from typing import List, Tuple, Literal
 
 import pandas as pd
-import time
-import re
-import argparse
-import os
-from multiprocessing import Process, Queue
 from presburger_converter import test_formula
 
-def get_script_dir():
-    return os.path.dirname(os.path.abspath(__file__))
+Outcome = Literal["ok", "timeout", "error"]
+Result = Tuple[float | None, int | None, Outcome]
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
 
 def formula_worker(q, expr):
     try:
@@ -22,8 +29,8 @@ def formula_worker(q, expr):
         q.put(("n/a", "n/a"))
 
 def run_formula_with_timeout(expr, timeout_sec):
-    q = Queue()
-    p = Process(target=formula_worker, args=(q, expr))
+    q = mp.Queue()
+    p = mp.Process(target=formula_worker, args=(q, expr))
     p.start()
     p.join(timeout=timeout_sec)
 
@@ -37,40 +44,94 @@ def run_formula_with_timeout(expr, timeout_sec):
     else:
         return "n/a", "n/a"
 
+def get_script_dir() -> Path:
+    """Return the absolute directory containing this script."""
+    return Path(__file__).resolve().parent
 
-def run_tests_from_csv(csv_path, output_csv, timeout):
-    # Make paths relative to script directory
-    script_dir = get_script_dir()
-    csv_path = os.path.join(script_dir, csv_path)
-    output_csv = os.path.join(script_dir, output_csv)
-    
+
+def _run_in_subprocess(expr: str, q: mp.Queue) -> None:  # type: ignore[type-arg]
+    """Executes inside the disposable subprocess.  Sends the result back via *q*."""
+    try:
+        start = time.perf_counter()
+        _dot, num_states = test_formula(expr)
+        duration_ms = (time.perf_counter() - start) * 1000
+        q.put((round(duration_ms, 2), num_states, "ok"))
+    except Exception as exc:  # noqa: BLE001
+        print(f"Error in test_formula({expr!r}): {exc}")
+        q.put((None, None, "error"))
+
+
+def _safe_run_formula(expr: str, timeout_sec: int) -> Result:
+    """Run `test_formula` with a hard timeout via a dedicated subprocess."""
+    ctx = mp.get_context("spawn")
+    q: mp.Queue[Result] = ctx.Queue()
+    p = ctx.Process(target=_run_in_subprocess, args=(expr, q))
+    p.start()
+    p.join(timeout_sec)
+
+    if p.is_alive():  # hard timeout
+        p.terminate()
+        p.join()
+        return None, None, "timeout"
+
+    try:
+        return q.get_nowait()
+    except Exception:  # queue empty or other issue
+        return None, None, "error"
+
+
+# ---------------------------------------------------------------------------
+# High‑level driver
+# ---------------------------------------------------------------------------
+
+
+def run_tests_from_csv(csv_path: str, output_csv: str, timeout: int, jobs: int = 8) -> None:
+    csv_path = Path(csv_path).expanduser().resolve()
+    output_csv = Path(output_csv).expanduser().resolve()
+
+    if not csv_path.exists():
+        raise FileNotFoundError(csv_path)
+
     df = pd.read_csv(csv_path)
-
-    times = []
-    state_counts = []
-
     total = len(df)
-    for idx, row in df.iterrows():
-        expr = row['expression']
-        print(expr)
-        print(f"[{idx+1}/{total}] Testing formula...")
 
-        time_ms, num_states = run_formula_with_timeout(expr, timeout)
+    # Pre‑allocate result columns (so dtype == float/int, NaN for missing)
+    df["time_ms"] = pd.NA
+    df["num_states"] = pd.NA
+    df["outcome"] = "pending"
 
-        if time_ms == "n/a":
-            print(f"⚠️ Timeout or error in row {idx}")
-        else:
-            print(f"✅ Done in {time_ms:.2f}ms with {num_states} states")
+    with cf.ThreadPoolExecutor(max_workers=jobs) as ex:
+        fut_to_idx = {
+            ex.submit(_safe_run_formula, expr, timeout): idx
+            for idx, expr in enumerate(df["expression"].tolist())
+        }
 
-        times.append(time_ms)
-        state_counts.append(num_states)
+        finished = 0
+        for fut in cf.as_completed(fut_to_idx):
+            idx = fut_to_idx[fut]
+            expr = df.at[idx, "expression"]
+            preview = expr[:50] + ("…" if len(expr) > 50 else "")
 
-    df["time_ms"] = times
-    df["num_states"] = state_counts
+            try:
+                duration, states, status = fut.result()
+            except Exception as exc:  # should never fire; already handled
+                duration, states, status = None, None, "error"
+                print(f"Internal error for index {idx}: {exc}")
+
+            df.at[idx, "outcome"] = status
+            if status == "ok":
+                df.at[idx, "time_ms"] = duration
+                df.at[idx, "num_states"] = states
+                print(f"[{finished + 1}/{total}] ✅ '{preview}' → {duration:.2f} ms, {states} states")
+            elif status == "timeout":
+                print(f"[{finished + 1}/{total}] ⚠️  '{preview}' → timeout (>{timeout}s)")
+            else:  # error
+                print(f"[{finished + 1}/{total}] ❌ '{preview}' → error (see log)")
+
+            finished += 1
 
     df.to_csv(output_csv, index=False)
     print(f"\n✅ Results saved to {output_csv}")
-
 
 def retry_failed_tests(csv_path):
     # Make path relative to script directory

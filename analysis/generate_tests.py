@@ -2,18 +2,18 @@ import pandas as pd
 import random
 import string
 
-def _random_atomic_formula(c: int, variables: list[str]) -> str:
+def _random_atomic_formula(c: int, c_variance: int, variables: list[str], coefficient_range) -> str:
     """
     Create one quantifier-free linear (in)equality over the given variables.
 
     Coefficients are chosen uniformly from {-3,…,-1,1,…,3}.
     The constant is random in [c-10 … c+10] (always ≥ 1).
     """
-    coefficients = [random.choice([i for i in range(-3, 4) if i != 0])
+    coefficients = [random.choice([i for i in coefficient_range if i != 0])
                     for _ in variables]
     op = random.choice(['=', '<=', '>=', '<', '>'])
 
-    constant = random.randint(max(1, c - 10), c + 10)
+    constant = random.randint(c - c_variance, c + c_variance)
 
     terms = []
     for coef, var in zip(coefficients, variables):
@@ -26,9 +26,12 @@ def _random_atomic_formula(c: int, variables: list[str]) -> str:
 
 def generate_quantified_formula(count: int,
                                 c: int,
+                                c_variance: int,
                                 depth: int,
                                 variable_count: int,
-                                mode: str = "random") -> str:
+                                coefficient_range,
+                                mode: str = "random"
+                                ) -> str:
     """
     Build  ⟨quantifier block⟩ ( φ₁ ⋄ φ₂ ⋄ … φ_count )
 
@@ -49,7 +52,7 @@ def generate_quantified_formula(count: int,
     variables = list(string.ascii_lowercase[:variable_count])
 
     # ---- 1. create the atomic pieces (no quantifiers yet) -------------------
-    atoms = [f"({_random_atomic_formula(c, variables)})" for _ in range(count)]
+    atoms = [f"({_random_atomic_formula(c, c_variance, variables, coefficient_range)})" for _ in range(count)]
 
     # ---- 2. combine them with the requested Boolean operator(s) -------------
     combined = atoms[0]
@@ -68,14 +71,14 @@ def generate_quantified_formula(count: int,
 
     return quant_block + combined
 
-def generate_random_formula(c, depth, variable_count):
+def generate_random_formula(c, c_variance, depth, variable_count, coefficient_range):
     if not (1 <= variable_count <= 10):
         raise ValueError("variable_count must be between 1 and 10.")
     if depth > variable_count:
         raise ValueError("depth cannot be greater than variable_count.")
-    c_random = random.randint(max(0, c - 10), c + 10)
+    c_random = random.randint(c - c_variance, c + c_variance)
     variables = list(string.ascii_lowercase[:variable_count])
-    coefficients = [random.choice([i for i in range(-3, 4) if i != 0]) for _ in range(variable_count)]
+    coefficients = [random.choice([i for i in coefficient_range if i != 0]) for _ in range(variable_count)]
     inequality_operator = random.choice(['=', '<=', '>=', '<', '>'])
 
     quantifier_str = ''
@@ -93,10 +96,10 @@ def generate_random_formula(c, depth, variable_count):
     return formula
 
 
-def generate_combined_formulas(count, c, depth, variable_count, mode):
+def generate_combined_formulas(count, c, c_variance, depth, variable_count, mode, coefficient_range):
     if mode not in {"and", "or", "random"}:
         raise ValueError("mode must be 'and', 'or', or 'random'")
-    formulas = [f"({generate_random_formula(c, depth, variable_count)})" for _ in range(count)]
+    formulas = [f"({generate_random_formula(c, c_variance, depth, variable_count, coefficient_range)})" for _ in range(count)]
 
     combined = formulas[0]
     for i in range(1, count):
@@ -109,15 +112,13 @@ def generate_combined_formulas(count, c, depth, variable_count, mode):
     return combined
 
 
-def generate_test_dataframe(position, path, count_values, c_values, variable_counts, depths, modes, sample_size):
+def generate_test_dataframe(position, path, count_values, c_values, c_variance, variable_counts, depths, variable_is_depth, modes, sample_size, coefficient_range):
     rows = []
     for count in count_values:
         for c in c_values:
             for variable_count in variable_counts:
-                for depth in depths:
-                    if depth > variable_count:
-                        continue  # prune invalid case
-
+                if variable_is_depth:
+                    depth = variable_count - 1
                     for mode in modes:
                         #if count == 1 and mode != "random":
                         #    continue  # only do one for count == 1
@@ -125,9 +126,9 @@ def generate_test_dataframe(position, path, count_values, c_values, variable_cou
                         for _ in range(sample_size):
                             #c_random = random.randint(max(0, c - 10), c + 10)
                             if position == "outside":
-                                expr = generate_quantified_formula(count, c, depth, variable_count, mode)
+                                expr = generate_quantified_formula(count, c, c_variance, depth, variable_count, coefficient_range, mode)
                             else:
-                                expr = generate_combined_formulas(count, c, depth, variable_count, mode)
+                                expr = generate_combined_formulas(count, c, c_variance, depth, variable_count, mode, coefficient_range)
                             rows.append({
                                 "expression": expr,
                                 "count": count,
@@ -136,5 +137,28 @@ def generate_test_dataframe(position, path, count_values, c_values, variable_cou
                                 "depth": depth,
                                 "mode": mode
                             })
+                else:
+                    for depth in depths:
+                        if depth > variable_count:
+                            continue  # prune invalid case
+
+                        for mode in modes:
+                            #if count == 1 and mode != "random":
+                            #    continue  # only do one for count == 1
+
+                            for _ in range(sample_size):
+                                #c_random = random.randint(max(0, c - 10), c + 10)
+                                if position == "outside":
+                                    expr = generate_quantified_formula(count, c, c_variance, depth, variable_count, coefficient_range, mode)
+                                else:
+                                    expr = generate_combined_formulas(count, c, c_variance, depth, variable_count, mode, coefficient_range)
+                                rows.append({
+                                    "expression": expr,
+                                    "count": count,
+                                    "constant": c,
+                                    "variable_count": variable_count,
+                                    "depth": depth,
+                                    "mode": mode
+                                })
     df = pd.DataFrame(rows)
     df.to_csv(path, index=False)

@@ -7,7 +7,7 @@ from lark import UnexpectedInput
 from typing import List
 from presburger_converter import formula_to_dot
 from fastapi.middleware.cors import CORSMiddleware
-
+import libmata
 from presburger_converter.solutions import find_example_solutions
 
 app = FastAPI()
@@ -38,6 +38,9 @@ async def automaton_dot(req: FormulaRequest):
     try:
         aut, dot_string, original_variable_order, new_variable_order = formula_to_dot(formula, new_variable_order)
         example_solutions = find_example_solutions(aut, k_solutions, original_variable_order, new_variable_order)
+        num_states = len(aut.get_reachable_states())
+        num_final_states = len(aut.final_states)
+        print(num_states, num_final_states)
     except UnexpectedInput as exc:
         try:
             context = exc.get_context(formula)
@@ -60,5 +63,8 @@ async def automaton_dot(req: FormulaRequest):
             "dot": dot_string,
             "variables": new_variable_order,
             "example_solutions": example_solutions,
+            "mata": str(aut),
+            "num_states": num_states,
+            "num_final_states": num_final_states,
         }
     )

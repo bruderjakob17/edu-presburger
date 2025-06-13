@@ -14,5 +14,342 @@
 
 \maketitle
 
+\section*{1. Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      ymax=1000,
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_100/states_vs_junctions_4_10_random_100_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_100/avg_states_vs_junctions_4_10_random_100_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6}, variables=4, constant midpoint=10, mode=random, timeout=60\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      ymax=10000,
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_100/time_vs_junctions_4_10_random_100_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_100/avg_time_vs_junctions_4_10_random_100_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6}, variables=4, constant midpoint=10, mode=random, timeout=60\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{2. Junctions / AND / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_and_10/states_vs_junctions_3_10_and_10_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_and_10/avg_states_vs_junctions_3_10_and_10_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}, variables=3, constant midpoint=10, mode=and, timeout=60\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_and_10/time_vs_junctions_3_10_and_10_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_and_10/avg_time_vs_junctions_3_10_and_10_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}, variables=3, constant midpoint=10, mode=and, timeout=60\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{3. Constant / RANDOM / C=0}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Constant Size},
+      ylabel={Number of States},
+      title={Constant Size vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=constant, y=num_states
+      ] {plots/constant/constant_4_1_random_100/states_vs_constant_4_1_random_100_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=constant, y=num_states
+      ] {plots/constant/constant_4_1_random_100/avg_states_vs_constant_4_1_random_100_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{variables=4, constant midpoint=0, mode=random, timeout=10\,s. Constants sampled from $[-10,10]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Constant Size},
+      ylabel={Time (ms)},
+      title={Constant Size vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=constant, y=time_ms
+      ] {plots/constant/constant_4_1_random_100/time_vs_constant_4_1_random_100_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=constant, y=time_ms
+      ] {plots/constant/constant_4_1_random_100/avg_time_vs_constant_4_1_random_100_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{variables=4, constant midpoint=0, mode=random, timeout=10\,s. Constants sampled from $[-10,10]$. (no filtering)}
+\end{figure}
+
+\section*{4. Depth / RANDOM / C=3}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Quantifier Depth},
+      ylabel={Number of States},
+      title={Quantifier Depth vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=depth, y=num_states
+      ] {plots/depth/depth_outside_1_4_3_4_1_random_10/states_vs_depth_outside_1_4_3_4_1_random_10_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=depth, y=num_states
+      ] {plots/depth/depth_outside_1_4_3_4_1_random_10/avg_states_vs_depth_outside_1_4_3_4_1_random_10_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Quantifier depth $\in$ [1,4] (position=outside), variables=4, constant midpoint=3, mode=random, timeout=300\,s. Constants sampled from $[-7,13]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Quantifier Depth},
+      ylabel={Time (ms)},
+      title={Quantifier Depth vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=depth, y=time_ms
+      ] {plots/depth/depth_outside_1_4_3_4_1_random_10/time_vs_depth_outside_1_4_3_4_1_random_10_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=depth, y=time_ms
+      ] {plots/depth/depth_outside_1_4_3_4_1_random_10/avg_time_vs_depth_outside_1_4_3_4_1_random_10_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Quantifier depth $\in$ [1,4] (position=outside), variables=4, constant midpoint=3, mode=random, timeout=300\,s. Constants sampled from $[-7,13]$. (no filtering)}
+\end{figure}
+
+\section*{5. Depth / AND / C=5}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Quantifier Depth},
+      ylabel={Number of States},
+      title={Quantifier Depth vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=depth, y=num_states
+      ] {plots/depth/depth_outside_1_4_5_4_2_and_10/states_vs_depth_outside_1_4_5_4_2_and_10_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=depth, y=num_states
+      ] {plots/depth/depth_outside_1_4_5_4_2_and_10/avg_states_vs_depth_outside_1_4_5_4_2_and_10_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Quantifier depth $\in$ [1,4] (position=outside), variables=4, constant midpoint=5, mode=and, timeout=300\,s. Constants sampled from $[-5,15]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Quantifier Depth},
+      ylabel={Time (ms)},
+      title={Quantifier Depth vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=depth, y=time_ms
+      ] {plots/depth/depth_outside_1_4_5_4_2_and_10/time_vs_depth_outside_1_4_5_4_2_and_10_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=depth, y=time_ms
+      ] {plots/depth/depth_outside_1_4_5_4_2_and_10/avg_time_vs_depth_outside_1_4_5_4_2_and_10_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Quantifier depth $\in$ [1,4] (position=outside), variables=4, constant midpoint=5, mode=and, timeout=300\,s. Constants sampled from $[-5,15]$. (no filtering)}
+\end{figure}
+
 \end{document}
 

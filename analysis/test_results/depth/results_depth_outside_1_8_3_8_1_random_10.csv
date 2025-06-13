@@ -1,0 +1,81 @@
+expression,count,constant,variable_count,depth,mode,time_ms,num_states,outcome
+A a. (1a -2b -3c -3d +1e +1f -3g +2h < 4),1,3,8,1,random,133.47,1,ok
+A a. (3a -3b +1c -1d +2e -1f -3g +2h < 2),1,3,8,1,random,161.78,1,ok
+A a. (3a +2b +2c +3d +2e -1f -3g -2h = 4),1,3,8,1,random,101.83,1,ok
+A a. (1a -1b +1c -1d -1e +1f +3g -2h >= 3),1,3,8,1,random,11.72,10,ok
+A a. (2a +2b +1c -1d -3e +1f -1g -1h = 4),1,3,8,1,random,77.25,1,ok
+A a. (-2a -3b -1c +2d -3e -1f +3g -2h < 1),1,3,8,1,random,126.88,1,ok
+A a. (1a -3b -3c -3d -1e +3f +2g +1h > 4),1,3,8,1,random,139.57,16,ok
+A a. (-2a +3b -1c +2d -2e +2f +2g -3h < 3),1,3,8,1,random,145.77,1,ok
+A a. (3a -2b -2c +1d +1e +3f +3g +1h > 3),1,3,8,1,random,117.66,13,ok
+A a. (-3a -2b -3c +3d +3e -1f +3g +1h > 2),1,3,8,1,random,118.72,16,ok
+A a. E b. (-3a +3b +3c +3d -3e +2f +1g -3h < 3),1,3,8,2,random,222.4,1,ok
+A a. E b. (-2a -1b -3c -3d -3e -2f -2g +2h = 1),1,3,8,2,random,70.29,15,ok
+A a. E b. (-1a -2b +3c +2d +3e +1f +2g +1h <= 1),1,3,8,2,random,18.5,1,ok
+A a. E b. (-1a -3b +2c -2d -1e -1f +2g +3h > 2),1,3,8,2,random,139.44,11,ok
+A a. E b. (-1a +1b -3c -1d +2e -2f -2g -2h > 2),1,3,8,2,random,102.58,1,ok
+A a. E b. (-2a +3b +3c +2d +2e +2f +2g -1h >= 4),1,3,8,2,random,22.47,1,ok
+A a. E b. (1a -2b -1c +2d +1e -2f +3g +3h >= 4),1,3,8,2,random,19.43,13,ok
+A a. E b. (-2a -1b +2c +1d +3e -2f +1g +2h = 1),1,3,8,2,random,50.68,11,ok
+A a. E b. (-1a -3b +1c +2d -1e -2f +3g +2h = 3),1,3,8,2,random,110.32,1,ok
+A a. E b. (3a +2b -2c +1d -1e +3f +2g +3h <= 3),1,3,8,2,random,27.23,1,ok
+A a. E b. A c. (-2a +3b +1c -2d -3e +2f +1g +2h <= 3),1,3,8,3,random,45.12,1,ok
+A a. E b. A c. (2a -1b +2c +1d -1e +2f +3g +2h >= 4),1,3,8,3,random,28.23,12,ok
+A a. E b. A c. (3a +2b +2c +2d +3e -1f -2g -2h > 5),1,3,8,3,random,177.97,1,ok
+A a. E b. A c. (1a -1b -2c -2d +3e +1f +2g +2h <= 3),1,3,8,3,random,22.49,1,ok
+A a. E b. A c. (-2a +3b +3c +1d +3e -3f +3g +1h <= 5),1,3,8,3,random,52.94,1,ok
+A a. E b. A c. (-3a -3b -1c -1d +3e +1f +1g +1h <= 2),1,3,8,3,random,24.03,1,ok
+A a. E b. A c. (-3a -2b -2c -2d -2e +2f -1g +3h > 4),1,3,8,3,random,152.27,1,ok
+A a. E b. A c. (-1a +3b +2c +2d +2e -1f -2g -3h >= 3),1,3,8,3,random,32.81,1,ok
+A a. E b. A c. (1a +1b +3c -2d -2e +3f +3g +1h <= 4),1,3,8,3,random,37.43,1,ok
+A a. E b. A c. (2a -1b +3c -3d +1e +2f +3g +3h = 3),1,3,8,3,random,268.65,1,ok
+A a. E b. A c. E d. (3a -3b -2c -1d +1e +3f -3g +3h < 4),1,3,8,4,random,205.6,1,ok
+A a. E b. A c. E d. (-1a -1b -2c -2d -2e +1f +1g -3h < 2),1,3,8,4,random,123.6,1,ok
+A a. E b. A c. E d. (-2a -2b -1c +2d +3e +1f +1g +1h >= 4),1,3,8,4,random,27.59,1,ok
+A a. E b. A c. E d. (3a -3b +3c +3d -1e -3f -3g -2h < 1),1,3,8,4,random,362.28,1,ok
+A a. E b. A c. E d. (3a +1b +2c +2d +1e +1f -2g -1h < 4),1,3,8,4,random,149.91,1,ok
+A a. E b. A c. E d. (3a +3b +3c +1d -1e -2f +3g -2h <= 2),1,3,8,4,random,67.26,1,ok
+A a. E b. A c. E d. (-2a -2b +2c +2d -1e -3f -3g +1h < 2),1,3,8,4,random,160.08,1,ok
+A a. E b. A c. E d. (-1a +1b +1c +3d +3e -1f -1g +1h = 4),1,3,8,4,random,168.63,1,ok
+A a. E b. A c. E d. (-3a -2b +3c -3d +3e -3f -3g +2h >= 3),1,3,8,4,random,64.2,11,ok
+A a. E b. A c. E d. (3a +2b +1c -3d -1e -1f -1g +3h = 3),1,3,8,4,random,268.71,1,ok
+A a. E b. A c. E d. A e. (-2a -1b -1c +2d -2e -2f +3g -3h > 5),1,3,8,5,random,179.58,1,ok
+A a. E b. A c. E d. A e. (-3a -1b +2c -3d +2e -2f -3g +2h = 4),1,3,8,5,random,905.94,1,ok
+A a. E b. A c. E d. A e. (3a +1b +3c +2d +3e -3f +2g -2h < 5),1,3,8,5,random,1639.3,1,ok
+A a. E b. A c. E d. A e. (2a +1b +3c +3d +2e -2f -1g +3h >= 2),1,3,8,5,random,65.84,1,ok
+A a. E b. A c. E d. A e. (-1a +3b +2c +3d -3e -2f -2g +3h <= 5),1,3,8,5,random,92.09,1,ok
+A a. E b. A c. E d. A e. (-2a -1b +1c -2d -1e +2f +2g -3h > 1),1,3,8,5,random,123.48,1,ok
+A a. E b. A c. E d. A e. (2a +2b +2c +1d -2e -3f -1g +1h >= 1),1,3,8,5,random,38.72,1,ok
+A a. E b. A c. E d. A e. (3a -3b -1c -2d +1e -2f -3g +2h < 2),1,3,8,5,random,238.54,1,ok
+A a. E b. A c. E d. A e. (2a +1b +2c +1d +1e +2f +1g +3h = 1),1,3,8,5,random,83.73,1,ok
+A a. E b. A c. E d. A e. (3a +2b +1c -1d -2e +1f -2g -2h = 5),1,3,8,5,random,130.8,1,ok
+A a. E b. A c. E d. A e. E f. (3a +3b +2c -1d -3e +1f +2g -1h <= 1),1,3,8,6,random,142.81,1,ok
+A a. E b. A c. E d. A e. E f. (1a +1b +1c -2d -1e -2f +3g +2h = 1),1,3,8,6,random,105.87,1,ok
+A a. E b. A c. E d. A e. E f. (-1a +3b -2c -1d +3e +1f +1g -2h >= 2),1,3,8,6,random,95.39,1,ok
+A a. E b. A c. E d. A e. E f. (-1a +1b +1c -3d +1e -2f +2g -2h >= 4),1,3,8,6,random,69.84,1,ok
+A a. E b. A c. E d. A e. E f. (-2a +1b -1c -2d +1e -2f -1g -3h < 1),1,3,8,6,random,140.22,1,ok
+A a. E b. A c. E d. A e. E f. (3a -2b +1c +3d -1e -3f -3g -1h <= 2),1,3,8,6,random,88.7,1,ok
+A a. E b. A c. E d. A e. E f. (-2a -1b -2c +2d -1e -1f +2g -1h = 5),1,3,8,6,random,62.65,1,ok
+A a. E b. A c. E d. A e. E f. (1a -1b -2c +1d +2e -1f -1g +3h >= 4),1,3,8,6,random,35.47,1,ok
+A a. E b. A c. E d. A e. E f. (-1a -3b -1c +3d +3e +2f +2g -2h < 4),1,3,8,6,random,489.3,1,ok
+A a. E b. A c. E d. A e. E f. (2a -1b -2c +1d +2e -1f -2g -3h > 3),1,3,8,6,random,140.49,1,ok
+A a. E b. A c. E d. A e. E f. A g. (-3a -1b -2c -1d -2e +3f -3g -3h >= 3),1,3,8,7,random,63.52,1,ok
+A a. E b. A c. E d. A e. E f. A g. (2a -2b -2c -1d -2e +2f -3g -3h <= 3),1,3,8,7,random,78.86,1,ok
+A a. E b. A c. E d. A e. E f. A g. (2a -3b -2c +3d -3e +2f +3g +3h <= 4),1,3,8,7,random,153.41,1,ok
+A a. E b. A c. E d. A e. E f. A g. (2a -3b +2c -3d -3e +1f -3g -2h < 4),1,3,8,7,random,639.19,1,ok
+A a. E b. A c. E d. A e. E f. A g. (-1a +1b -1c +1d -1e +2f -1g +2h = 5),1,3,8,7,random,71.18,1,ok
+A a. E b. A c. E d. A e. E f. A g. (-1a +1b +1c +1d +2e -3f +2g +1h >= 3),1,3,8,7,random,113.42,1,ok
+A a. E b. A c. E d. A e. E f. A g. (1a -1b -2c +2d -2e +3f +1g -2h < 4),1,3,8,7,random,326.87,1,ok
+A a. E b. A c. E d. A e. E f. A g. (1a -3b +2c -2d -3e -2f +2g +3h = 1),1,3,8,7,random,542.42,1,ok
+A a. E b. A c. E d. A e. E f. A g. (-2a -3b -3c +2d +3e -1f +1g +2h <= 1),1,3,8,7,random,158.35,1,ok
+A a. E b. A c. E d. A e. E f. A g. (-1a -1b +3c -2d -3e +1f -3g -1h > 2),1,3,8,7,random,379.84,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (-2a -1b +2c -3d +1e -1f -3g +3h < 5),1,3,8,8,random,233.35,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (-3a +2b +2c +3d +1e +3f +3g +1h < 1),1,3,8,8,random,262.06,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (1a -2b +2c -3d -2e +1f +1g -2h = 5),1,3,8,8,random,136.52,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (-1a -1b -3c +3d -3e -1f -3g -3h >= 2),1,3,8,8,random,68.6,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (3a -1b -2c -1d -3e +2f -1g -1h <= 2),1,3,8,8,random,99.09,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (3a -1b -3c +3d +1e +2f -1g -1h = 4),1,3,8,8,random,113.72,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (-3a +3b +2c -3d +1e -1f -3g -2h >= 2),1,3,8,8,random,121.46,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (-1a -1b -1c -2d +3e +2f +1g +1h <= 2),1,3,8,8,random,50.54,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (-3a -1b +2c -2d +2e +2f -3g +2h >= 3),1,3,8,8,random,166.68,1,ok
+A a. E b. A c. E d. A e. E f. A g. E h. (-1a +2b -1c -1d +1e -3f -2g -1h >= 3),1,3,8,8,random,124.13,1,ok

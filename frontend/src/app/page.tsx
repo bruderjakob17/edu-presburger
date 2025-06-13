@@ -248,6 +248,14 @@ export default function Home() {
               >
                 <div className="mb-2 font-semibold">Formula Syntax Help</div>
                 <div className="mb-2">
+                  <span className="font-semibold">Macros:</span><br />
+                  Define macros at the beginning of your input, one per line. After the macros, add your formula on a new line.<br />
+                  <span className="text-gray-600">Example:</span><br />
+                  <span className="block font-mono bg-gray-100 rounded p-2 my-1">LessThan(x, y) = x &lt; y</span>
+                  <span className="block font-mono bg-gray-100 rounded p-2 my-1">IsEven(x) = EX y. x = 2y</span>
+                  <span className="block font-mono bg-gray-100 rounded p-2 my-1">LessThan(x, y) AND IsEven(z)</span>
+                </div>
+                <div className="mb-2">
                   <span className="font-semibold">Boolean connectives:</span><br />
                   <span className="font-mono">AND</span>, <span className="font-mono">OR</span>, <span className="font-mono">NOT</span>, <span className="font-mono">-&gt;</span>, <span className="font-mono">&lt;-&gt;</span><br />
                   <span className="text-gray-600">Example: <span className="font-mono">(x = y) AND (NOT (x &lt; 3))</span></span>

@@ -19,11 +19,13 @@ def setup(k):
     #print(f"alphabet: {a.get_alphabet_symbols()}")
     config['alphabet'] = a
 
-def build_automaton(node) -> (mata_nfa.Nfa, [str]):
+def build_automaton(node, mode="determinize") -> (mata_nfa.Nfa, [str]):
     global config
     if isinstance(node, LessEqual):
         # Atomic case: build automaton for t <= u
         aut, variables = build_atomic_automaton(node)
+        if mode == "always":
+            aut = mata_nfa.minimize(aut)
         # print(aut.to_dot_str())
         # aut = project_variable(aut, 0 )
         #print(f"automaton for {node}:")
@@ -31,25 +33,32 @@ def build_automaton(node) -> (mata_nfa.Nfa, [str]):
         return aut, variables
 
     elif isinstance(node, Or):
-        left_automaton, left_variables = build_automaton(node.left)
-        right_automaton, right_variables = build_automaton(node.right)
+        left_automaton, left_variables = build_automaton(node.left, mode)
+        right_automaton, right_variables = build_automaton(node.right, mode)
         aut, variables = union(left_automaton, right_automaton, left_variables, right_variables)
+        if mode == "always":
+            aut = mata_nfa.minimize(aut)
         #print(f"automaton for {node}:")
         #print(aut.to_dot_str())
         return aut, variables
 
     elif isinstance(node, Not):
-        child_automaton, variables = build_automaton(node.expr)
+        child_automaton, variables = build_automaton(node.expr, mode)
         #child_automaton = mata_nfa.minimize(child_automaton)
         #print(f"child automaton: {child_automaton.to_dot_str()}")
         if not is_deterministic(child_automaton):
             #print("Child automaton is not deterministic, determinizing...")
-            child_automaton = determinize(child_automaton)
+            if mode in ["always", "minimize"]:
+                child_automaton = mata_nfa.minimize(child_automaton)
+            else:
+                child_automaton = determinize(child_automaton)
             #print(f"determinized automaton \n: {child_automaton.to_dot_str()}")
         #child_automaton = mata_nfa.complement(child_automaton, config['alphabet'])
-        child_automaton = complete(child_automaton, variables)
+        if mode in ["always", "minimize"]:
+            child_automaton = complete(child_automaton, variables)
         #print(f"completed automaton \n: {child_automaton.to_dot_str()}")
         child_automaton = complement(child_automaton)
+        #child_automaton = mata_nfa.minimize(child_automaton)
         #print(f"complemented automaton \n: {child_automaton.to_dot_str()}")
         #child_automaton = mata_nfa.complement(child_automaton, alphabet = config['alphabet'])
         #print(f"child automaton: {child_automaton.to_dot_str()}")
@@ -58,11 +67,14 @@ def build_automaton(node) -> (mata_nfa.Nfa, [str]):
         return child_automaton, variables
 
     elif isinstance(node, Exists):
-        child_automaton, variables = build_automaton(node.formula)
+        child_automaton, variables = build_automaton(node.formula, mode)
         setup(len(variables) - 1)
         index = variables.index(node.var)
         #print(f"automaton for {node}:")
         aut, variables = project_variable(child_automaton, index, variables)
+        if mode == "always":
+            aut = mata_nfa.minimize(aut)
+        #aut = mata_nfa.minimize(aut)
         #print(aut.to_dot_str())
         return aut, variables
 
@@ -290,7 +302,10 @@ def union(automaton1, automaton2, variables1, variables2):
 def complete(automaton : mata_nfa.Nfa, variables):
     new_transitions = []
     states = automaton.get_reachable_states()
+    max_state = 0
     for state in states:
+        if max_state < state:
+            max_state = state
         transitions = automaton.get_trans_from_state_as_sequence(state)
         needed_labels = set(range(2**len(variables)))
         for transition in transitions:
@@ -299,11 +314,14 @@ def complete(automaton : mata_nfa.Nfa, variables):
             new_transitions.append((state, label))
     if not new_transitions:
         return automaton
-    catch_state = automaton.add_state()
+    catch_state = automaton.add_state(max_state + 1)
     for transition in new_transitions:
         source = transition[0]
         label = transition[1]
         automaton.add_transition(source, label, catch_state)
+    needed_labels = set(range(2**len(variables)))
+    for label in needed_labels:
+        automaton.add_transition(catch_state, label, catch_state)
     return automaton
 
 
@@ -330,29 +348,64 @@ def determinize(automaton : mata_nfa.Nfa):
     return mata_nfa.determinize(automaton)
 
 def count_tree(node):
-    coefficients = {}
-    ones = 0
-    def helper(t, i):
-        nonlocal ones
+    """Return `(constant, coeffs)` for a linear arithmetic constraint.
+
+    Given a (possibly expanded) binary comparison node such as `LessEqual`,
+    the helper walks its *left* and *right* arithmetic sub‑trees and
+    gathers:
+
+    * **coeffs** – a mapping *x ↦ c* meaning variable `x` occurs with
+      coefficient *c* in the canonical form *left − right*;
+    * **constant** – the accumulated numeric offset appearing on that side.
+
+    The function understands:
+
+    * `Zero`, `One`, `Const`  – numeric literals (any sign);
+    * `Var`                  – single variables;
+    * `Mult`                 – linear multiplication by a positive integer;
+    * `Add`, `Sub`           – binary arithmetic operators.
+
+    Any other term node will raise `ValueError`.
+    """
+
+    coeffs: dict[str, int] = {}
+    constant = 0
+
+    def helper(t, sign: int) -> None:
+        nonlocal constant
+
         if isinstance(t, Var):
-            coefficients[t.name] = coefficients.get(t.name, 0) + i
+            coeffs[t.name] = coeffs.get(t.name, 0) + sign
+
+        elif isinstance(t, Mult):  # n * x  ⇒  coeff += n
+            coeffs[t.var] = coeffs.get(t.var, 0) + sign * t.n
+
         elif isinstance(t, One):
-            ones -= i                      # already there
-        elif isinstance(t, Const):         # NEW  (handles ±N)
-            ones -= i * t.value
+            constant -= sign  # subtract because we bring everything to LHS
+
+        elif isinstance(t, Const):
+            constant -= sign * t.value
+
         elif isinstance(t, Zero):
             pass
+
         elif isinstance(t, Add):
-            helper(t.left,  i)
-            helper(t.right, i)
+            helper(t.left, sign)
+            helper(t.right, sign)
+
         elif isinstance(t, Sub):
-            helper(t.left,  i)
-            helper(t.right, -i)
+            helper(t.left, sign)
+            helper(t.right, -sign)
+
         else:
             raise ValueError(f"Unexpected term node: {type(t)}")
+
+    #  Walk *left − right* to get everything on the same side.
     helper(node.left, 1)
     helper(node.right, -1)
-    return ones, coefficients
+    print(f"count_tree: constant={constant}, coeffs={coeffs}")
+    return constant, coeffs
+
 
 
 def is_deterministic(aut : mata_nfa.Nfa):

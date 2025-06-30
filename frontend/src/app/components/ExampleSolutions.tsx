@@ -10,24 +10,37 @@ interface ExampleSolution {
 
 interface ExampleSolutionsProps {
   solutions: ExampleSolution[];
+  allSolutions: ExampleSolution[];
+  bufferSolutions: ExampleSolution[];
   kSolutions: number;
   onAddExample: () => void;
   loading: boolean;
+  isFullSolutionSet: boolean;
+  isRefillingBuffer: boolean;
+  isButtonDisabled: boolean;
 }
 
-export default function ExampleSolutions({ solutions, kSolutions, onAddExample, loading }: ExampleSolutionsProps) {
+export default function ExampleSolutions({ 
+  solutions, 
+  allSolutions, 
+  bufferSolutions,
+  kSolutions, 
+  onAddExample, 
+  loading, 
+  isFullSolutionSet, 
+  isRefillingBuffer, 
+  isButtonDisabled 
+}: ExampleSolutionsProps) {
   if (!solutions || solutions.length === 0) return null;
 
-  // Determine if we should show the + button or the 'no more solutions' card
-  const showAddButton = solutions.length === kSolutions;
-  const showNoMore = kSolutions > solutions.length;
-
-  // For sizing, use the first solution as a reference
-  const referenceSolution = solutions[solutions.length - 1];
+  // Determine if we should show the + button
+  const showAddButton = bufferSolutions.length > 0;
 
   return (
     <div className="mb-8">
-      <h2 className="text-xl font-semibold mb-4">Example Solutions</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        {isFullSolutionSet ? 'Full Solution Set' : 'Example Solutions'}
+      </h2>
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {solutions.map((solution, index) => (
           <div
@@ -80,27 +93,37 @@ export default function ExampleSolutions({ solutions, kSolutions, onAddExample, 
             </div>
           </div>
         ))}
-        {/* Add Example Button or No More Solutions Card */}
-        {showAddButton && referenceSolution && (
+        {/* Add Example Button */}
+        {showAddButton && (
           <button
             type="button"
             onClick={onAddExample}
-            disabled={loading}
-            className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors min-h-[180px]"
+            disabled={isButtonDisabled}
+            className="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg shadow-md p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors min-h-[180px] disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ minHeight: '180px' }}
             aria-label="Generate another example"
           >
-            <span className="text-4xl text-gray-400 mb-2">+</span>
-            <span className="text-gray-500 font-medium">Generate another example</span>
+            {isButtonDisabled ? (
+              <>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400 mb-2"></div>
+                <span className="text-gray-500 font-medium">Loading more examples...</span>
+              </>
+            ) : (
+              <>
+                <span className="text-4xl text-gray-400 mb-2">+</span>
+                <span className="text-gray-500 font-medium">Generate another example</span>
+              </>
+            )}
           </button>
         )}
-        {showNoMore && referenceSolution && (
-          <div
-            className="bg-red-50 border-2 border-dashed border-red-300 rounded-lg shadow-md p-4 flex flex-col items-center justify-center min-h-[180px]"
-            style={{ minHeight: '180px' }}
-          >
-            <span className="text-2xl text-red-400 mb-2">✗</span>
-            <span className="text-red-600 font-medium text-center">expression has no more solutions</span>
+        
+        {/* Completion Tile */}
+        {!showAddButton && isFullSolutionSet && (
+          <div className="bg-green-50 border-2 border-green-200 rounded-lg shadow-md p-4 flex flex-col items-center justify-center min-h-[180px]">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-green-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="text-green-700 font-medium text-center">Solution set completed</span>
           </div>
         )}
       </div>

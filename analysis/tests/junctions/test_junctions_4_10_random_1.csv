@@ -1,0 +1,7 @@
+expression,count,constant,variable_count,depth,mode
+(1a -2b +3c +3d < 14),1,10,4,0,random
+(1a -2b -1c +1d < 14) OR (-3a +1b -2c +2d >= 0),2,10,4,0,random
+(-3a -3b +3c -2d <= 19) AND (-2a +2b -3c -1d >= 12) OR (1a -2b +3c +1d <= 13),3,10,4,0,random
+(-1a +2b -2c -2d < 5) OR (2a -3b +3c +1d > 11) AND (-1a +1b -2c +2d < 13) OR (-2a -1b +2c +1d = 4),4,10,4,0,random
+(-1a -3b -1c -2d = 15) OR (3a +1b -1c +1d <= 8) OR (1a +1b +2c -1d >= 0) OR (-3a +1b +3c -2d >= 17) OR (2a -2b +3c -2d = 9),5,10,4,0,random
+(3a +3b +1c -3d >= 13) AND (3a -1b -2c +2d <= 9) AND (-1a -3b -2c +1d < 6) OR (3a -1b +2c -1d >= 11) OR (2a +2b +3c -3d < 19) AND (-2a -3b -2c +1d < 10),6,10,4,0,random

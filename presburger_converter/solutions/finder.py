@@ -1,7 +1,7 @@
-# solutions.py
+# finder.py
 from collections import deque
 import libmata.nfa.nfa as mata_nfa
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple, Set
 
 
 def _int_to_lsbf(num: int, width: int) -> List[int]:
@@ -85,6 +85,15 @@ def describe_paths(
 
     return solutions
 
+def remove_trailing_zeros(seq: List[int]) -> List[int]:
+    """
+    Removes trailing zeros from a list until the last element is nonzero,
+    or only one element remains.
+    """
+    i = len(seq)
+    while i > 0 and seq[i - 1] == 0:
+        i -= 1
+    return seq[:i]
 
 def find_shortest_paths(nfa: mata_nfa.Nfa, k: int = 1) -> List[List[int]]:
     """
@@ -120,7 +129,7 @@ def find_shortest_paths(nfa: mata_nfa.Nfa, k: int = 1) -> List[List[int]]:
 
         # Accepting configuration?
         if state in nfa.final_states:
-            t_path = tuple(path)
+            t_path = tuple(remove_trailing_zeros(path))
             if t_path not in seen_solutions:
                 seen_solutions.add(t_path)
                 solutions.append(path)
@@ -128,17 +137,21 @@ def find_shortest_paths(nfa: mata_nfa.Nfa, k: int = 1) -> List[List[int]]:
                     break
 
         # Breadth-first expansion
-        for trans in nfa.get_trans_from_state_as_sequence(state):
-            queue.append((trans.target, path + [trans.symbol]))
+        transitions = nfa.get_trans_from_state_as_sequence(state)
+        if not (len(transitions) == 1 and transitions[0].symbol == 0 and transitions[0].target == state):
+            for tr in transitions:
+                queue.append((tr.target, path + [tr.symbol]))
 
     return solutions
 
 
-def find_example_solutions(aut: mata_nfa, k_solutions: int, variables: List[str], variable_order: List[str] = None):
+def find_example_solutions(aut, k_solutions, variables_order, new_variable_order = None):
     example_solutions = find_shortest_paths(aut, k_solutions)
-    if variable_order:
-        example_solutions = describe_paths(variables, example_solutions, variable_order)
+    if new_variable_order:
+        example_solutions = describe_paths(variables_order, example_solutions, new_variable_order)
     else:
         # comment out for benchmarks
-        example_solutions = describe_paths(variables, example_solutions)
+        example_solutions = describe_paths(variables_order, example_solutions)
+    if all(not d["var_ints"] for d in example_solutions):
+        return []
     return example_solutions

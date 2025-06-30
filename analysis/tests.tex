@@ -351,5 +351,1211 @@
   \caption{Quantifier depth $\in$ [1,4] (position=outside), variables=4, constant midpoint=5, mode=and, timeout=300\,s. Constants sampled from $[-5,15]$. (no filtering)}
 \end{figure}
 
+\section*{6. Junctions / RANDOM / C=5}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_2_5_random_1/states_vs_junctions_2_5_random_1_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_2_5_random_1/avg_states_vs_junctions_2_5_random_1_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4,5,6}, variables=2, constant midpoint=5, mode=random, timeout=10\,s. Constants sampled from $[-5,15]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_2_5_random_1/time_vs_junctions_2_5_random_1_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_2_5_random_1/avg_time_vs_junctions_2_5_random_1_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4,5,6}, variables=2, constant midpoint=5, mode=random, timeout=10\,s. Constants sampled from $[-5,15]$. (no filtering)}
+\end{figure}
+
+\section*{7. Junctions / RANDOM / C=5}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_2_5_random_30/states_vs_junctions_2_5_random_30_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_2_5_random_30/avg_states_vs_junctions_2_5_random_30_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4,5,6}, variables=2, constant midpoint=5, mode=random, timeout=10\,s. Constants sampled from $[-5,15]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_2_5_random_30/time_vs_junctions_2_5_random_30_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_2_5_random_30/avg_time_vs_junctions_2_5_random_30_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4,5,6}, variables=2, constant midpoint=5, mode=random, timeout=10\,s. Constants sampled from $[-5,15]$. (no filtering)}
+\end{figure}
+
+\section*{8. Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_99/states_vs_junctions_4_10_random_99_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_99/avg_states_vs_junctions_4_10_random_99_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_99/time_vs_junctions_4_10_random_99_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_99/avg_time_vs_junctions_4_10_random_99_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{9. Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_1/states_vs_junctions_4_10_random_1_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_1/avg_states_vs_junctions_4_10_random_1_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_1/time_vs_junctions_4_10_random_1_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_1/avg_time_vs_junctions_4_10_random_1_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4,5,6}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{10. Plain / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_10/states_vs_junctions_4_10_random_10_plain_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_10/avg_states_vs_junctions_4_10_random_10_plain_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_10/time_vs_junctions_4_10_random_10_plain_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_10/avg_time_vs_junctions_4_10_random_10_plain_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{11. Optimized / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_10/states_vs_junctions_4_10_random_10_optimized_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_4_10_random_10/avg_states_vs_junctions_4_10_random_10_optimized_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_10/time_vs_junctions_4_10_random_10_optimized_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_4_10_random_10/avg_time_vs_junctions_4_10_random_10_optimized_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {1,2,3,4}, variables=4, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{12. Always / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_30/states_vs_junctions_3_10_random_30_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_30/avg_states_vs_junctions_3_10_random_30_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_30/time_vs_junctions_3_10_random_30_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_30/avg_time_vs_junctions_3_10_random_30_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{13. Minimize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_30/states_vs_junctions_3_10_random_30_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_30/avg_states_vs_junctions_3_10_random_30_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_30/time_vs_junctions_3_10_random_30_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_30/avg_time_vs_junctions_3_10_random_30_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{14. Determinize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_30/states_vs_junctions_3_10_random_30_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_30/avg_states_vs_junctions_3_10_random_30_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_30/time_vs_junctions_3_10_random_30_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_30/avg_time_vs_junctions_3_10_random_30_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{15. Always / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_1/states_vs_junctions_3_10_random_1_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_1/avg_states_vs_junctions_3_10_random_1_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_1/time_vs_junctions_3_10_random_1_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_1/avg_time_vs_junctions_3_10_random_1_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{16. Minimize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_1/states_vs_junctions_3_10_random_1_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_1/avg_states_vs_junctions_3_10_random_1_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_1/time_vs_junctions_3_10_random_1_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_1/avg_time_vs_junctions_3_10_random_1_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{17. Determinize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_1/states_vs_junctions_3_10_random_1_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_1/avg_states_vs_junctions_3_10_random_1_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_1/time_vs_junctions_3_10_random_1_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_1/avg_time_vs_junctions_3_10_random_1_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{18. Always / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_20/states_vs_junctions_3_10_random_20_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_20/avg_states_vs_junctions_3_10_random_20_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_20/time_vs_junctions_3_10_random_20_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_20/avg_time_vs_junctions_3_10_random_20_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{19. Minimize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_20/states_vs_junctions_3_10_random_20_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_20/avg_states_vs_junctions_3_10_random_20_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_20/time_vs_junctions_3_10_random_20_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_20/avg_time_vs_junctions_3_10_random_20_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{20. Determinize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_20/states_vs_junctions_3_10_random_20_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_20/avg_states_vs_junctions_3_10_random_20_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_20/time_vs_junctions_3_10_random_20_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_20/avg_time_vs_junctions_3_10_random_20_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=10\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{21. Always / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_25/states_vs_junctions_3_10_random_25_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_25/avg_states_vs_junctions_3_10_random_25_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=30\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_25/time_vs_junctions_3_10_random_25_always_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_25/avg_time_vs_junctions_3_10_random_25_always_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=30\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{22. Minimize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_25/states_vs_junctions_3_10_random_25_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_25/avg_states_vs_junctions_3_10_random_25_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=30\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_25/time_vs_junctions_3_10_random_25_minimize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_25/avg_time_vs_junctions_3_10_random_25_minimize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=30\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\section*{23. Determinize / Junctions / RANDOM / C=10}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Number of States},
+      title={Number of Junctions vs. Number of States},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_25/states_vs_junctions_3_10_random_25_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=num_states
+      ] {plots/junctions/junctions_3_10_random_25/avg_states_vs_junctions_3_10_random_25_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=30\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      xlabel={Number of Junctions},
+      ylabel={Time (ms)},
+      title={Number of Junctions vs. Time (ms)},
+      grid=major,
+      width=12cm,
+      height=8cm
+    ]
+      % scatter
+      \addplot+[
+        only marks, mark=*
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_25/time_vs_junctions_3_10_random_25_determinize_raw.csv};
+
+      % average line
+      \addplot+[
+        mark=none,
+        thick,
+        smooth
+      ] table[
+        col sep=comma,
+        x=junctions, y=time_ms
+      ] {plots/junctions/junctions_3_10_random_25/avg_time_vs_junctions_3_10_random_25_determinize_raw.csv};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Junction count $\in$ {2,3,4}, variables=3, constant midpoint=10, mode=random, timeout=30\,s. Constants sampled from $[0,20]$. (no filtering)}
+\end{figure}
+
 \end{document}
 

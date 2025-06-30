@@ -18,10 +18,10 @@ Result = Tuple[float | None, int | None, Outcome]
 # Helpers
 # ---------------------------------------------------------------------------
 
-def formula_worker(q, expr):
+def formula_worker(q, expr, mode):
     try:
         start = time.perf_counter()
-        dot_string, num_states = test_formula(expr)
+        dot_string, num_states = test_formula(expr, mode)
         duration = (time.perf_counter() - start) * 1000
         q.put((duration, num_states))
     except Exception as e:
@@ -49,11 +49,11 @@ def get_script_dir() -> Path:
     return Path(__file__).resolve().parent
 
 
-def _run_in_subprocess(expr: str, q: mp.Queue) -> None:  # type: ignore[type-arg]
+def _run_in_subprocess(expr: str, q: mp.Queue, mode) -> None:  # type: ignore[type-arg]
     """Executes inside the disposable subprocess.  Sends the result back via *q*."""
     try:
         start = time.perf_counter()
-        _dot, num_states = test_formula(expr)
+        _dot, num_states = test_formula(expr, mode)
         duration_ms = (time.perf_counter() - start) * 1000
         q.put((round(duration_ms, 2), num_states, "ok"))
     except Exception as exc:  # noqa: BLE001
@@ -61,11 +61,11 @@ def _run_in_subprocess(expr: str, q: mp.Queue) -> None:  # type: ignore[type-arg
         q.put((None, None, "error"))
 
 
-def _safe_run_formula(expr: str, timeout_sec: int) -> Result:
+def _safe_run_formula(expr: str, timeout_sec: int, mode) -> Result:
     """Run `test_formula` with a hard timeout via a dedicated subprocess."""
     ctx = mp.get_context("spawn")
     q: mp.Queue[Result] = ctx.Queue()
-    p = ctx.Process(target=_run_in_subprocess, args=(expr, q))
+    p = ctx.Process(target=_run_in_subprocess, args=(expr, q, mode))
     p.start()
     p.join(timeout_sec)
 
@@ -85,7 +85,7 @@ def _safe_run_formula(expr: str, timeout_sec: int) -> Result:
 # ---------------------------------------------------------------------------
 
 
-def run_tests_from_csv(csv_path: str, output_csv: str, timeout: int, jobs: int = 8) -> None:
+def run_tests_from_csv(csv_path: str, output_csv: str, timeout: int, mode = "plain", jobs: int = 8) -> None:
     csv_path = Path(csv_path).expanduser().resolve()
     output_csv = Path(output_csv).expanduser().resolve()
 
@@ -99,14 +99,15 @@ def run_tests_from_csv(csv_path: str, output_csv: str, timeout: int, jobs: int =
     df["time_ms"] = pd.NA
     df["num_states"] = pd.NA
     df["outcome"] = "pending"
-
+    timeout_count = 0
     with cf.ThreadPoolExecutor(max_workers=jobs) as ex:
         fut_to_idx = {
-            ex.submit(_safe_run_formula, expr, timeout): idx
+            ex.submit(_safe_run_formula, expr, timeout, mode): idx
             for idx, expr in enumerate(df["expression"].tolist())
         }
 
         finished = 0
+
         for fut in cf.as_completed(fut_to_idx):
             idx = fut_to_idx[fut]
             expr = df.at[idx, "expression"]
@@ -124,6 +125,7 @@ def run_tests_from_csv(csv_path: str, output_csv: str, timeout: int, jobs: int =
                 df.at[idx, "num_states"] = states
                 print(f"[{finished + 1}/{total}] ✅ '{preview}' → {duration:.2f} ms, {states} states")
             elif status == "timeout":
+                timeout_count += 1
                 print(f"[{finished + 1}/{total}] ⚠️  '{preview}' → timeout (>{timeout}s)")
             else:  # error
                 print(f"[{finished + 1}/{total}] ❌ '{preview}' → error (see log)")
@@ -132,6 +134,7 @@ def run_tests_from_csv(csv_path: str, output_csv: str, timeout: int, jobs: int =
 
     df.to_csv(output_csv, index=False)
     print(f"\n✅ Results saved to {output_csv}")
+    return timeout_count
 
 def retry_failed_tests(csv_path):
     # Make path relative to script directory

@@ -19,7 +19,7 @@
 
 ?atom: comparison
      | quantifier
-     | "(" formula ")"                             -> parent     // NEW – parentheses around *any* formula
+     | "(" formula ")"                             -> parent
 
 ?quantifier: EX VAR "." formula                    -> ex_quantifier
             | ALL VAR "." formula                 -> all_quantifier
@@ -36,14 +36,13 @@
     | sum "+" product                              -> add
     | sum "-" product                              -> sub
 
-?product: CONST VAR         -> mult
-        | "-" CONST VAR     -> neg_mult
-        | factor
+product: CONST VAR       -> mult
+       | factor
 
-?factor: "-" factor          -> unary_minus
-       | VAR                 -> var
-       | CONST               -> const
-       | "(" term ")"        -> parent
+?factor: "-" product        -> unary_minus
+       | VAR                -> var
+       | CONST              -> const
+       | "(" term ")"       -> parent
 
 EX: "EX" | "E"
 ALL: "ALL" | "A"

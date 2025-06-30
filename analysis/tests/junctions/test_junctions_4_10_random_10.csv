@@ -1,0 +1,41 @@
+expression,count,constant,variable_count,depth,mode
+(-1a -3b +3c -1d >= 7),1,10,4,0,random
+(-1a -3b -1c -1d = 7),1,10,4,0,random
+(-2a +3b +3c +2d < 6),1,10,4,0,random
+(-3a -1b -3c -1d <= 15),1,10,4,0,random
+(-2a -1b +1c -1d >= 15),1,10,4,0,random
+(-3a +2b -1c -1d = 17),1,10,4,0,random
+(-1a -2b +2c +3d < 15),1,10,4,0,random
+(1a +3b +1c +3d < 1),1,10,4,0,random
+(-1a +2b -3c -1d < 19),1,10,4,0,random
+(1a -3b +3c +1d >= 1),1,10,4,0,random
+(2a -2b -1c -2d = 10) AND (-1a +2b +3c -3d >= 5),2,10,4,0,random
+(2a -3b -1c -1d = 1) OR (2a -3b -1c +3d > 7),2,10,4,0,random
+(-3a -2b -3c +2d = 7) OR (-2a -2b -2c -3d >= 17),2,10,4,0,random
+(-2a -1b +2c -1d < 4) AND (-1a -1b +1c +1d >= 19),2,10,4,0,random
+(-3a -3b +1c -1d <= 4) OR (3a -1b -3c +3d = 3),2,10,4,0,random
+(3a -1b -2c -2d = 15) AND (-3a +2b +2c +2d < 0),2,10,4,0,random
+(1a +1b -3c -3d = 19) OR (-3a +2b +2c +1d > 18),2,10,4,0,random
+(-2a +1b +3c -2d <= 18) AND (3a -2b -1c -2d < 3),2,10,4,0,random
+(2a -1b -3c +3d >= 6) OR (3a -1b +3c -3d = 15),2,10,4,0,random
+(1a -1b -2c -1d >= 17) OR (-1a -1b +1c +3d <= 12),2,10,4,0,random
+(-3a -3b -2c +2d > 7) AND (-3a -1b +1c +2d >= 17) AND (1a +2b +1c -1d >= 14),3,10,4,0,random
+(3a +2b -1c +2d >= 17) AND (-1a -3b +3c +3d < 7) AND (3a -2b -2c -1d < 12),3,10,4,0,random
+(-2a -2b -1c -1d < 15) OR (-2a +2b -3c +2d > 5) OR (-3a -1b -1c -2d > 5),3,10,4,0,random
+(2a +1b -1c +2d < 7) OR (-3a +2b +3c -2d < 1) OR (-1a -3b +1c -1d > 20),3,10,4,0,random
+(2a -1b +1c -1d >= 9) AND (3a +2b +2c -2d < 19) AND (1a +2b -2c -2d >= 20),3,10,4,0,random
+(-3a +2b +3c +2d <= 2) AND (-3a +1b +1c -3d >= 2) AND (2a -2b -2c +3d < 19),3,10,4,0,random
+(-3a -3b -1c +1d <= 0) AND (-1a -2b -3c +1d < 5) AND (-3a -1b -2c +3d <= 6),3,10,4,0,random
+(1a -2b +2c -1d > 3) AND (3a -1b -2c -3d >= 9) AND (-2a +2b -1c +3d = 15),3,10,4,0,random
+(2a -2b -2c -3d <= 12) AND (2a -3b -1c +1d <= 8) OR (1a -2b +1c +1d < 18),3,10,4,0,random
+(2a -1b -3c +2d = 5) AND (3a -2b +1c +1d >= 10) OR (3a +1b -2c +2d <= 15),3,10,4,0,random
+(-3a +2b -1c +2d = 9) OR (1a +2b +2c +1d = 3) OR (2a +3b -1c -1d > 20) OR (1a +2b +1c +3d = 15),4,10,4,0,random
+(-2a +2b +2c +2d > 9) OR (-1a -2b -3c -2d > 6) OR (1a -3b +1c +3d > 7) OR (-2a -1b -1c +1d < 2),4,10,4,0,random
+(3a +1b -2c -2d <= 9) OR (-2a -1b -2c -2d <= 3) OR (-3a -2b -2c -2d <= 4) OR (2a -2b +1c -2d > 15),4,10,4,0,random
+(-1a +2b +1c -1d > 12) OR (-2a +1b +2c -2d = 1) OR (-3a -1b +1c -3d >= 15) AND (3a +2b +1c +1d <= 8),4,10,4,0,random
+(-1a -2b -2c -1d <= 2) OR (3a -2b -2c +3d > 2) OR (3a -3b +3c -1d >= 8) AND (3a -3b -1c -3d <= 18),4,10,4,0,random
+(1a -3b -1c +2d = 7) AND (1a -2b +2c +2d = 13) AND (3a -3b +1c -1d = 18) OR (3a -1b +3c +2d = 14),4,10,4,0,random
+(1a -2b -2c -2d >= 18) OR (-2a +2b +3c -3d <= 7) AND (1a +3b -2c -2d <= 4) OR (3a -2b -2c +3d <= 0),4,10,4,0,random
+(-1a -3b -1c +3d = 0) OR (2a +1b -2c -2d > 14) OR (1a -2b -3c +1d = 19) OR (-3a +1b -1c -2d > 7),4,10,4,0,random
+(1a -3b +3c -2d >= 5) AND (3a -3b -3c -1d > 13) AND (-2a -2b +1c +3d >= 18) AND (-2a +1b +1c +1d <= 16),4,10,4,0,random
+(2a -2b +2c +1d > 11) AND (1a -3b -2c +1d < 7) OR (-2a -2b -1c +3d <= 0) AND (3a -3b +1c -1d = 11),4,10,4,0,random

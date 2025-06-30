@@ -1,0 +1,541 @@
+expression,count,constant,variable_count,depth,mode,time_ms,num_states,outcome
+(3a +3b +3c < 18) AND (-3a +1b +2c < 15),2,10,3,0,random,7.11,4,ok
+(-2a +3b +1c = 12) OR (-3a -2b -3c >= 10),2,10,3,0,random,5.38,12,ok
+(3a -1b -3c > 2) OR (1a -3b -3c <= 6),2,10,3,0,random,5.8,1,ok
+(-2a +2b -1c < 19) AND (3a +1b -2c > 4),2,10,3,0,random,9.94,60,ok
+(-1a -1b +3c >= 7) AND (3a +3b -3c = 3),2,10,3,0,random,5.09,8,ok
+(3a -3b -3c >= 12) OR (-1a +3b -3c = 15),2,10,3,0,random,6.8,36,ok
+(1a -2b +2c = 1) AND (3a -2b +2c < 17),2,10,3,0,random,6.39,8,ok
+(3a +1b -1c <= 17) OR (-1a -2b -1c = 10),2,10,3,0,random,9.18,15,ok
+(1a -1b +3c = 1) OR (-3a +2b +1c = 19),2,10,3,0,random,8.24,45,ok
+(-1a +1b -1c = 5) OR (-3a -2b +3c > 11),2,10,3,0,random,8.1,37,ok
+(-1a -3b -2c >= 19) AND (1a -3b -3c > 11),2,10,3,0,random,5.88,1,ok
+(2a -3b +2c >= 9) AND (3a -3b +3c > 2),2,10,3,0,random,5.2,11,ok
+(-3a -2b -3c < 7) AND (1a -2b +1c > 18),2,10,3,0,random,6.84,13,ok
+(3a +2b +1c < 1) AND (3a +2b -2c > 0),2,10,3,0,random,5.54,1,ok
+(-1a -2b -2c > 20) OR (-3a +1b +1c < 3),2,10,3,0,random,6.08,5,ok
+(3a -1b -1c >= 6) AND (2a -1b +1c = 17),2,10,3,0,random,5.71,32,ok
+(-3a -3b +2c >= 6) OR (-2a +1b -3c < 12),2,10,3,0,random,5.66,11,ok
+(3a -1b +3c >= 6) AND (1a +3b +3c <= 19),2,10,3,0,random,5.04,18,ok
+(2a -1b -3c = 11) AND (-1a +2b -3c > 18),2,10,3,0,random,8.85,24,ok
+(-3a +1b +3c > 16) OR (3a -1b +2c <= 19),2,10,3,0,random,17.19,53,ok
+(3a -2b +1c >= 2) OR (2a -3b -3c <= 3),2,10,3,0,random,4.64,1,ok
+(-1a -1b +2c > 11) OR (2a -2b -3c < 19),2,10,3,0,random,11.45,54,ok
+(-2a -1b -2c = 20) OR (-2a +2b -3c = 3),2,10,3,0,random,5.75,6,ok
+(-3a -3b -2c <= 16) OR (-1a +3b +1c = 5),2,10,3,0,random,5.65,1,ok
+(-2a +3b -3c > 15) AND (-3a -1b -3c < 14),2,10,3,0,random,6.9,15,ok
+(-3a +3b -3c <= 11) OR (-2a -3b -3c >= 4),2,10,3,0,random,4.65,5,ok
+(-3a -2b -3c > 5) AND (-2a +3b -1c < 18),2,10,3,0,random,6.99,1,ok
+(1a +2b -3c < 15) OR (-1a -1b -3c = 16),2,10,3,0,random,7.82,13,ok
+(1a +2b -3c < 6) OR (-1a -3b +1c = 0),2,10,3,0,random,8.3,9,ok
+(3a +3b +2c < 16) OR (2a +2b -1c <= 12),2,10,3,0,random,8.39,12,ok
+A a. (3a -3b +3c <= 10) OR (2a +2b -1c < 4),2,10,3,1,random,16.79,1,ok
+A a. (-3a +1b +3c <= 6) AND (3a +1b -1c > 9),2,10,3,1,random,11.17,1,ok
+A a. (3a -2b -3c > 3) OR (-2a -1b +2c = 14),2,10,3,1,random,49.65,1,ok
+A a. (3a +3b +3c > 3) AND (2a -2b +3c <= 8),2,10,3,1,random,11.2,1,ok
+A a. (-1a +1b -1c <= 20) OR (-3a +2b +1c >= 19),2,10,3,1,random,8.01,21,ok
+A a. (1a -2b +1c >= 6) OR (1a +1b +3c > 18),2,10,3,1,random,11.11,11,ok
+A a. (-3a -3b -2c <= 1) OR (-2a +3b -3c < 9),2,10,3,1,random,9.07,1,ok
+A a. (-2a +3b -3c < 14) AND (1a -1b +3c < 9),2,10,3,1,random,22.84,1,ok
+A a. (2a +2b +2c >= 5) AND (2a -1b +2c < 20),2,10,3,1,random,11.05,1,ok
+A a. (2a +3b +1c >= 7) AND (-1a -1b +1c >= 4),2,10,3,1,random,6.76,1,ok
+A a. (-3a +2b +2c > 1) AND (2a -3b +2c = 6),2,10,3,1,random,60.35,1,ok
+A a. (1a +2b +1c >= 0) OR (3a +1b -3c = 16),2,10,3,1,random,10.31,1,ok
+A a. (-3a +1b -1c < 3) AND (3a +1b +3c <= 1),2,10,3,1,random,8.67,1,ok
+A a. (1a -1b +1c >= 5) OR (3a -3b -3c < 8),2,10,3,1,random,9.6,2,ok
+A a. (-3a -2b +1c < 1) OR (-3a -2b +3c <= 16),2,10,3,1,random,11.34,10,ok
+A a. (2a -3b +2c <= 17) OR (1a +1b +1c >= 3),2,10,3,1,random,6.93,1,ok
+A a. (-2a +2b -1c < 7) AND (1a +2b +2c > 19),2,10,3,1,random,17.34,14,ok
+A a. (-1a -1b -3c >= 18) OR (-3a -3b -2c >= 0),2,10,3,1,random,6.18,1,ok
+A a. (3a -3b +2c >= 18) OR (1a -2b -3c < 1),2,10,3,1,random,9.14,5,ok
+A a. (3a +1b +3c < 12) OR (3a -3b -2c < 8),2,10,3,1,random,119.16,1,ok
+A a. (3a +1b +3c < 17) AND (-3a +1b +3c = 18),2,10,3,1,random,16.81,1,ok
+A a. (-3a -3b +1c < 12) AND (-1a +2b -3c < 20),2,10,3,1,random,27.84,48,ok
+A a. (2a +2b -3c < 5) OR (1a +1b -1c > 8),2,10,3,1,random,8.16,10,ok
+A a. (2a -1b -1c < 8) AND (3a +1b +2c <= 4),2,10,3,1,random,12.34,1,ok
+A a. (-1a +3b +1c > 19) OR (-3a +3b -3c >= 6),2,10,3,1,random,17.23,1,ok
+A a. (3a +2b -2c <= 2) AND (-1a +3b +3c < 7),2,10,3,1,random,13.01,1,ok
+A a. (2a +2b -3c < 9) OR (3a -2b +1c >= 7),2,10,3,1,random,11.76,24,ok
+A a. (-1a +2b -3c > 0) OR (2a +1b +1c >= 1),2,10,3,1,random,15.31,2,ok
+A a. (2a +1b -3c <= 6) AND (1a +3b -2c > 2),2,10,3,1,random,10.63,1,ok
+A a. (1a +1b -3c = 12) AND (3a -2b +3c >= 14),2,10,3,1,random,15.58,1,ok
+A a. E b. (-1a -2b +1c >= 18) AND (-3a -2b -1c >= 5),2,10,3,2,random,9.79,1,ok
+A a. E b. (-1a +3b -2c >= 1) AND (3a -3b +1c <= 19),2,10,3,2,random,22.53,1,ok
+A a. E b. (2a +2b -3c >= 10) OR (2a +1b +2c >= 15),2,10,3,2,random,11.16,1,ok
+A a. E b. (-2a +2b +3c < 18) AND (-1a -1b +1c > 1),2,10,3,2,random,21.27,1,ok
+A a. E b. (-3a -1b +1c = 15) OR (-2a -3b -1c = 18),2,10,3,2,random,7.94,1,ok
+A a. E b. (-3a -2b -2c <= 15) OR (-2a +3b +1c < 16),2,10,3,2,random,17.1,1,ok
+A a. E b. (-2a +3b +2c = 6) OR (-3a +3b -1c >= 14),2,10,3,2,random,13.16,1,ok
+A a. E b. (3a -3b -3c > 6) AND (-1a +2b -2c >= 5),2,10,3,2,random,24.35,1,ok
+A a. E b. (2a +3b +2c <= 12) OR (-3a +1b -2c <= 9),2,10,3,2,random,7.94,1,ok
+A a. E b. (-3a -3b -1c = 14) OR (-1a +1b -2c <= 5),2,10,3,2,random,12.76,1,ok
+A a. E b. (2a -3b -3c = 11) AND (3a -3b +1c <= 18),2,10,3,2,random,410.63,1,ok
+A a. E b. (3a -2b +3c >= 19) OR (1a -3b -3c < 3),2,10,3,2,random,12.68,1,ok
+A a. E b. (-2a +3b -3c < 13) AND (-1a +3b +1c = 8),2,10,3,2,random,165.95,1,ok
+A a. E b. (-3a -2b +2c < 2) AND (-2a -3b +2c = 20),2,10,3,2,random,5018.67,1,ok
+A a. E b. (-1a -1b +3c <= 4) OR (-2a +2b -1c > 19),2,10,3,2,random,11.08,1,ok
+A a. E b. (-2a -1b +3c < 12) AND (1a -1b -3c >= 6),2,10,3,2,random,17.37,1,ok
+A a. E b. (2a -2b -3c > 4) AND (1a -1b -2c < 18),2,10,3,2,random,19.81,1,ok
+A a. E b. (1a -1b -1c <= 18) OR (3a -2b -1c < 19),2,10,3,2,random,14.19,1,ok
+A a. E b. (-2a +3b -2c = 1) OR (3a -1b -2c <= 7),2,10,3,2,random,11.05,1,ok
+A a. E b. (2a -3b +1c = 3) OR (3a +1b -1c > 20),2,10,3,2,random,14.58,1,ok
+A a. E b. (2a -2b -3c < 20) AND (-3a +2b +2c <= 1),2,10,3,2,random,15.89,1,ok
+A a. E b. (-3a -2b -3c <= 12) OR (-1a +2b +3c = 3),2,10,3,2,random,7.87,1,ok
+A a. E b. (2a -3b -2c <= 9) AND (-3a +3b -3c >= 18),2,10,3,2,random,14.05,1,ok
+A a. E b. (-2a +1b -1c = 12) AND (-3a -1b +1c < 12),2,10,3,2,random,10.52,1,ok
+A a. E b. (-3a -3b -3c = 6) AND (2a -3b +2c = 8),2,10,3,2,random,40.47,1,ok
+A a. E b. (-2a -3b -3c >= 2) AND (1a +3b -3c >= 20),2,10,3,2,random,19.96,1,ok
+A a. E b. (3a +2b -1c >= 7) OR (-3a -1b -3c < 4),2,10,3,2,random,7.09,1,ok
+A a. E b. (3a +2b -2c <= 10) AND (-2a +2b -3c < 1),2,10,3,2,random,106.71,1,ok
+A a. E b. (-1a -2b -2c = 1) AND (3a -2b +3c >= 1),2,10,3,2,random,7.34,1,ok
+A a. E b. (2a -2b -2c >= 1) AND (3a -2b -2c > 16),2,10,3,2,random,19.48,1,ok
+(2a +3b -3c +2d >= 11) OR (3a +1b -3c +2d > 11),2,10,4,0,random,10.78,47,ok
+(-3a +3b -3c -1d = 18) OR (1a +3b +3c -2d < 4),2,10,4,0,random,29.6,97,ok
+(1a +1b +2c -3d = 14) OR (2a +2b -1c +2d <= 2),2,10,4,0,random,10.86,67,ok
+(3a -3b -3c +1d > 2) AND (1a -1b -1c +1d = 9),2,10,4,0,random,8.52,17,ok
+(-1a -3b -1c +2d >= 19) OR (-1a -1b -3c +2d > 11),2,10,4,0,random,19.26,59,ok
+(-2a -3b -2c -2d > 17) AND (-2a +2b -3c -2d <= 2),2,10,4,0,random,8.42,1,ok
+(-1a -2b +1c +1d < 6) AND (3a -3b +2c +1d >= 7),2,10,4,0,random,11.0,39,ok
+(2a -3b +3c +1d > 17) AND (-2a +3b -3c -2d > 7),2,10,4,0,random,11.36,1,ok
+(2a -2b +2c -3d = 13) AND (-2a -1b +2c +1d = 6),2,10,4,0,random,11.45,42,ok
+(-2a -2b -3c -2d < 8) OR (1a +2b +1c -1d > 19),2,10,4,0,random,9.22,1,ok
+(-2a -1b +1c -3d > 14) AND (1a -1b +2c -1d < 18),2,10,4,0,random,10.71,1,ok
+(3a +1b -3c -2d <= 13) AND (3a +3b +3c -3d <= 12),2,10,4,0,random,8.51,42,ok
+(1a +1b -2c +2d < 6) AND (-1a +1b +1c -1d <= 2),2,10,4,0,random,7.86,30,ok
+(-2a +1b +1c +2d >= 6) AND (-3a -2b -1c -1d >= 20),2,10,4,0,random,7.0,1,ok
+(-3a -1b +2c -3d = 15) OR (-1a -3b -3c +1d > 5),2,10,4,0,random,15.35,81,ok
+(1a -3b -3c +2d <= 7) AND (-2a +2b +3c +3d = 1),2,10,4,0,random,8.33,64,ok
+(1a +1b -1c -2d = 15) AND (-3a -2b -1c -2d = 12),2,10,4,0,random,9.19,1,ok
+(2a -3b +3c +1d < 1) AND (-1a +1b -1c -3d > 9),2,10,4,0,random,10.53,10,ok
+(-3a -2b -1c +1d < 12) AND (-2a +1b +3c +3d = 11),2,10,4,0,random,12.05,14,ok
+(2a -3b -2c +3d < 20) AND (-3a +2b +3c +1d <= 0),2,10,4,0,random,25.24,102,ok
+(2a +1b -3c -1d = 17) OR (-2a -3b +3c +1d < 9),2,10,4,0,random,13.03,12,ok
+(-3a +3b -2c +2d > 1) AND (-2a -3b +1c -1d < 6),2,10,4,0,random,12.55,10,ok
+(-2a +1b -3c +1d < 6) OR (-3a +3b +3c -2d > 7),2,10,4,0,random,23.79,71,ok
+(1a -3b +2c -3d <= 6) OR (-3a +3b +1c -3d >= 3),2,10,4,0,random,10.26,71,ok
+(-3a +1b +2c +3d >= 14) AND (-2a +3b +2c +3d <= 4),2,10,4,0,random,8.72,1,ok
+(-2a +1b +3c +1d = 0) OR (2a +1b -3c -1d >= 16),2,10,4,0,random,8.68,42,ok
+(-2a -2b -1c +3d <= 5) AND (-3a -2b +3c +1d < 18),2,10,4,0,random,18.15,80,ok
+(2a -3b -1c -1d < 14) AND (1a +2b +1c +1d <= 6),2,10,4,0,random,11.7,5,ok
+(3a +1b +3c -3d <= 0) AND (2a -1b -1c +3d < 1),2,10,4,0,random,7.96,3,ok
+(-1a +1b +2c +3d <= 11) AND (2a +1b +2c -3d < 1),2,10,4,0,random,8.13,19,ok
+A a. (-1a -1b -2c -2d > 19) OR (-1a +2b -1c +2d > 10),2,10,4,1,random,17.49,1,ok
+A a. (2a -3b -3c -3d > 19) OR (-3a +2b -3c +1d < 18),2,10,4,1,random,414.45,15,ok
+A a. (2a +3b +1c -1d < 7) OR (-1a -1b +2c -1d < 0),2,10,4,1,random,27.16,32,ok
+A a. (-1a +3b -3c -2d = 17) OR (-2a +1b +3c -1d >= 6),2,10,4,1,random,30.45,1,ok
+A a. (-1a +3b -1c -3d < 0) OR (2a +2b +1c +2d <= 6),2,10,4,1,random,14.91,10,ok
+A a. (-3a +3b +1c -2d > 16) AND (-3a +1b -3c +2d = 0),2,10,4,1,random,183.39,1,ok
+A a. (1a +2b +3c +2d >= 1) AND (-1a -3b +3c +3d <= 15),2,10,4,1,random,13.57,10,ok
+A a. (1a +2b -1c -3d < 13) OR (1a +1b +2c -1d > 7),2,10,4,1,random,13.84,7,ok
+A a. (3a -3b -2c -2d < 1) OR (2a -1b +2c -1d > 2),2,10,4,1,random,63.47,5,ok
+A a. (-2a +3b +3c -3d = 8) AND (2a +1b -2c +1d < 20),2,10,4,1,random,145.12,1,ok
+A a. (-3a +2b -2c +2d > 6) OR (3a +2b +2c -1d = 7),2,10,4,1,random,131.4,1,ok
+A a. (2a -1b +1c +3d < 9) OR (2a +1b -2c +2d > 8),2,10,4,1,random,43.37,39,ok
+A a. (-2a -1b +1c -3d < 15) AND (-1a +3b -1c +2d >= 18),2,10,4,1,random,82.34,1,ok
+A a. (-2a +1b -1c -1d <= 8) AND (-1a -1b +2c +1d = 9),2,10,4,1,random,15.09,1,ok
+A a. (-2a -2b -2c +3d >= 19) AND (2a -3b -2c -2d > 13),2,10,4,1,random,53.29,1,ok
+A a. (-2a -3b -1c -2d > 3) OR (-2a -3b +1c -3d <= 4),2,10,4,1,random,13.22,7,ok
+A a. (-3a -1b -3c +3d >= 18) AND (3a +1b +2c +3d <= 6),2,10,4,1,random,37.53,1,ok
+A a. (2a +1b -1c +2d = 7) OR (-3a +3b +1c +1d = 19),2,10,4,1,random,253.2,1,ok
+A a. (-3a +2b +3c +2d >= 20) AND (-1a -2b +2c -1d > 0),2,10,4,1,random,44.12,1,ok
+A a. (3a -3b +3c -3d <= 10) OR (2a +3b +1c -2d <= 10),2,10,4,1,random,22.29,1,ok
+A a. (-2a +1b +3c -1d >= 11) OR (1a +2b -3c -1d <= 2),2,10,4,1,random,10.09,1,ok
+A a. (2a -1b +3c -1d < 15) AND (1a -1b +1c -2d < 4),2,10,4,1,random,34.43,1,ok
+A a. (3a +2b +3c +2d < 1) OR (-1a -2b -2c -3d = 16),2,10,4,1,random,11.24,1,ok
+A a. (1a -3b +2c +2d > 13) OR (2a +3b -2c -3d <= 3),2,10,4,1,random,21.52,28,ok
+A a. (-2a -1b +1c -2d = 1) AND (-1a +1b +3c +3d < 14),2,10,4,1,random,52.28,1,ok
+A a. (-1a -3b +1c +2d = 7) OR (-3a +1b -1c +1d = 10),2,10,4,1,random,70.27,1,ok
+A a. (3a -1b -2c +2d <= 3) OR (3a -2b -2c -1d <= 14),2,10,4,1,random,21.01,1,ok
+A a. (3a -1b -1c +3d = 1) OR (-1a +2b +2c +3d <= 18),2,10,4,1,random,45.6,10,ok
+A a. (2a -1b +2c +3d >= 16) AND (-3a -2b -1c +3d < 11),2,10,4,1,random,124.72,52,ok
+A a. (2a -2b -3c -2d > 5) OR (-3a +3b -2c +2d >= 5),2,10,4,1,random,62.23,1,ok
+A a. E b. (-2a +3b -3c +1d > 19) AND (-2a -1b -2c -2d >= 12),2,10,4,2,random,,,timeout
+A a. E b. (2a -2b -3c +1d > 11) AND (2a -3b -1c -1d > 11),2,10,4,2,random,5855.72,1,ok
+A a. E b. (3a -1b +3c -1d < 4) OR (1a +1b +2c -3d <= 5),2,10,4,2,random,14.92,1,ok
+A a. E b. (-1a -2b +3c +3d > 9) OR (1a +2b +3c +3d >= 16),2,10,4,2,random,19.65,1,ok
+A a. E b. (1a -2b +1c +1d = 11) OR (1a +1b -2c +2d >= 7),2,10,4,2,random,11.15,1,ok
+A a. E b. (1a +1b +1c +2d < 4) AND (-2a +1b -3c -1d = 4),2,10,4,2,random,246.68,1,ok
+A a. E b. (2a +2b -2c -3d = 6) OR (3a -2b +1c +1d >= 18),2,10,4,2,random,57.18,9,ok
+A a. E b. (1a +2b -3c +1d >= 2) OR (1a -1b +1c +3d < 5),2,10,4,2,random,12.21,1,ok
+A a. E b. (3a +2b -2c +3d > 19) AND (1a -1b +1c -1d < 9),2,10,4,2,random,459.96,1,ok
+A a. E b. (2a -1b -3c +2d <= 10) OR (1a +3b -2c -3d < 20),2,10,4,2,random,66.32,1,ok
+A a. E b. (2a +3b +1c +1d < 3) AND (-3a -1b +2c -2d < 0),2,10,4,2,random,,,timeout
+A a. E b. (-1a -3b -1c -1d > 18) OR (1a +2b +2c +3d >= 16),2,10,4,2,random,12.58,1,ok
+A a. E b. (-3a +2b +2c +3d < 0) OR (3a -2b +3c -3d >= 12),2,10,4,2,random,161.34,5,ok
+A a. E b. (2a +1b -1c +3d = 12) OR (3a +3b +3c -2d = 19),2,10,4,2,random,536.15,1,ok
+A a. E b. (3a -3b +3c +2d <= 16) AND (3a -2b +1c +2d > 7),2,10,4,2,random,2509.29,15,ok
+A a. E b. (2a +1b -2c +3d <= 14) OR (-1a +1b -2c -2d >= 10),2,10,4,2,random,11.03,1,ok
+A a. E b. (-1a +2b -3c +3d > 0) OR (3a -3b +1c +2d < 11),2,10,4,2,random,96.75,1,ok
+A a. E b. (1a +1b -2c -1d = 7) AND (3a -2b -1c +1d = 10),2,10,4,2,random,,,timeout
+A a. E b. (2a -1b -3c +3d = 6) AND (-1a +1b -3c -2d >= 8),2,10,4,2,random,62.31,11,ok
+A a. E b. (2a -3b -1c +2d <= 7) OR (3a -2b +2c +2d < 15),2,10,4,2,random,59.26,1,ok
+A a. E b. (1a +2b +3c -2d >= 2) AND (3a +2b +1c -3d = 18),2,10,4,2,random,3744.03,1,ok
+A a. E b. (-3a -2b +3c -3d > 3) OR (3a -1b +2c +2d <= 17),2,10,4,2,random,26.6,1,ok
+A a. E b. (-2a -2b -1c -2d >= 13) OR (2a +2b -2c -2d >= 6),2,10,4,2,random,8.63,1,ok
+A a. E b. (3a -2b +3c -2d > 12) AND (1a -2b +2c +1d = 0),2,10,4,2,random,4180.34,1,ok
+A a. E b. (3a -1b -3c +3d < 10) OR (-2a +2b -1c -1d >= 20),2,10,4,2,random,20.22,1,ok
+A a. E b. (-3a +3b +3c -1d <= 0) OR (1a +2b +3c +1d > 17),2,10,4,2,random,25.32,1,ok
+A a. E b. (1a +1b -1c -1d >= 6) AND (3a +1b -2c -2d = 14),2,10,4,2,random,12.09,1,ok
+A a. E b. (1a +1b -2c -1d < 4) AND (-3a +1b -2c -2d < 10),2,10,4,2,random,226.03,1,ok
+A a. E b. (-1a -2b +3c +2d < 8) OR (3a +1b -3c +1d > 13),2,10,4,2,random,60.67,1,ok
+A a. E b. (2a -1b +3c +3d = 14) AND (-1a -1b -3c -3d >= 20),2,10,4,2,random,45.63,1,ok
+(-1a +3b +2c > 5) OR (2a -3b +1c = 17) AND (3a +3b +2c >= 1),3,10,3,0,random,21.99,28,ok
+(-2a +3b -1c < 8) AND (1a -1b -1c = 10) OR (3a -1b -3c >= 2),3,10,3,0,random,23.43,7,ok
+(3a -2b +1c >= 7) AND (1a +3b +1c >= 12) AND (-3a +3b +2c = 1),3,10,3,0,random,9.73,13,ok
+(-3a -2b -2c >= 3) AND (1a +2b -1c = 6) OR (-3a +1b -2c > 13),3,10,3,0,random,9.14,12,ok
+(1a +1b +3c <= 7) OR (-3a +2b +3c >= 15) AND (-1a +1b +3c > 9),3,10,3,0,random,9.81,32,ok
+(-1a +2b -2c <= 16) OR (-2a +2b -2c > 1) OR (1a -2b -2c >= 15),3,10,3,0,random,10.38,25,ok
+(-1a +1b -2c <= 3) AND (-2a -1b -1c >= 7) AND (-2a -2b -3c <= 18),3,10,3,0,random,9.73,1,ok
+(-1a -3b +3c <= 19) AND (1a -1b +1c < 12) AND (2a +1b -2c <= 6),3,10,3,0,random,17.46,46,ok
+(-1a -1b +3c = 19) AND (2a +3b +3c > 16) AND (3a -2b +3c >= 3),3,10,3,0,random,22.74,52,ok
+(1a +3b -3c >= 11) AND (-1a +3b -2c = 16) OR (3a +1b -2c = 0),3,10,3,0,random,13.08,74,ok
+(-2a -3b +3c < 5) OR (1a -1b +3c = 18) AND (1a +3b +3c = 12),3,10,3,0,random,14.07,8,ok
+(-2a +1b -1c >= 1) AND (-1a -2b -3c > 0) OR (-3a -1b +1c = 13),3,10,3,0,random,8.76,10,ok
+(3a +2b -1c < 3) OR (2a +3b +1c < 7) AND (1a -3b -2c < 7),3,10,3,0,random,12.44,13,ok
+(3a +2b +3c <= 15) AND (-1a -2b +3c <= 9) AND (2a -1b -3c > 7),3,10,3,0,random,11.45,4,ok
+(-2a -1b +1c = 16) AND (3a -1b +2c < 2) AND (1a +3b +3c < 2),3,10,3,0,random,23.33,1,ok
+(2a -2b -2c > 0) OR (-1a -2b +2c < 14) OR (-3a +1b -3c >= 7),3,10,3,0,random,24.71,28,ok
+(2a -2b +3c = 0) AND (2a -3b -1c >= 13) AND (-3a +1b +3c < 16),3,10,3,0,random,17.36,1,ok
+(-1a +3b -3c >= 6) OR (1a +2b +2c = 20) OR (2a -2b -2c < 9),3,10,3,0,random,17.34,57,ok
+(-2a +3b +2c >= 3) AND (-3a +2b -2c < 8) OR (3a -2b -2c >= 5),3,10,3,0,random,15.84,27,ok
+(-2a +2b +2c > 6) OR (1a -1b +1c > 10) OR (3a +1b +2c < 2),3,10,3,0,random,12.36,21,ok
+(-3a +3b -1c = 18) OR (-1a -1b +1c >= 5) AND (-3a -1b -2c = 17),3,10,3,0,random,8.71,14,ok
+(-1a -1b +3c <= 13) OR (-2a -1b +2c < 11) OR (3a -2b -1c = 1),3,10,3,0,random,10.36,41,ok
+(3a +1b +3c > 11) AND (-1a +3b -2c >= 18) OR (3a +2b -2c = 3),3,10,3,0,random,30.59,67,ok
+(-3a +1b -2c > 1) OR (-1a +1b -1c = 18) OR (3a -2b -3c < 4),3,10,3,0,random,21.02,49,ok
+(3a -3b -2c < 12) AND (1a -2b +3c > 7) OR (2a -2b +3c >= 0),3,10,3,0,random,21.49,7,ok
+(1a +1b -1c <= 12) AND (-1a -1b +3c > 11) OR (-1a -3b +3c >= 13),3,10,3,0,random,14.0,65,ok
+(-2a +1b +3c >= 5) AND (2a +2b -2c >= 15) AND (-1a +3b -3c > 2),3,10,3,0,random,19.01,88,ok
+(1a +1b -2c < 10) AND (3a -1b -1c > 18) OR (1a -2b -1c < 11),3,10,3,0,random,18.66,31,ok
+(-2a +1b -2c <= 6) OR (-1a +1b +3c <= 0) AND (3a -2b -1c > 15),3,10,3,0,random,9.72,8,ok
+(3a -3b -2c < 13) OR (3a +1b -3c > 8) AND (1a -1b -1c <= 20),3,10,3,0,random,32.63,150,ok
+A a. (-1a +1b -1c >= 15) OR (-3a +3b -1c = 5) AND (-2a -1b +3c < 0),3,10,3,1,random,455.93,1,ok
+A a. (2a +3b +1c < 17) OR (-2a -2b +2c >= 11) AND (2a +1b -2c > 10),3,10,3,1,random,12.05,1,ok
+A a. (2a +2b +2c = 9) OR (3a +1b -2c < 18) AND (3a +1b +3c > 10),3,10,3,1,random,37.31,1,ok
+A a. (-1a -3b +1c <= 4) AND (3a -3b +2c < 7) OR (3a -1b -2c <= 15),3,10,3,1,random,265.83,1,ok
+A a. (1a +1b -1c < 8) AND (-3a +2b -3c <= 15) AND (-2a +1b -3c = 2),3,10,3,1,random,64.32,1,ok
+A a. (1a -3b +3c >= 4) OR (3a -2b +1c = 9) AND (-3a -2b +3c = 19),3,10,3,1,random,241.91,3,ok
+A a. (1a -1b +3c > 10) OR (1a +1b +1c >= 9) OR (-2a -1b -3c = 16),3,10,3,1,random,12.55,9,ok
+A a. (-1a -3b -3c < 15) OR (2a +3b -2c >= 13) OR (-2a +1b -2c >= 16),3,10,3,1,random,13.32,1,ok
+A a. (-1a +2b +2c < 18) AND (-1a +1b -1c <= 10) OR (1a -2b +2c < 1),3,10,3,1,random,17.23,9,ok
+A a. (-1a +2b +3c <= 4) OR (-2a +3b -1c < 3) AND (-1a -2b +3c <= 0),3,10,3,1,random,65.46,3,ok
+A a. (2a +3b +3c > 8) AND (-2a -1b -2c < 6) OR (2a +2b +3c <= 3),3,10,3,1,random,10.84,4,ok
+A a. (3a +1b -1c = 16) OR (1a -1b -1c <= 7) OR (-2a -2b +2c < 5),3,10,3,1,random,22.92,1,ok
+A a. (2a -1b +1c = 16) AND (-1a -3b -1c < 16) OR (-1a -2b +1c >= 20),3,10,3,1,random,11.62,1,ok
+A a. (3a +1b +3c > 1) AND (-1a +2b -1c >= 8) AND (3a +3b +2c = 1),3,10,3,1,random,418.71,1,ok
+A a. (3a -2b -3c >= 3) OR (-3a +2b +1c < 12) OR (2a +1b -3c > 1),3,10,3,1,random,839.49,19,ok
+A a. (-3a +1b +3c < 5) OR (2a -1b -3c = 13) OR (-1a -1b -2c > 9),3,10,3,1,random,20.36,4,ok
+A a. (1a -2b -2c > 6) OR (-2a +3b +1c <= 2) AND (-1a +1b +1c = 4),3,10,3,1,random,21.48,1,ok
+A a. (1a -3b +2c >= 17) AND (-2a +2b +1c = 7) OR (3a -2b -1c < 16),3,10,3,1,random,535.77,1,ok
+A a. (1a -1b -3c > 3) AND (1a -3b -1c <= 17) AND (3a -1b +3c > 17),3,10,3,1,random,339.92,1,ok
+A a. (2a +1b -3c >= 17) AND (2a -1b +2c < 13) OR (3a +3b +3c < 1),3,10,3,1,random,1703.24,1,ok
+A a. (3a +1b -2c <= 17) AND (3a -2b +3c = 20) OR (-1a +2b -1c < 19),3,10,3,1,random,264.23,11,ok
+A a. (-1a -1b -2c > 16) AND (-1a -1b -1c < 3) AND (2a -1b +2c = 7),3,10,3,1,random,16.28,1,ok
+A a. (3a +3b -2c = 5) AND (3a -2b +2c < 19) AND (-2a +3b +3c = 8),3,10,3,1,random,,,timeout
+A a. (-2a -3b -3c > 12) OR (3a -2b +3c < 2) AND (3a +1b +1c <= 8),3,10,3,1,random,19.24,1,ok
+A a. (-2a +1b +2c < 3) AND (2a +3b +2c <= 8) AND (1a -2b +3c = 12),3,10,3,1,random,215.81,1,ok
+A a. (1a -1b -1c > 19) OR (-1a +3b -1c = 3) AND (1a -3b -1c = 13),3,10,3,1,random,13.47,1,ok
+A a. (1a +3b -1c = 4) OR (-1a +1b +3c = 1) AND (3a +3b +2c <= 0),3,10,3,1,random,9.04,1,ok
+A a. (1a +1b -2c = 18) OR (3a -2b -3c <= 5) AND (-1a +2b -3c > 7),3,10,3,1,random,165.74,1,ok
+A a. (-2a +2b +3c < 1) AND (1a -1b -3c = 18) AND (-3a -3b -1c > 4),3,10,3,1,random,1818.5,1,ok
+A a. (-3a +1b +1c < 19) AND (-3a +1b +3c < 6) OR (-2a -1b +2c <= 3),3,10,3,1,random,522.88,6,ok
+A a. E b. (-3a +3b -1c = 6) OR (-3a -2b -1c > 18) OR (-1a +2b +1c < 19),3,10,3,2,random,18.04,15,ok
+A a. E b. (-2a -2b -3c = 10) AND (2a -2b -2c < 17) AND (3a +2b +3c <= 2),3,10,3,2,random,145.77,1,ok
+A a. E b. (1a -1b +3c = 14) OR (3a +2b -3c = 20) OR (3a -3b -1c > 9),3,10,3,2,random,52.22,5,ok
+A a. E b. (-1a +3b -2c > 8) OR (1a +3b -2c = 1) AND (-2a -2b -2c < 17),3,10,3,2,random,12.41,1,ok
+A a. E b. (-2a -3b +1c < 6) OR (-3a -1b -2c <= 6) OR (-1a -2b -1c <= 6),3,10,3,2,random,17.9,1,ok
+A a. E b. (1a -2b -2c >= 7) AND (1a -2b -2c < 0) OR (-3a -3b +3c > 12),3,10,3,2,random,11.6,1,ok
+A a. E b. (-1a -2b -3c = 4) AND (3a -3b +2c < 0) AND (3a +1b -3c < 0),3,10,3,2,random,,,timeout
+A a. E b. (2a -2b +1c >= 4) AND (2a -3b -1c = 7) AND (-3a -1b -3c >= 18),3,10,3,2,random,,,timeout
+A a. E b. (1a -2b +1c < 1) OR (1a -1b -1c <= 18) OR (-3a +2b -3c >= 20),3,10,3,2,random,10.94,1,ok
+A a. E b. (-3a +3b -2c > 5) AND (-3a +1b -1c > 10) AND (1a +2b +3c < 18),3,10,3,2,random,,,timeout
+A a. E b. (-1a +3b -3c <= 5) AND (1a -2b -3c < 15) AND (-2a +3b +2c <= 13),3,10,3,2,random,2449.96,1,ok
+A a. E b. (-1a -3b +1c > 17) AND (-3a +1b +3c >= 17) AND (2a +3b -2c <= 5),3,10,3,2,random,2711.54,1,ok
+A a. E b. (-3a +2b +1c >= 11) OR (1a +3b +2c < 15) AND (1a -3b -3c <= 2),3,10,3,2,random,99.31,1,ok
+A a. E b. (3a +3b +3c >= 7) AND (3a +3b +1c >= 18) OR (1a +2b +3c < 5),3,10,3,2,random,24.49,1,ok
+A a. E b. (3a -1b +1c > 1) OR (3a +2b -2c < 17) AND (-1a +1b -1c >= 20),3,10,3,2,random,11.74,3,ok
+A a. E b. (-2a +1b +3c = 3) OR (-3a +1b -2c > 10) AND (-2a -1b +1c >= 13),3,10,3,2,random,11.02,2,ok
+A a. E b. (1a +3b +3c >= 14) AND (2a +3b +2c = 19) AND (1a -3b +3c <= 3),3,10,3,2,random,624.91,1,ok
+A a. E b. (-2a -2b +2c = 0) OR (1a +3b -3c > 15) OR (1a -2b -2c < 6),3,10,3,2,random,18.87,1,ok
+A a. E b. (-3a -2b +2c < 8) AND (-1a -3b -2c < 10) AND (-2a -1b +1c <= 11),3,10,3,2,random,18.35,1,ok
+A a. E b. (-1a +2b +1c < 16) AND (1a +2b +2c > 20) OR (3a +3b -1c = 15),3,10,3,2,random,385.42,12,ok
+A a. E b. (2a -2b +1c <= 4) AND (1a -3b +3c = 17) OR (1a -1b -1c <= 7),3,10,3,2,random,44.64,1,ok
+A a. E b. (-1a +3b +1c = 16) OR (-3a -1b -2c < 11) OR (1a +1b -3c <= 0),3,10,3,2,random,25.9,1,ok
+A a. E b. (-2a +3b -2c <= 3) OR (-2a +3b +3c > 0) OR (-3a -1b +2c >= 18),3,10,3,2,random,25.71,1,ok
+A a. E b. (-1a -3b +1c >= 19) AND (-2a -1b +2c >= 14) OR (1a -3b -3c > 9),3,10,3,2,random,93.69,1,ok
+A a. E b. (-2a -3b -2c < 13) AND (-2a -1b -1c > 14) AND (3a +3b -2c <= 18),3,10,3,2,random,45.44,1,ok
+A a. E b. (-2a +1b +2c > 18) AND (2a +2b -3c < 4) OR (1a +1b -2c < 11),3,10,3,2,random,100.39,1,ok
+A a. E b. (-3a +1b +3c = 5) AND (-1a -1b +1c <= 9) AND (1a +1b -1c > 11),3,10,3,2,random,14.98,1,ok
+A a. E b. (-1a +2b -1c >= 14) OR (-2a -1b -3c < 16) AND (2a -1b +3c > 10),3,10,3,2,random,15.73,1,ok
+A a. E b. (-2a +3b -2c = 4) OR (-3a -3b -3c >= 18) OR (1a -3b +3c = 3),3,10,3,2,random,27.04,1,ok
+A a. E b. (-3a +1b +3c < 11) AND (2a +3b +2c = 13) AND (-1a -1b -3c <= 20),3,10,3,2,random,,,timeout
+(1a +1b -3c +2d <= 10) OR (-2a +3b +2c +3d >= 7) AND (1a +2b +2c +2d > 1),3,10,4,0,random,45.11,87,ok
+(-2a -3b +3c +3d = 3) AND (-1a +3b -2c +1d >= 3) OR (3a -3b +3c -1d <= 0),3,10,4,0,random,38.91,196,ok
+(1a +2b +1c +3d = 16) OR (1a -3b +3c +3d = 2) AND (1a +1b -3c +3d >= 5),3,10,4,0,random,37.6,66,ok
+(2a +1b -3c -3d = 7) AND (2a +1b +3c -3d >= 12) AND (2a -1b -3c -3d >= 10),3,10,4,0,random,19.25,1,ok
+(-1a -1b +1c +1d = 0) AND (-2a +3b -3c +3d = 8) AND (-1a -1b -2c +2d <= 6),3,10,4,0,random,21.58,59,ok
+(1a -3b -3c +2d > 9) OR (1a +2b -1c +3d < 20) AND (2a +3b -2c -3d < 19),3,10,4,0,random,201.24,186,ok
+(3a -3b -1c -3d <= 13) AND (2a -1b -2c +2d > 1) OR (-2a +1b +3c -3d = 13),3,10,4,0,random,160.92,259,ok
+(2a +2b +1c +3d = 9) AND (-1a +3b +3c -1d < 2) AND (2a -3b +2c -3d > 12),3,10,4,0,random,123.75,1,ok
+(-3a -2b -1c +2d <= 9) OR (1a +1b -2c +2d < 11) AND (1a +1b -2c -2d <= 7),3,10,4,0,random,25.68,62,ok
+(3a -2b +3c +1d < 16) OR (3a +2b -1c -1d >= 2) AND (1a +1b -1c +3d = 9),3,10,4,0,random,36.93,274,ok
+(-3a -3b +3c +1d > 10) OR (2a -1b +3c -2d >= 8) OR (2a +3b +2c +2d <= 13),3,10,4,0,random,115.09,127,ok
+(-2a +2b -2c -2d <= 20) AND (3a -2b -1c -2d < 0) OR (-1a -2b +1c +1d = 15),3,10,4,0,random,63.87,191,ok
+(-2a -1b -2c +2d >= 5) AND (3a -1b +2c -3d >= 14) AND (3a +1b -2c -2d >= 4),3,10,4,0,random,12.93,1,ok
+(-1a -3b -3c +3d = 11) AND (2a +3b -2c -1d >= 10) OR (1a +3b -3c +2d >= 18),3,10,4,0,random,29.03,18,ok
+(2a -3b -3c -1d > 19) OR (-2a +1b +2c -1d > 7) OR (3a +2b +3c -3d < 6),3,10,4,0,random,417.08,412,ok
+(-2a -2b +1c -2d < 0) OR (-3a +1b -3c +3d <= 12) AND (2a -2b -1c +3d >= 9),3,10,4,0,random,32.92,47,ok
+(-2a -2b -2c -2d >= 1) OR (-2a -2b +2c -2d >= 19) AND (1a +1b +3c -2d <= 13),3,10,4,0,random,12.55,1,ok
+(2a -1b +3c +1d <= 17) OR (-2a +1b +2c -3d < 12) OR (2a +1b -2c +1d >= 17),3,10,4,0,random,124.4,199,ok
+(2a -2b -2c -3d <= 8) OR (1a +2b -2c -3d < 11) OR (1a -3b +1c -1d > 4),3,10,4,0,random,132.07,181,ok
+(1a -3b +3c -2d = 0) AND (-1a +2b +2c -3d = 5) OR (3a -2b -2c -3d = 18),3,10,4,0,random,40.15,55,ok
+(2a +2b -2c -2d < 0) OR (-2a -2b -1c -1d < 7) AND (3a +2b +3c +1d = 0),3,10,4,0,random,13.08,5,ok
+(-3a +1b +1c +1d > 13) AND (-3a -3b +3c +3d > 13) OR (-3a +2b +1c -3d < 18),3,10,4,0,random,305.04,151,ok
+(-1a +1b +2c +3d >= 7) OR (3a -2b -2c -2d < 14) AND (3a -1b +2c +1d >= 6),3,10,4,0,random,47.94,51,ok
+(3a -2b -3c +3d >= 18) OR (2a -1b +1c -2d < 2) OR (-3a -2b -3c +1d = 6),3,10,4,0,random,84.59,76,ok
+(-2a -1b -1c +1d >= 16) AND (1a +2b +2c +2d = 15) AND (-1a -1b +2c -2d < 12),3,10,4,0,random,30.15,1,ok
+(3a -1b +2c -3d > 17) OR (-2a +2b -3c +2d < 3) AND (-1a -1b +1c -1d = 1),3,10,4,0,random,51.19,52,ok
+(-1a -3b +3c -2d <= 4) OR (1a -2b +3c -2d < 18) OR (2a -1b +3c +1d >= 0),3,10,4,0,random,15.0,1,ok
+(-2a -1b -3c -2d = 6) OR (3a -2b -1c -3d = 11) OR (3a -1b +2c +2d = 2),3,10,4,0,random,16.12,65,ok
+(3a -2b +2c -2d = 9) OR (2a +3b +1c +3d > 15) AND (1a +3b +3c +2d >= 2),3,10,4,0,random,38.81,19,ok
+(3a -2b -1c -3d >= 0) OR (3a -2b +2c +2d > 14) OR (3a -1b -1c -1d > 0),3,10,4,0,random,46.96,72,ok
+A a. (1a +1b +1c +1d > 13) AND (-2a -1b +2c -1d < 4) AND (1a +1b +1c -3d >= 13),3,10,4,1,random,916.3,42,ok
+A a. (-1a +2b +2c -2d < 8) AND (1a +3b -3c -2d <= 19) AND (-1a +2b +2c -1d = 8),3,10,4,1,random,110.51,1,ok
+A a. (1a +1b +3c +2d < 2) AND (2a +2b -1c +3d < 7) OR (-1a +2b +3c -1d < 8),3,10,4,1,random,5769.94,11,ok
+A a. (1a +2b +3c -1d < 0) OR (-1a +1b +3c -2d = 6) AND (1a +1b -2c +2d < 5),3,10,4,1,random,348.15,1,ok
+A a. (3a -3b +3c -3d < 0) OR (-1a -1b -1c +3d > 6) AND (-1a -1b +2c -3d <= 5),3,10,4,1,random,442.76,1,ok
+A a. (-3a +1b +1c +2d < 16) AND (-3a +3b -2c -3d < 6) AND (-1a -1b +2c +2d = 18),3,10,4,1,random,,,timeout
+A a. (2a +2b +2c +2d < 13) OR (-1a +1b -2c -2d <= 3) OR (3a -1b -1c +3d <= 0),3,10,4,1,random,197.77,31,ok
+A a. (-1a +2b +1c -1d > 6) OR (3a +3b -1c -2d <= 16) OR (-2a +1b +2c -1d <= 6),3,10,4,1,random,156.59,95,ok
+A a. (1a +3b +3c -3d < 8) AND (-1a +2b +1c +1d < 19) OR (-1a +1b -3c +3d = 19),3,10,4,1,random,1193.52,1,ok
+A a. (2a +3b +1c +1d <= 6) OR (-2a +3b -1c +2d <= 11) OR (-3a -3b +2c +1d = 13),3,10,4,1,random,,,timeout
+A a. (2a -3b -2c +1d < 19) OR (3a +3b -3c -1d <= 6) OR (2a +3b +3c +1d < 10),3,10,4,1,random,,,timeout
+A a. (-2a -1b -1c -3d = 0) AND (-3a +3b -3c +2d = 10) OR (-1a -1b -1c -3d <= 6),3,10,4,1,random,18.16,1,ok
+A a. (2a +3b +2c -3d > 20) AND (-3a +1b -1c +3d >= 17) OR (2a -1b -2c -2d < 11),3,10,4,1,random,,,timeout
+A a. (-3a +2b -3c -2d < 13) OR (-2a +1b -2c -1d > 16) OR (-1a -2b -2c +3d > 9),3,10,4,1,random,5101.09,150,ok
+A a. (-2a -3b +3c -2d > 2) AND (2a +2b +2c +2d < 1) OR (-1a +3b -1c +2d < 7),3,10,4,1,random,18.08,10,ok
+A a. (-2a +2b -3c +3d = 19) OR (-1a -3b -1c +2d <= 10) AND (2a -3b +1c -1d = 4),3,10,4,1,random,3129.74,1,ok
+A a. (-3a -2b +2c -2d >= 10) OR (-3a -2b +2c +1d < 4) OR (-1a -2b +1c +3d = 5),3,10,4,1,random,1145.04,23,ok
+A a. (3a -2b -3c -2d <= 8) OR (1a -3b -1c +1d <= 3) AND (2a +3b +2c -1d <= 7),3,10,4,1,random,840.88,1,ok
+A a. (1a -1b -1c +1d > 15) OR (2a -2b -2c -3d <= 4) AND (1a +1b -1c +2d = 8),3,10,4,1,random,380.97,10,ok
+A a. (-1a -3b +3c -3d > 14) OR (1a -1b +3c +3d = 4) OR (-2a +1b +3c -3d <= 6),3,10,4,1,random,1212.28,115,ok
+A a. (3a +2b +1c -3d = 20) OR (-3a -1b -1c +1d < 20) AND (-3a -1b +3c +3d = 9),3,10,4,1,random,,,timeout
+A a. (-3a -2b -1c -2d < 8) OR (2a +2b +3c -3d >= 20) AND (-2a +1b -1c -3d <= 17),3,10,4,1,random,85.07,1,ok
+A a. (-3a -2b -3c -1d >= 10) AND (2a -3b +1c +1d <= 18) AND (-2a -2b +1c -2d > 2),3,10,4,1,random,,,timeout
+A a. (-1a -3b +3c -1d >= 2) OR (2a -2b +1c -3d >= 6) AND (-3a -1b +2c +2d <= 16),3,10,4,1,random,330.31,20,ok
+A a. (-3a -1b +1c +1d < 19) OR (3a +1b -2c -2d = 16) OR (2a +1b -2c -1d > 3),3,10,4,1,random,,,timeout
+A a. (3a +2b +2c +2d < 16) AND (-3a +3b +1c +3d = 4) OR (1a +1b +1c +1d <= 1),3,10,4,1,random,560.73,1,ok
+A a. (2a -3b -2c +1d = 13) OR (-2a +1b +1c +2d >= 3) AND (2a +2b -3c -3d > 7),3,10,4,1,random,2429.02,1,ok
+A a. (3a +1b +2c -1d > 2) OR (-3a +2b +2c +1d = 16) OR (-1a -2b +2c +2d >= 20),3,10,4,1,random,3511.04,28,ok
+A a. (-1a +3b +3c +2d = 6) OR (2a +1b +2c -3d = 11) AND (-1a -2b +3c +3d > 7),3,10,4,1,random,,,timeout
+A a. (-1a +3b -3c +3d = 12) OR (-1a -3b +1c -1d < 4) OR (2a -1b +2c +2d > 7),3,10,4,1,random,151.85,1,ok
+A a. E b. (-3a +2b -1c -1d < 9) OR (-3a +3b +1c -1d < 16) OR (1a -2b +1c +2d >= 11),3,10,4,2,random,316.65,1,ok
+A a. E b. (1a -3b -2c -3d > 7) OR (-2a +1b -2c +1d >= 5) AND (1a -1b -2c +2d = 19),3,10,4,2,random,,,timeout
+A a. E b. (-1a +2b +2c +2d > 11) OR (3a -3b -1c +2d <= 18) OR (3a -2b -3c -1d >= 10),3,10,4,2,random,410.78,1,ok
+A a. E b. (1a +1b +3c -2d = 14) AND (-1a +2b +1c +3d < 4) OR (1a -3b -3c +3d <= 14),3,10,4,2,random,1944.73,1,ok
+A a. E b. (1a -3b -3c +2d = 4) AND (2a -1b -2c -3d < 5) AND (-1a -2b +3c +2d > 6),3,10,4,2,random,,,timeout
+A a. E b. (3a +3b -3c +2d >= 10) OR (1a +2b +1c +2d <= 3) AND (-3a +2b +3c -3d = 20),3,10,4,2,random,20.68,1,ok
+A a. E b. (3a -3b -3c +3d = 4) AND (-3a +1b -2c +3d >= 17) AND (-3a -3b +2c -3d > 0),3,10,4,2,random,,,timeout
+A a. E b. (1a +3b +3c -1d <= 1) OR (-1a +3b +3c -1d >= 18) AND (-2a +2b +2c -1d >= 8),3,10,4,2,random,62.6,1,ok
+A a. E b. (2a -1b +1c +3d > 5) OR (2a -1b -3c -2d > 19) OR (2a +1b +3c +1d < 13),3,10,4,2,random,106.63,5,ok
+A a. E b. (1a -3b -3c +1d >= 7) OR (3a -2b -3c -3d > 5) AND (-1a -2b +3c -2d >= 18),3,10,4,2,random,,,timeout
+A a. E b. (1a -3b -3c -1d >= 0) AND (-3a +3b +3c +1d > 17) OR (-3a -2b -2c -2d < 13),3,10,4,2,random,20.74,1,ok
+A a. E b. (-2a -3b -3c +1d <= 7) AND (-1a -2b +1c -2d = 14) OR (1a +1b +2c -3d <= 4),3,10,4,2,random,,,timeout
+A a. E b. (-3a +3b +2c -3d < 20) AND (2a -3b -1c -1d > 16) OR (-2a +3b -1c +2d > 5),3,10,4,2,random,,,timeout
+A a. E b. (-2a +1b +2c +2d = 7) OR (-1a -1b +1c +3d >= 10) AND (-2a -3b -1c +3d >= 2),3,10,4,2,random,607.19,12,ok
+A a. E b. (2a -3b -2c +2d <= 15) OR (-1a +3b +3c +2d > 20) OR (-2a +1b +2c -3d > 17),3,10,4,2,random,606.64,1,ok
+A a. E b. (-1a +3b +1c -1d <= 20) AND (-1a -1b -2c +2d > 15) OR (2a -1b +2c -3d > 7),3,10,4,2,random,3706.09,50,ok
+A a. E b. (-2a +1b +1c +3d <= 18) OR (3a +3b +1c +1d = 18) AND (-3a +1b -1c +3d > 17),3,10,4,2,random,,,timeout
+A a. E b. (-1a -2b -2c +3d >= 0) OR (2a +3b -3c +2d >= 5) AND (-2a -1b +2c -2d < 1),3,10,4,2,random,106.14,1,ok
+A a. E b. (3a -1b +3c +3d < 15) AND (3a +1b +1c -3d < 17) AND (1a -3b -3c +2d <= 17),3,10,4,2,random,,,timeout
+A a. E b. (1a +1b +2c +1d <= 18) AND (3a +3b -2c +1d >= 16) OR (-1a -3b +3c +3d <= 7),3,10,4,2,random,131.29,1,ok
+A a. E b. (-3a +1b -2c -3d = 17) OR (2a -3b +1c -2d >= 16) AND (-2a +1b +3c -1d > 19),3,10,4,2,random,6801.09,1,ok
+A a. E b. (-1a +3b +2c +3d = 1) AND (1a -2b -1c +3d <= 1) AND (2a -1b +1c +2d <= 20),3,10,4,2,random,,,timeout
+A a. E b. (1a -1b +2c -1d >= 10) OR (3a +2b -2c +1d = 20) AND (-2a +1b +3c +1d < 9),3,10,4,2,random,,,timeout
+A a. E b. (1a +2b +1c +2d >= 18) OR (-1a -2b -2c -3d >= 16) OR (3a -1b +2c -3d = 5),3,10,4,2,random,27.31,1,ok
+A a. E b. (2a +3b +2c -1d < 0) AND (-3a +2b -3c -2d >= 20) AND (-2a -2b +3c -3d < 20),3,10,4,2,random,,,timeout
+A a. E b. (3a +2b -2c +2d < 5) OR (-1a +1b +3c +1d = 11) OR (-1a +2b -2c +2d = 5),3,10,4,2,random,3742.0,8,ok
+A a. E b. (-1a -1b -3c -1d = 6) AND (-1a +3b -2c +3d > 12) AND (-3a +2b +2c -2d < 16),3,10,4,2,random,,,timeout
+A a. E b. (1a -1b -1c +1d > 11) OR (-1a +2b -2c -2d <= 6) AND (3a -1b +3c -1d <= 5),3,10,4,2,random,,,timeout
+A a. E b. (1a -1b +2c -2d <= 3) AND (-3a +2b -1c -1d >= 10) AND (3a -2b -2c +2d >= 1),3,10,4,2,random,,,timeout
+A a. E b. (2a -3b -1c +1d >= 10) AND (3a -3b -3c +2d <= 19) AND (-2a -1b -1c +1d < 11),3,10,4,2,random,,,timeout
+(-2a +1b +3c >= 13) AND (-3a -2b -2c < 12) AND (3a -2b +3c = 5) AND (1a +2b -3c < 17),4,10,3,0,random,27.59,15,ok
+(1a -2b -1c >= 2) AND (1a +3b +2c > 20) OR (3a -3b +3c <= 12) OR (2a +2b +1c > 12),4,10,3,0,random,27.0,13,ok
+(2a +1b -3c < 11) OR (-2a -1b -3c > 0) AND (1a +2b -2c < 1) AND (2a -1b +3c <= 17),4,10,3,0,random,22.28,11,ok
+(1a +3b -2c > 5) OR (-3a +2b +1c < 9) AND (1a -2b +3c < 16) OR (-3a -2b -1c < 11),4,10,3,0,random,24.22,1,ok
+(3a -2b +2c < 12) OR (1a +3b -3c >= 16) OR (2a +2b -1c >= 10) OR (-3a +3b +1c = 0),4,10,3,0,random,68.19,73,ok
+(1a -2b +3c > 14) AND (-3a -3b +3c > 14) AND (2a +3b -2c < 16) AND (-1a +1b +3c = 3),4,10,3,0,random,142.66,1,ok
+(-3a -1b +2c = 7) AND (-1a -2b +3c < 20) OR (-2a -1b +3c <= 11) AND (1a +2b +1c > 10),4,10,3,0,random,32.75,99,ok
+(-3a +1b -3c > 15) AND (-2a -1b -2c = 1) AND (3a -2b +1c = 11) OR (-3a -1b -2c > 13),4,10,3,0,random,25.01,1,ok
+(1a +1b -3c = 2) OR (2a +1b +2c >= 19) AND (-3a +2b +1c >= 7) AND (-2a -2b +2c <= 5),4,10,3,0,random,33.28,120,ok
+(1a -2b -2c > 7) AND (-2a -1b -3c >= 16) OR (3a +3b -2c > 7) AND (-3a +3b +2c > 4),4,10,3,0,random,18.51,58,ok
+(1a -1b +3c >= 1) OR (2a +2b +2c < 0) AND (-3a -3b +2c > 5) OR (1a +3b +2c = 19),4,10,3,0,random,13.51,13,ok
+(1a +3b -1c >= 11) AND (-2a +2b +1c < 15) AND (-2a +2b -2c <= 20) OR (-2a -2b +3c >= 16),4,10,3,0,random,49.29,97,ok
+(1a +3b -3c > 18) OR (-1a +3b -3c >= 10) AND (2a -2b +1c > 4) OR (-1a +1b +1c > 13),4,10,3,0,random,37.01,53,ok
+(3a +2b -3c <= 4) OR (-1a +3b +1c >= 5) AND (3a +3b -1c > 1) OR (-2a -3b +2c >= 10),4,10,3,0,random,17.97,13,ok
+(2a -1b +1c = 14) AND (3a -2b +3c = 20) OR (-3a -3b -3c <= 10) OR (3a +3b +2c = 2),4,10,3,0,random,24.18,1,ok
+(-1a +3b -2c < 9) OR (-1a -2b +1c > 14) AND (3a +2b +2c <= 17) AND (2a -2b +1c > 3),4,10,3,0,random,27.42,10,ok
+(-1a +2b +1c >= 12) OR (1a +3b -3c > 4) AND (3a -2b -2c < 8) AND (-1a -2b -1c = 10),4,10,3,0,random,25.39,11,ok
+(-2a -2b +2c <= 1) OR (2a +1b +2c = 6) AND (-2a -1b +1c > 19) AND (-3a +2b +1c >= 6),4,10,3,0,random,23.55,3,ok
+(-2a +1b -2c < 5) OR (2a -2b -1c > 12) OR (-2a -2b +1c < 17) OR (1a +1b -3c = 7),4,10,3,0,random,23.01,1,ok
+(3a -1b -2c = 8) OR (3a -2b +2c >= 0) AND (-2a +1b +2c < 10) AND (1a -2b -3c > 13),4,10,3,0,random,33.44,37,ok
+(2a -2b +2c > 13) OR (3a -2b +3c = 11) AND (1a -1b +2c = 12) AND (2a -3b -3c <= 13),4,10,3,0,random,27.05,23,ok
+(-2a +1b -2c < 17) AND (-1a +1b +3c <= 4) AND (-2a +3b -3c = 3) OR (2a -2b +1c >= 2),4,10,3,0,random,25.95,12,ok
+(-3a -3b +3c <= 13) AND (1a -2b +2c <= 17) AND (1a +2b +1c > 9) AND (-1a +2b +3c <= 15),4,10,3,0,random,32.13,63,ok
+(1a +2b +1c > 17) AND (-3a +3b -1c <= 8) AND (-3a -3b +1c = 8) OR (-1a +1b -3c = 5),4,10,3,0,random,41.38,20,ok
+(-1a +2b -3c > 9) AND (-3a -1b +1c <= 0) OR (1a +3b -1c < 15) AND (-2a +1b -1c >= 3),4,10,3,0,random,18.66,17,ok
+(3a +1b -3c > 19) AND (3a +1b -3c = 8) OR (-2a -1b -1c > 8) OR (-2a -2b -1c >= 5),4,10,3,0,random,17.82,1,ok
+(-1a -3b -3c >= 9) OR (2a -2b +2c >= 18) OR (3a -2b +2c = 18) OR (3a +3b +1c >= 11),4,10,3,0,random,17.6,8,ok
+(-2a +1b +2c > 0) AND (2a +1b +2c > 11) AND (1a -3b +2c < 4) AND (3a +3b +1c = 4),4,10,3,0,random,73.74,1,ok
+(2a -1b -3c < 13) OR (2a +1b +2c >= 18) OR (1a +3b -1c < 17) AND (3a +1b -3c >= 19),4,10,3,0,random,19.82,1,ok
+(-2a +3b +2c <= 0) AND (-2a -1b -2c < 12) OR (-2a -3b -1c = 12) OR (-3a -2b +1c >= 10),4,10,3,0,random,10.81,44,ok
+A a. (1a +1b +1c >= 7) AND (2a +1b +3c < 5) OR (2a -3b -3c >= 1) OR (-3a +1b -2c >= 11),4,10,3,1,random,17.56,1,ok
+A a. (-3a +2b +2c >= 10) OR (2a -2b +1c >= 2) OR (1a +1b -1c < 5) OR (-3a -2b +3c = 11),4,10,3,1,random,617.19,27,ok
+A a. (-1a +1b -1c <= 4) OR (-1a -2b -1c > 5) AND (-2a +2b -3c <= 17) OR (-3a -2b +1c >= 16),4,10,3,1,random,14.41,5,ok
+A a. (3a +1b +1c = 1) AND (-3a +1b -1c >= 16) AND (-3a +3b -3c <= 19) AND (3a -3b -2c = 17),4,10,3,1,random,5262.72,1,ok
+A a. (-2a +1b +1c <= 19) AND (-2a +2b +2c <= 11) OR (-1a +1b +3c >= 0) OR (3a -1b +1c <= 2),4,10,3,1,random,23.15,1,ok
+A a. (-1a +1b +3c <= 11) OR (-2a +1b -1c < 6) AND (-1a -2b +3c >= 6) OR (2a -1b -1c >= 20),4,10,3,1,random,333.12,16,ok
+A a. (3a -3b +1c = 16) AND (1a +2b +1c < 20) AND (1a +2b +3c = 3) OR (-3a +1b -2c <= 16),4,10,3,1,random,39.45,11,ok
+A a. (-3a +3b +3c = 4) AND (-1a +3b +1c < 2) OR (2a -3b -2c = 18) AND (-2a -2b -2c > 1),4,10,3,1,random,23.21,1,ok
+A a. (-3a +2b -3c < 19) OR (1a -3b -3c > 8) AND (1a +2b -1c < 8) AND (1a +1b -2c >= 14),4,10,3,1,random,20.43,13,ok
+A a. (3a +1b -2c < 10) OR (-3a +3b -3c <= 6) OR (-3a -2b +3c >= 11) OR (2a -3b -2c <= 13),4,10,3,1,random,210.3,1,ok
+A a. (2a -2b +2c > 2) AND (2a -3b +1c > 20) OR (3a -3b -3c = 9) OR (1a +3b -2c >= 0),4,10,3,1,random,1527.86,35,ok
+A a. (-1a -1b -2c < 18) AND (-1a +3b +1c >= 5) AND (2a -1b +3c >= 1) OR (-3a +3b +2c > 3),4,10,3,1,random,302.6,1,ok
+A a. (3a +2b +3c = 18) AND (3a -2b -1c <= 7) OR (-2a -3b +3c <= 4) OR (-1a -1b -3c > 13),4,10,3,1,random,709.58,3,ok
+A a. (1a +2b +3c >= 11) OR (3a -3b -1c >= 14) OR (2a +3b +3c >= 20) OR (1a +3b -2c >= 3),4,10,3,1,random,92.87,6,ok
+A a. (-1a +1b +2c <= 9) AND (-3a -2b -2c <= 10) OR (3a -2b +1c > 15) OR (-1a +1b +2c < 1),4,10,3,1,random,56.14,22,ok
+A a. (-1a +1b -3c > 12) AND (2a +2b -2c > 13) OR (-1a -1b +3c = 9) OR (3a +2b +1c >= 11),4,10,3,1,random,104.46,9,ok
+A a. (-2a +3b +2c > 12) AND (-1a +1b -1c <= 4) OR (3a -2b +3c < 15) OR (-3a -1b -1c = 13),4,10,3,1,random,858.1,1,ok
+A a. (2a -3b -2c <= 19) AND (3a +1b +3c < 1) AND (-1a -1b +3c >= 10) AND (2a -3b -1c >= 8),4,10,3,1,random,6634.12,1,ok
+A a. (3a -3b +1c = 0) OR (-2a -3b +2c >= 18) AND (-2a +2b +3c < 7) AND (-1a -1b -1c > 0),4,10,3,1,random,30.05,1,ok
+A a. (-1a -2b +2c > 1) AND (-3a +3b -2c < 20) AND (3a +1b +1c >= 13) AND (-2a +2b +3c >= 8),4,10,3,1,random,,,timeout
+A a. (1a -3b +1c = 5) AND (-3a +1b -3c = 17) OR (2a -3b +3c > 7) AND (-1a -2b +2c >= 14),4,10,3,1,random,19.75,1,ok
+A a. (2a +1b +1c >= 5) AND (-1a -3b -3c < 19) OR (-1a -3b +1c <= 12) OR (-3a -3b +3c <= 0),4,10,3,1,random,21.0,1,ok
+A a. (-3a +1b +1c > 7) AND (-3a -2b -2c = 12) AND (2a -3b +3c <= 8) AND (3a +2b -3c > 2),4,10,3,1,random,,,timeout
+A a. (3a +2b +3c >= 5) OR (1a -2b -1c < 3) AND (-3a +2b -3c = 11) OR (2a -1b +1c < 2),4,10,3,1,random,192.03,2,ok
+A a. (2a +2b +2c < 9) OR (1a -3b +2c < 1) AND (1a +3b -3c = 12) AND (-2a -2b -1c > 16),4,10,3,1,random,41.53,1,ok
+A a. (-1a -3b -2c < 3) AND (-3a +3b -1c = 6) OR (1a -1b -1c > 2) OR (-3a -1b -2c <= 2),4,10,3,1,random,21.46,1,ok
+A a. (-2a -2b +3c > 9) AND (-2a +3b +1c > 5) AND (2a +1b -1c = 4) AND (3a -1b -1c < 3),4,10,3,1,random,,,timeout
+A a. (1a +2b +3c > 0) OR (-2a +3b +3c < 14) OR (1a -3b +3c <= 8) AND (2a -2b -1c < 2),4,10,3,1,random,87.37,1,ok
+A a. (-1a +3b -3c >= 7) OR (-2a -1b -3c = 8) AND (2a +2b +1c > 15) AND (-1a +2b -2c = 7),4,10,3,1,random,23.05,1,ok
+A a. (-3a -3b +2c > 11) AND (2a +3b -2c = 6) OR (1a -3b -3c <= 10) AND (1a +1b +2c <= 13),4,10,3,1,random,23.62,1,ok
+A a. E b. (-1a -1b -3c = 11) OR (-1a -2b +2c > 20) AND (1a -2b +3c <= 5) OR (-3a -1b -1c >= 15),4,10,3,2,random,18.99,1,ok
+A a. E b. (2a +3b -1c < 8) OR (-2a -1b -3c >= 18) OR (-1a +1b +1c < 16) OR (-1a -3b +2c = 9),4,10,3,2,random,31.89,10,ok
+A a. E b. (-2a -3b +3c > 14) OR (-2a +2b +3c >= 11) AND (2a -1b -2c > 3) OR (-3a +2b -3c >= 14),4,10,3,2,random,82.14,1,ok
+A a. E b. (-2a +3b -1c < 0) AND (-3a -1b -3c > 0) OR (2a +3b +3c <= 2) AND (-2a -3b +1c > 4),4,10,3,2,random,51.83,1,ok
+A a. E b. (-2a -3b +3c < 2) OR (2a -3b +2c < 18) OR (-3a -3b +1c <= 0) AND (-1a +2b +3c <= 2),4,10,3,2,random,1808.82,1,ok
+A a. E b. (2a +3b +2c > 1) OR (2a +3b -3c >= 12) OR (-3a -1b -1c = 8) OR (-2a +3b -3c <= 0),4,10,3,2,random,22.56,1,ok
+A a. E b. (-3a -1b -2c <= 9) OR (-3a +3b -3c >= 18) OR (-1a -2b -2c < 13) OR (-3a +3b -2c > 9),4,10,3,2,random,24.05,1,ok
+A a. E b. (1a +1b +1c < 1) OR (1a -1b -1c >= 14) AND (3a +2b -3c = 3) OR (3a -2b +3c <= 9),4,10,3,2,random,14.13,1,ok
+A a. E b. (-2a -3b -1c = 3) OR (-2a -3b +1c = 11) AND (2a +1b +3c <= 5) OR (3a +2b +2c >= 14),4,10,3,2,random,21.33,1,ok
+A a. E b. (-1a +3b +3c >= 2) OR (2a -2b +3c >= 7) AND (3a +3b -2c <= 19) OR (1a +3b -3c > 15),4,10,3,2,random,878.57,1,ok
+A a. E b. (-3a -2b -2c <= 6) OR (2a -1b -1c = 9) AND (2a +3b -3c < 17) AND (-2a +2b -3c = 4),4,10,3,2,random,36.06,1,ok
+A a. E b. (-3a -3b +3c <= 16) OR (1a +2b -2c = 11) OR (3a -3b -2c <= 1) AND (-2a -3b +2c = 4),4,10,3,2,random,511.2,1,ok
+A a. E b. (-2a +1b -2c = 11) OR (-3a +3b +1c >= 6) AND (1a +2b +3c = 15) OR (1a +1b +1c <= 10),4,10,3,2,random,115.59,1,ok
+A a. E b. (-3a +1b -1c < 6) AND (1a -2b +3c = 3) AND (3a -2b +3c < 0) AND (-1a -1b +3c < 9),4,10,3,2,random,,,timeout
+A a. E b. (-2a -3b +2c = 10) OR (1a +2b +2c <= 19) AND (1a -3b -1c > 18) AND (-1a +1b +3c < 0),4,10,3,2,random,,,timeout
+A a. E b. (2a -3b +1c <= 11) OR (3a -2b -2c >= 12) AND (2a -2b +2c = 17) OR (2a +1b +2c > 7),4,10,3,2,random,22.9,1,ok
+A a. E b. (1a +1b -1c < 10) AND (-3a -3b +3c < 3) AND (3a +2b -3c > 8) OR (-1a -1b -1c < 10),4,10,3,2,random,38.04,1,ok
+A a. E b. (2a +1b +2c < 15) OR (-1a +2b -1c >= 16) OR (-2a +2b -2c < 12) AND (-2a -2b -3c > 19),4,10,3,2,random,23.34,1,ok
+A a. E b. (-3a -1b -1c >= 4) AND (-1a -2b -1c > 19) AND (1a +3b +1c < 13) AND (1a -1b +2c >= 18),4,10,3,2,random,,,timeout
+A a. E b. (3a +3b -3c >= 11) AND (-1a -1b -2c <= 17) AND (-3a -1b -2c = 2) AND (-3a -3b +3c <= 13),4,10,3,2,random,289.74,1,ok
+A a. E b. (-1a +2b +3c <= 16) OR (-2a +1b +2c >= 19) OR (1a +2b -3c = 16) AND (-2a +1b +2c = 0),4,10,3,2,random,51.35,1,ok
+A a. E b. (2a -3b +1c < 10) AND (3a -2b +1c >= 17) AND (1a +2b +3c = 12) OR (3a +3b -3c < 7),4,10,3,2,random,31.77,1,ok
+A a. E b. (2a +1b +3c >= 3) AND (-1a -3b +2c > 18) AND (-2a +3b -3c < 16) AND (-3a +3b -2c <= 9),4,10,3,2,random,,,timeout
+A a. E b. (-2a -2b +2c >= 15) OR (-2a +3b -2c >= 8) AND (3a +3b -3c <= 9) AND (-1a -1b +3c >= 11),4,10,3,2,random,957.27,1,ok
+A a. E b. (-2a -2b -3c >= 8) OR (2a +2b +2c > 4) OR (-3a -1b -2c > 9) OR (3a -3b +1c >= 0),4,10,3,2,random,15.18,1,ok
+A a. E b. (3a -1b +1c > 10) AND (3a -1b -1c > 4) AND (-2a -3b -2c <= 7) AND (-3a -3b +1c <= 19),4,10,3,2,random,215.75,1,ok
+A a. E b. (-2a +3b +2c >= 13) AND (3a -1b -1c <= 3) AND (-3a -3b +2c > 1) OR (1a +2b +3c <= 2),4,10,3,2,random,,,timeout
+A a. E b. (2a -2b +2c > 0) AND (1a -3b +1c >= 14) OR (-2a +3b -2c > 12) OR (3a -3b -2c > 11),4,10,3,2,random,192.67,1,ok
+A a. E b. (-3a +2b +2c = 17) OR (3a +2b -2c <= 13) OR (3a -2b -2c = 7) AND (2a -1b -2c <= 8),4,10,3,2,random,43.38,1,ok
+A a. E b. (1a +1b +1c <= 8) AND (1a -3b +3c = 8) AND (1a -2b -3c < 5) OR (-3a -3b +2c <= 10),4,10,3,2,random,3725.79,1,ok
+(-1a +3b +2c -3d >= 18) OR (2a -1b -2c -1d = 18) AND (-2a -3b -2c +1d > 20) OR (3a +3b -1c +1d > 0),4,10,4,0,random,53.84,95,ok
+(-1a -2b +2c +1d < 10) AND (2a -2b +2c -1d <= 0) AND (-1a +1b +1c +2d <= 7) OR (-3a -3b -1c +1d >= 2),4,10,4,0,random,47.14,52,ok
+(3a +3b +1c -2d = 16) OR (-2a -1b +1c -3d = 8) OR (1a +3b +1c +3d < 14) AND (2a +3b -2c +1d < 20),4,10,4,0,random,100.09,127,ok
+(-1a -2b +1c +2d <= 0) OR (-1a +3b +3c -2d <= 19) AND (-3a -3b -3c -1d > 20) AND (1a +3b -1c +2d >= 0),4,10,4,0,random,85.88,6,ok
+(3a +3b -1c -2d <= 15) AND (1a +1b +1c -1d >= 18) OR (1a -2b -1c -1d >= 17) AND (-2a +1b +1c -1d > 0),4,10,4,0,random,23.83,64,ok
+(2a +1b -1c -3d < 6) OR (-1a -2b -1c -2d < 14) OR (3a -1b -3c -3d = 9) OR (-1a -2b -2c -3d >= 19),4,10,4,0,random,26.29,1,ok
+(-3a -3b +2c +2d < 9) OR (3a +2b -3c +2d <= 6) AND (-2a -1b -1c -1d >= 3) OR (-1a +1b -2c -3d = 1),4,10,4,0,random,18.04,13,ok
+(3a +2b -3c +2d = 11) AND (2a +2b +3c +2d > 2) OR (-3a -1b +1c -1d < 7) OR (2a -2b +1c +2d < 6),4,10,4,0,random,256.8,48,ok
+(2a -3b -2c +1d <= 1) AND (-2a -3b -3c +1d > 6) OR (-2a +2b +1c +3d <= 0) AND (-1a +2b +2c +1d > 0),4,10,4,0,random,18.93,26,ok
+(-2a -2b +3c -3d = 15) AND (1a -1b +2c +3d > 6) OR (-1a +2b +2c +1d >= 7) AND (1a -1b +1c -1d > 17),4,10,4,0,random,543.27,263,ok
+(-2a +1b -1c +2d <= 0) OR (1a -2b +2c +3d <= 17) OR (3a +1b +2c -2d <= 20) OR (-2a +2b +3c -3d = 19),4,10,4,0,random,2881.54,1294,ok
+(3a -2b +3c -1d >= 10) OR (-1a +3b -3c +1d > 10) AND (-3a +2b -2c +2d > 20) AND (3a +1b -2c -3d > 4),4,10,4,0,random,1207.82,334,ok
+(-3a +3b +1c -2d > 8) AND (1a -2b -2c -3d <= 20) AND (-2a +1b +2c -3d < 20) AND (-3a +1b +1c -1d = 14),4,10,4,0,random,255.61,113,ok
+(1a +3b -1c +2d <= 8) AND (2a -3b +2c -2d <= 20) OR (-2a +3b +2c -1d >= 18) OR (-3a +2b -2c -3d = 11),4,10,4,0,random,291.76,76,ok
+(-1a -2b +2c +3d >= 0) OR (1a -3b +3c -2d = 10) OR (1a +3b -1c +2d < 1) OR (-2a -2b +3c +3d <= 15),4,10,4,0,random,926.44,266,ok
+(-3a -3b -1c +3d <= 16) AND (-1a +2b -3c +1d > 17) AND (3a -2b -2c -3d < 3) OR (-3a -2b -3c -2d = 16),4,10,4,0,random,338.24,460,ok
+(1a -1b +2c -2d = 10) OR (2a +2b +3c -1d <= 8) AND (-3a +3b -3c -2d >= 13) AND (-2a -3b +1c -3d >= 20),4,10,4,0,random,48.99,10,ok
+(-3a -3b -3c -3d >= 3) OR (2a -2b +2c +3d <= 9) OR (-2a -2b -1c -3d >= 13) AND (1a -2b -3c -3d > 17),4,10,4,0,random,20.88,14,ok
+(3a -1b -1c -1d <= 20) OR (-1a +1b +3c +1d > 9) OR (2a +3b +1c -1d = 13) AND (-1a -2b +1c +2d >= 20),4,10,4,0,random,169.21,62,ok
+(1a +2b +2c -3d <= 9) OR (-1a -2b +1c -1d >= 18) AND (3a -1b -3c -2d <= 12) AND (-3a +2b +3c -3d <= 3),4,10,4,0,random,39.8,13,ok
+(-3a -2b -1c -2d <= 16) OR (1a -3b -1c -3d >= 1) OR (1a -2b -3c +3d = 7) OR (1a -2b -2c +3d >= 8),4,10,4,0,random,29.35,1,ok
+(-2a -3b -1c -1d >= 19) AND (2a +3b -1c +1d = 16) OR (3a -3b +3c +1d < 2) OR (-2a -1b -2c +3d >= 17),4,10,4,0,random,37.71,98,ok
+(1a +1b +3c -2d = 17) OR (-2a +2b +2c -1d <= 20) OR (-3a -2b +2c +2d < 4) OR (3a +1b +1c -3d >= 19),4,10,4,0,random,2861.04,852,ok
+(-2a +1b +3c -1d > 20) AND (1a +2b -2c +1d <= 12) AND (-1a -2b +3c +3d >= 13) AND (-1a +3b +1c +2d = 11),4,10,4,0,random,192.53,64,ok
+(1a -2b +1c -1d <= 8) OR (-1a -3b -1c -3d = 8) AND (-3a -3b -2c -2d = 3) AND (-1a -1b -2c -1d <= 5),4,10,4,0,random,17.65,9,ok
+(2a -3b -2c -1d <= 18) AND (-1a -3b +3c -2d >= 4) AND (3a +1b +2c +1d <= 0) AND (1a -2b +1c +2d < 16),4,10,4,0,random,128.69,1,ok
+(3a -1b -3c +1d >= 19) AND (2a +3b -1c +3d = 8) AND (-1a -3b +3c +1d < 1) AND (-3a -1b -3c -1d >= 3),4,10,4,0,random,415.14,1,ok
+(3a -2b +2c -2d = 6) AND (-2a -3b -3c -1d >= 12) OR (-3a -1b +2c -3d = 18) OR (-3a +3b +3c +1d <= 4),4,10,4,0,random,26.13,95,ok
+(3a +2b -1c -1d >= 4) OR (-3a -3b -1c -2d >= 8) AND (3a -1b +2c -1d <= 19) AND (1a +1b +1c -1d > 7),4,10,4,0,random,38.0,9,ok
+(-1a +1b +1c +1d = 1) AND (1a +3b +3c +1d = 0) AND (3a +3b +1c +3d > 3) OR (-2a -2b +1c -2d = 15),4,10,4,0,random,33.86,12,ok
+A a. (-3a +2b -3c +3d > 14) OR (-3a +2b -2c -3d < 11) OR (3a +3b +2c -2d >= 11) OR (1a -1b +3c +1d = 20),4,10,4,1,random,,,timeout
+A a. (-3a -2b +1c -2d >= 16) OR (1a -1b -2c +3d > 15) AND (1a +1b -1c -3d > 10) OR (-1a +3b -1c +2d < 1),4,10,4,1,random,,,timeout
+A a. (-2a +1b +3c +3d < 19) OR (-1a +3b -2c -3d > 12) OR (1a +2b +3c +1d > 2) AND (-3a +2b -2c -1d >= 12),4,10,4,1,random,,,timeout
+A a. (2a -3b +3c -1d < 18) AND (2a -3b +1c -1d > 9) AND (1a +2b +1c +3d = 15) OR (3a +1b -2c +1d >= 7),4,10,4,1,random,,,timeout
+A a. (-2a -1b -2c -1d <= 18) OR (2a -3b +3c +1d > 17) AND (-3a -3b -1c +3d = 13) OR (-3a +1b -1c -3d > 7),4,10,4,1,random,,,timeout
+A a. (3a -3b +1c -1d = 2) AND (-3a -2b +2c +3d >= 9) OR (-3a -2b -2c -3d = 20) OR (2a -1b +2c -3d > 18),4,10,4,1,random,,,timeout
+A a. (3a -1b -1c -3d < 10) AND (3a -3b -1c +3d < 7) OR (-2a -3b +3c +1d = 1) OR (-1a -2b -3c -2d <= 11),4,10,4,1,random,,,timeout
+A a. (1a -1b -2c -1d >= 8) AND (2a -3b -2c -1d <= 7) AND (2a +1b +2c +1d < 3) AND (3a +1b -2c +3d < 14),4,10,4,1,random,,,timeout
+A a. (2a +3b +3c -2d > 8) OR (2a +2b +3c +2d <= 9) AND (3a +2b +2c -3d < 18) AND (-2a -3b +2c +1d <= 14),4,10,4,1,random,,,timeout
+A a. (1a -3b -3c -1d >= 5) OR (-1a +1b -1c -1d < 2) OR (-1a -3b +1c +1d >= 11) OR (-3a +2b +1c +3d < 20),4,10,4,1,random,,,timeout
+A a. (2a -3b +1c +3d >= 16) OR (1a -1b -2c +2d >= 20) OR (2a -1b +2c +1d = 12) OR (3a -1b -3c +1d > 17),4,10,4,1,random,,,timeout
+A a. (-2a -2b -3c +3d >= 17) OR (3a +3b +3c -2d <= 2) OR (-3a -1b -2c -1d < 10) AND (-2a -1b +3c -3d >= 15),4,10,4,1,random,1323.33,1,ok
+A a. (-1a -1b -3c +2d < 6) OR (-1a +3b +3c +2d <= 16) OR (-3a -3b +3c +1d <= 20) AND (2a +3b +2c -2d = 12),4,10,4,1,random,,,timeout
+A a. (3a +2b -3c +2d = 16) AND (-1a -2b +2c -1d > 19) AND (2a +2b -2c -3d > 3) AND (-1a +3b -1c -1d >= 6),4,10,4,1,random,,,timeout
+A a. (-2a +3b -3c -1d < 18) OR (1a +2b +1c -1d = 17) OR (1a -2b +2c +1d = 10) OR (-1a +2b +3c -3d < 19),4,10,4,1,random,,,timeout
+A a. (-1a -3b +2c +3d >= 1) AND (1a -2b +3c +2d >= 6) AND (-2a -1b +1c -3d <= 15) AND (3a +2b +1c -1d <= 10),4,10,4,1,random,,,timeout
+A a. (1a +1b +1c -2d = 4) AND (-2a -3b -3c -3d <= 8) AND (-1a +2b +2c +2d = 3) AND (-1a +2b +1c -1d = 5),4,10,4,1,random,156.52,1,ok
+A a. (-2a -2b -2c +2d < 4) AND (-3a -1b +2c -3d >= 16) OR (-1a +1b -1c +1d > 6) AND (1a -1b +2c +1d < 1),4,10,4,1,random,,,timeout
+A a. (-1a +2b -3c -3d = 19) OR (3a -2b +3c -3d <= 12) OR (2a -2b -3c -3d < 7) OR (-1a +3b -2c +2d < 7),4,10,4,1,random,,,timeout
+A a. (-1a -1b +1c +1d > 17) AND (2a +2b +1c -3d >= 3) AND (2a -3b -1c -1d >= 17) AND (2a +1b -2c -2d = 6),4,10,4,1,random,,,timeout
+A a. (-1a -2b -3c +2d = 2) OR (-2a -2b -2c -2d > 18) OR (-1a +3b -3c +1d >= 9) OR (-1a +3b -3c +3d >= 16),4,10,4,1,random,167.58,1,ok
+A a. (3a +2b -2c -1d > 17) AND (2a +2b -1c -1d >= 19) OR (3a +3b -1c +1d < 4) AND (1a +2b -1c -1d <= 7),4,10,4,1,random,,,timeout
+A a. (-2a -1b -1c +2d > 0) AND (3a -3b +2c -2d >= 14) OR (3a +2b +2c -1d < 3) AND (-1a -3b +3c +3d > 6),4,10,4,1,random,,,timeout
+A a. (2a -1b +1c +3d = 0) OR (1a -3b +1c -2d >= 14) OR (3a -3b -1c -2d >= 13) AND (-2a -2b +3c -3d > 8),4,10,4,1,random,,,timeout
+A a. (-2a +1b +1c +3d < 18) OR (1a -3b -1c -3d >= 0) OR (3a -2b +3c -2d < 13) AND (2a -3b -2c -1d < 3),4,10,4,1,random,,,timeout
+A a. (1a -2b -1c -1d >= 3) AND (2a +2b -2c +1d >= 18) AND (2a +3b -1c -3d > 3) AND (3a +2b -1c -2d >= 2),4,10,4,1,random,,,timeout
+A a. (-3a -1b +2c -2d >= 12) AND (-1a +3b +1c -1d <= 13) AND (1a -2b +1c -3d >= 5) OR (1a -1b -3c +1d < 12),4,10,4,1,random,,,timeout
+A a. (-2a +1b +1c -1d = 9) AND (2a -1b +2c -2d > 7) OR (-2a -3b +2c -3d > 15) OR (-2a +2b +1c +1d >= 4),4,10,4,1,random,,,timeout
+A a. (-1a -2b +1c +2d >= 4) AND (1a +2b -2c +3d <= 18) AND (-1a -2b -1c +2d > 15) AND (-3a +2b +3c +3d <= 8),4,10,4,1,random,,,timeout
+A a. (2a -1b +3c -1d < 17) OR (2a +1b -3c +3d <= 3) OR (-2a -1b -2c -3d < 8) AND (-3a -2b +3c -1d > 11),4,10,4,1,random,,,timeout
+A a. E b. (-1a -2b -1c -3d >= 16) OR (-1a +2b -1c -3d <= 12) OR (2a +2b +3c +3d > 6) OR (1a -1b +3c -2d < 5),4,10,4,2,random,110.08,1,ok
+A a. E b. (-1a +3b -2c -2d >= 16) AND (3a +3b +1c +3d < 18) AND (-2a -2b +3c -1d = 2) OR (3a -1b +1c -2d <= 14),4,10,4,2,random,125.79,1,ok
+A a. E b. (-3a +1b -1c -2d >= 18) OR (-1a -2b -1c +2d = 5) AND (-2a +2b -3c +2d < 8) AND (-1a -1b -3c -3d > 3),4,10,4,2,random,112.85,1,ok
+A a. E b. (-1a +2b -3c +3d >= 8) AND (3a +2b +2c +2d >= 5) AND (-3a -2b -1c +1d > 11) OR (-1a +1b +3c -2d < 7),4,10,4,2,random,,,timeout
+A a. E b. (1a -1b -2c -3d >= 20) OR (2a +2b +3c -2d >= 16) AND (2a +3b +2c +3d >= 13) AND (3a -3b -1c -2d <= 14),4,10,4,2,random,,,timeout
+A a. E b. (-2a +2b -1c -3d <= 12) OR (1a +3b +3c +3d > 13) OR (-2a -3b +3c -2d > 1) OR (-2a -2b +3c -2d = 16),4,10,4,2,random,6603.33,1,ok
+A a. E b. (1a -3b +2c +1d >= 12) OR (3a -1b -3c -3d <= 4) AND (2a -1b -3c -2d >= 19) OR (2a +1b +2c +3d < 7),4,10,4,2,random,25.84,7,ok
+A a. E b. (-3a +1b +3c -2d = 19) OR (1a -3b -3c +2d >= 19) OR (-3a -2b +3c +3d < 14) OR (-3a -1b -3c -3d = 11),4,10,4,2,random,418.05,1,ok
+A a. E b. (-1a -3b +1c -3d = 9) AND (-2a +3b +1c -3d < 5) OR (2a +1b +1c -2d = 6) AND (-2a -1b -2c +1d < 4),4,10,4,2,random,,,timeout
+A a. E b. (-1a -1b +3c +2d >= 17) AND (3a -3b +1c +1d <= 16) OR (-1a +1b +1c -3d = 20) AND (-1a +3b -3c +1d = 14),4,10,4,2,random,,,timeout
+A a. E b. (3a +2b -1c -1d <= 3) OR (-1a +1b -1c +1d > 16) AND (-3a +2b -1c +3d > 12) OR (-3a +2b -1c -1d <= 6),4,10,4,2,random,1199.39,1,ok
+A a. E b. (2a -2b -2c -3d <= 13) OR (3a +3b -3c -2d >= 7) AND (-3a +2b +3c -1d > 1) AND (-2a -3b -2c +3d = 8),4,10,4,2,random,,,timeout
+A a. E b. (3a -1b -2c -3d = 18) AND (3a +2b +3c -1d >= 4) OR (3a -3b -1c -2d = 20) OR (2a -3b -2c -3d < 4),4,10,4,2,random,,,timeout
+A a. E b. (-1a -3b +3c -3d <= 19) AND (1a +3b +1c -2d >= 11) AND (-2a +2b +1c -2d >= 7) AND (2a -1b +2c +2d < 9),4,10,4,2,random,,,timeout
+A a. E b. (2a +3b +1c -1d = 19) OR (-1a +1b -3c +2d >= 11) AND (3a -2b -2c +1d < 3) AND (-3a -3b -3c -1d >= 4),4,10,4,2,random,65.28,1,ok
+A a. E b. (3a -1b +1c +3d >= 12) AND (2a +2b +2c -3d >= 15) OR (2a +3b -1c +3d < 10) AND (3a -1b -2c +1d > 17),4,10,4,2,random,256.63,14,ok
+A a. E b. (3a -1b -2c -3d > 4) OR (3a +3b +2c +1d > 12) OR (-3a +1b -3c -3d <= 3) OR (-1a +3b -3c +2d = 17),4,10,4,2,random,,,timeout
+A a. E b. (3a +1b -1c -2d > 17) OR (3a +1b -3c -1d > 3) AND (2a +3b +2c +1d >= 5) AND (2a -2b +1c +3d < 11),4,10,4,2,random,,,timeout
+A a. E b. (-3a -2b +1c +3d <= 1) OR (1a +2b -1c +1d >= 16) AND (1a -2b +3c -3d <= 0) OR (2a +2b +3c -3d >= 13),4,10,4,2,random,294.0,1,ok
+A a. E b. (-2a -2b -3c -2d < 12) OR (1a +1b +1c +1d > 4) AND (-2a -1b -1c +2d > 11) OR (3a -3b +3c -2d >= 6),4,10,4,2,random,452.3,1,ok
+A a. E b. (-1a +1b +3c +3d >= 2) OR (3a -2b +1c +1d < 14) OR (-2a +2b +2c -2d >= 19) AND (2a +2b +1c -3d > 13),4,10,4,2,random,9451.56,1,ok
+A a. E b. (2a +3b -2c +2d < 14) OR (2a -1b -1c -1d = 13) AND (-1a +1b -2c +1d = 3) AND (-2a +1b +1c +1d = 4),4,10,4,2,random,53.99,1,ok
+A a. E b. (2a -1b -1c +2d > 17) AND (-1a -1b -3c -2d >= 17) OR (2a +1b -2c -2d > 17) OR (-3a -3b +3c +3d > 16),4,10,4,2,random,35.6,1,ok
+A a. E b. (-3a -2b +1c -2d <= 0) AND (3a -3b +1c +3d < 3) OR (1a -3b +2c -2d <= 3) OR (-3a +3b -2c -1d < 9),4,10,4,2,random,,,timeout
+A a. E b. (-1a -1b +1c -1d = 8) AND (-1a -1b +2c -2d >= 3) OR (-1a -3b -1c -2d = 20) AND (3a +3b -2c -2d <= 2),4,10,4,2,random,38.07,1,ok
+A a. E b. (2a -2b -3c +1d = 8) AND (-2a +1b -1c +2d < 10) AND (3a +1b -2c -1d <= 5) OR (-2a -3b +1c -1d >= 6),4,10,4,2,random,,,timeout
+A a. E b. (1a -1b +3c +3d = 12) OR (-3a -3b -2c -1d >= 13) AND (-2a -2b +2c -3d = 5) AND (1a -3b -3c -2d <= 14),4,10,4,2,random,66.34,4,ok
+A a. E b. (3a +1b -3c -3d = 10) AND (1a -1b -3c -3d >= 4) OR (-2a +1b -3c -1d = 16) OR (3a -3b +3c +1d = 7),4,10,4,2,random,53.19,1,ok
+A a. E b. (1a -1b +2c -3d > 9) AND (2a -1b +2c +2d <= 14) OR (1a +3b -2c +3d < 16) OR (1a +3b -2c -1d = 10),4,10,4,2,random,,,timeout
+A a. E b. (1a +1b +3c +2d <= 14) OR (-2a -2b -3c +1d >= 2) OR (2a +1b -3c -1d > 0) OR (3a +3b -2c -2d > 13),4,10,4,2,random,1149.09,1,ok

@@ -1,0 +1,2 @@
+expression,count,constant,variable_count,depth,mode,time_ms,num_states,outcome
+(-3a -1b +3c <= 13) OR (-1a +2b +2c < 15),2,10,3,0,random,6.83,25,ok

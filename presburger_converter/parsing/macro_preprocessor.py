@@ -1,31 +1,25 @@
 # macro_preprocessor.py
 """
 Collects user-defined macros, checks them, expands them recursively and
-finally delegates to `parser.parse_formula()`.
-
-Usage
------
-from presburger_converter.parsing.macro_preprocessor import parse_with_macros
-ast = parse_with_macros(text_with_macros)
+returns the expanded formula as a string.
 """
 from __future__ import annotations
 import re
-from lark.lexer import Token          #  <-- new
 from dataclasses import dataclass
 from collections import OrderedDict
 from typing import Mapping, Sequence
 
 # --- Project imports --------------------------------------------------------
 from presburger_converter.parsing.parser import parse_formula, UnexpectedInput
-from presburger_converter.parsing.ast_nodes import Var, Exists, ForAll   # others via hasattr()
+from presburger_converter.parsing.utils import _free_vars
 
 # ---------------------------------------------------------------------------
 
 @dataclass
 class Macro:
     name: str
-    params: tuple[str, ...]   # formal parameter names
-    body_src: str             # raw RHS exactly as typed by the user
+    params: tuple[str, ...]
+    body_src: str
 
 
 # ---------------------------------------------------------------------------
@@ -33,9 +27,9 @@ class Macro:
 # ---------------------------------------------------------------------------
 
 _header_rx = re.compile(
-    r"""^\s*([A-Za-z]\w*)           # name
-         \s*\(\s*([^)]*)\)\s*=\s*   # (p1, ..., pn) =
-         (.+)$                      #   RHS
+    r"""^\s*([A-Za-z]\w*)
+         \s*\(\s*([^)]*)\)\s*=\s*
+         (.+)$
     """,
     re.X,
 )
@@ -103,14 +97,10 @@ def _expand(src: str, macros: Mapping[str, Macro], stack: tuple[str, ...] = ()) 
             i = m.end()  # <-- **add this line**
             continue
 
-        if name in stack:
-            cycle = " -> ".join(stack + (name,))
-            raise RecursionError(f"cyclic macro usage detected: {cycle}")
-
         args, i = _parse_parenthesised_args(src, i)
         macro = macros[name]
         if len(args) != len(macro.params):
-            raise SyntaxError(
+            raise UnexpectedInput(
                 f"macro '{name}' expects {len(macro.params)} args, got {len(args)}"
             )
 
@@ -131,47 +121,6 @@ def _expand(src: str, macros: Mapping[str, Macro], stack: tuple[str, ...] = ()) 
 
 
 # ---------------------------------------------------------------------------
-# Free-variable check
-# ---------------------------------------------------------------------------
-
-def _free_vars(node, bound=frozenset()) -> set[str]:
-    """
-    Return the set of variable names that occur free in *node*.
-    Handles both ast_nodes.Var and raw lark Token objects.
-    """
-    # ── atomic cases ───────────────────────────────────────────────
-    if isinstance(node, Var):
-        return {node.name} - bound
-
-    if isinstance(node, Token):
-        # A Token only shows up as a *bound* variable (from the quantifier
-        # header) or, in the worst case, a bare variable that the AST
-        # transformer forgot to wrap.  Treat it like a plain name string.
-        return {str(node)} - bound
-
-    # ── quantifiers ────────────────────────────────────────────────
-    if isinstance(node, (Exists, ForAll)):
-        # The “var” field may be Var *or* Token, so normalise to str.
-        bound_name = node.var.name if hasattr(node.var, "name") else str(node.var)
-        return _free_vars(node.formula, bound | {bound_name})
-
-    # ── generic structural recursion ───────────────────────────────
-    vars_found = set()
-
-    # Walk over standard containers first
-    if isinstance(node, (list, tuple, set)):
-        for item in node:
-            vars_found |= _free_vars(item, bound)
-        return vars_found
-
-    # Then dive into attributes of AST objects
-    if hasattr(node, "__dict__"):
-        for v in node.__dict__.values():
-            vars_found |= _free_vars(v, bound)
-
-    return vars_found
-
-# ---------------------------------------------------------------------------
 # Main procedure
 # ---------------------------------------------------------------------------
 
@@ -189,7 +138,9 @@ def _collect_macros(lines: Sequence[str]) -> tuple[OrderedDict[str, Macro], int]
 
         name, params_csv, rhs = m.groups()
         params = tuple(p.strip() for p in params_csv.split(",") if p.strip())
-
+        # check if name is logical operator
+        if name in {"AND", "OR", "NOT", "E", "EX", "A", "ALL"}:
+            raise UnexpectedInput("macro names cannot be logical operators")
         # check duplicates
         if name in macros:
             raise SyntaxError(f"duplicate macro '{name}' (line {idx+1})")
@@ -199,12 +150,12 @@ def _collect_macros(lines: Sequence[str]) -> tuple[OrderedDict[str, Macro], int]
         try:
             ast_rhs = parse_formula(expanded_rhs)
         except UnexpectedInput as e:
-            raise SyntaxError(
-                f"syntax error inside macro '{name}' (line {idx+1}):\n{e}"
-            ) from None
+            raise UnexpectedInput(
+                f"Inside macro '{name}' (line {idx+1}):\n{e}"
+            )
 
         if _free_vars(ast_rhs) != set(params):
-            raise SyntaxError(
+            raise UnexpectedInput(
                 f"free vars {sorted(_free_vars(ast_rhs))} "
                 f"don’t match parameter list {sorted(params)} "
                 f"(line {idx+1})"
@@ -217,23 +168,18 @@ def _collect_macros(lines: Sequence[str]) -> tuple[OrderedDict[str, Macro], int]
     return macros, idx
 
 
-def parse_with_macros(text: str):
-    """
-    Public entry point – call this **instead of** `parse_formula`
-    when the user may have defined macros.
-    """
-    lines = _split_lines(text)
+def process_macros(user_input):
+    lines = _split_lines(user_input)
     if not lines:
-        raise SyntaxError("empty input")
+        raise UnexpectedInput("Empty input")
 
     macros, start_idx = _collect_macros(lines)
 
     # The remaining lines form the actual formula.
     formula_src = "\n".join(lines[start_idx:])
     if not formula_src:
-        raise SyntaxError("no formula line found after macro definitions")
+        raise UnexpectedInput("No formula line found after macro definitions")
 
     expanded_formula = _expand(formula_src, macros)
-    print(f"Expanded formula:\n{expanded_formula}\n")
-    # Delegate to the ordinary parser so existing errors look the same
-    return parse_formula(expanded_formula)
+    #print(f"Expanded formula:\n{expanded_formula}\n")
+    return expanded_formula

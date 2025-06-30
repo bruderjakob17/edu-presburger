@@ -1,9 +1,11 @@
 # parser.py
 
-from lark import Lark, Transformer, v_args
+from lark import Lark, Transformer, v_args, Token
 from presburger_converter.parsing.ast_nodes import *
 from lark import UnexpectedInput
 import os
+
+from presburger_converter.parsing.syntax_tree_visualizier import syntax_tree_to_dot, lark_tree_to_dot
 
 # Load grammar
 grammar_path = os.path.join(os.path.dirname(__file__), "grammar.lark")
@@ -18,12 +20,6 @@ parser = Lark(grammar, start="start")
 class ASTTransformer(Transformer):
     # Variables and constants
     def unary_minus(self, expr):
-        # --- FIX START ---
-        if isinstance(expr, Const):
-            # -7  ➜  Const(-7)
-            return Const(-expr.value)
-        # --- FIX END ---
-        # For non-constants keep it as 0 - t
         return Sub(Zero(), expr)
 
     def var(self, token):
@@ -34,9 +30,6 @@ class ASTTransformer(Transformer):
 
     def mult(self, const, var):
         return Mult(int(const), str(var))
-
-    def neg_mult(self, const, var):
-        return Mult(-int(const), str(var))
 
     # Terms
     def add(self, left, right):
@@ -85,6 +78,11 @@ class ASTTransformer(Transformer):
     def parent(self, expr):
         return expr
 
+    # ────────────────────────────── pass-through helpers ──────────────────────────
+    def term(self, expr):     return expr          # if a ‘term’ is just a ‘sum’
+    def sum(self, expr):      return expr          # if a ‘sum’ is just a ‘product’
+    def product(self, expr):  return expr          # if a ‘product’ is just a ‘factor’
+
 
 def visualize_whitespace(line: str) -> str:
     """
@@ -96,14 +94,14 @@ def visualize_whitespace(line: str) -> str:
 
 
 # Main parser function
-def parse_formula(text: str):
+def parse_formula(formula):
     try:
-        tree = parser.parse(text)
+        tree = parser.parse(formula)
         ast = ASTTransformer().transform(tree)
         return ast
     except UnexpectedInput as e:
         # Get raw line and caret context
-        context = e.get_context(text)
+        context = e.get_context(formula)
 
         # Clean and align with visible markers
         lines = context.splitlines()

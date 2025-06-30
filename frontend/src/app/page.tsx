@@ -21,14 +21,24 @@ export default function Home() {
   const [dotString, setDotString] = useState<string>();
   const [mataString, setMataString] = useState<string>();
   const [variables, setVariables] = useState<string[]>([]);
+  const [originalVariables, setOriginalVariables] = useState<string[]>([]);
+  const [currentVariables, setCurrentVariables] = useState<string[]>([]);
   const [exampleSolutions, setExampleSolutions] = useState<ExampleSolution[]>([]);
+  const [allSolutions, setAllSolutions] = useState<ExampleSolution[]>([]);
+  const [displayedSolutions, setDisplayedSolutions] = useState<ExampleSolution[]>([]);
+  const [bufferSolutions, setBufferSolutions] = useState<ExampleSolution[]>([]);
+  const [isFullSolutionSet, setIsFullSolutionSet] = useState(false);
+  const [isRefillingBuffer, setIsRefillingBuffer] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [kSolutions, setKSolutions] = useState(3);
   const [numStates, setNumStates] = useState<number>(0);
   const [numFinalStates, setNumFinalStates] = useState<number>(0);
+  const [requestedSolutions, setRequestedSolutions] = useState<number>(0);
+  const [requestedK, setRequestedK] = useState<number>(0);
   const scrollPositionRef = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const allSolutionsRef = useRef<ExampleSolution[]>([]);
 
   // Effect to restore scroll position after loading completes
   useEffect(() => {
@@ -49,7 +59,7 @@ export default function Home() {
         setInput(content);
         setKSolutions(3);
         // Always build with the new content, regardless of previous state
-        await handleBuild([], 3, false, content);
+        await handleBuild(content);
         // Clear the file input after successful upload
         if (fileInputRef.current) {
           fileInputRef.current.value = '';
@@ -59,7 +69,7 @@ export default function Home() {
     }
   };
 
-  const handleBuild = async (variableOrder: string[] = [], kOverride?: number, forceExpand?: boolean, formulaOverride?: string) => {
+  const handleBuild = async (formulaOverride?: string) => {
     // Save current scroll position before any state changes
     scrollPositionRef.current = window.scrollY;
     
@@ -71,8 +81,6 @@ export default function Home() {
     try {
       const requestBody = {
         formula: (formulaOverride ?? input).trim(),
-        variable_order: variableOrder,
-        k_solutions: kOverride ?? kSolutions,
       };
 
       const response = await fetch('/api/automaton/dot', {
@@ -98,9 +106,94 @@ export default function Home() {
       setDotString(data.dot);
       setMataString(data.mata);
       setVariables(data.variables || []);
+      setOriginalVariables(data.variables || []);
+      setCurrentVariables(data.variables || []);
+      setAllSolutions(data.example_solutions || []);
+      allSolutionsRef.current = data.example_solutions || [];
+      if ((data.example_solutions || []).length < 9) {
+        setDisplayedSolutions(data.example_solutions || []); // Show all if full set
+        setBufferSolutions([]);
+        setIsFullSolutionSet(true);
+      } else {
+        setDisplayedSolutions((data.example_solutions || []).slice(0, 3));
+        setBufferSolutions((data.example_solutions || []).slice(3));
+        setIsFullSolutionSet(false);
+      }
       setExampleSolutions(data.example_solutions || []);
       setNumStates(data.num_states);
       setNumFinalStates(data.num_final_states);
+    } catch (err) {
+      const errorMsg = (err instanceof Error ? err.message : 'An error occurred')
+        .replace(/\t/g, '    ')
+        .replace(/ /g, '\u00A0');
+      console.log('Error message received:', JSON.stringify(errorMsg));
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdate = async (newVariableOrder: string[], kOverride?: number) => {
+    if (!mataString) return;
+    
+    setLoading(true);
+    setError(null);
+    try {
+      const requestBody = {
+        aut: mataString,
+        k_solutions: kOverride ?? kSolutions,
+        original_variable_order: originalVariables,
+        new_variable_order: newVariableOrder,
+      };
+
+      const response = await fetch('/api/automaton/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        const errorMsg = errorText
+          .replace(/\t/g, '    ')
+          .replace(/ /g, '\u00A0');
+        console.log('Error message received:', JSON.stringify(errorMsg));
+        setError(errorMsg);
+        return;
+      }
+
+      const data = await response.json();
+      console.log('Update API response:', data);
+      if (data.dot !== null && data.dot !== undefined) {
+        setDotString(data.dot);
+      }
+      
+      const newSolutions = data.example_solutions || [];
+      console.log('=== UPDATE RESPONSE RECEIVED ===');
+      console.log('Response contains', newSolutions.length, 'new solutions');
+      console.log('Solution set full:', data.solution_set_full);
+      
+      // Backend now returns only the new solutions, so add them directly to buffer
+      console.log('Adding', newSolutions.length, 'new solutions to buffer');
+      
+      setBufferSolutions(prev => {
+        const newBuffer = [...prev, ...newSolutions];
+        console.log('Buffer updated:');
+        console.log('- Previous buffer size:', prev.length);
+        console.log('- New buffer size:', newBuffer.length);
+        console.log('- Added solutions:', newSolutions.length);
+        return newBuffer;
+      });
+      
+      // Use the backend's solution_set_full boolean
+      console.log('Setting full solution set to:', data.solution_set_full);
+      setIsFullSolutionSet(data.solution_set_full || false);
+      
+      setExampleSolutions(data.example_solutions || []);
+      setIsRefillingBuffer(false);
+      console.log('Refill completed, isRefillingBuffer set to false');
     } catch (err) {
       const errorMsg = (err instanceof Error ? err.message : 'An error occurred')
         .replace(/\t/g, '    ')
@@ -124,13 +217,13 @@ export default function Home() {
     e.preventDefault();
     if (draggedIndex === null) return;
 
-    const newVariables = [...variables];
+    const newVariables = [...currentVariables];
     const [draggedItem] = newVariables.splice(draggedIndex, 1);
     newVariables.splice(targetIndex, 0, draggedItem);
 
-    setVariables(newVariables);
+    setCurrentVariables(newVariables);
     setDraggedIndex(null);
-    await handleBuild(newVariables);
+    await handleUpdate(newVariables);
   };
 
   const handleFormulaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -138,12 +231,61 @@ export default function Home() {
     setKSolutions(3);
   };
 
-  const handleAddExample = () => {
-    setKSolutions((prev) => {
-      const next = prev + 1;
-      handleBuild(variables, next, true);
-      return next;
-    });
+  const handleAddExample = async () => {
+    console.log('=== BUTTON CLICKED ===');
+    console.log('Current state:');
+    console.log('- Displayed solutions:', displayedSolutions.length);
+    console.log('- Buffer solutions:', bufferSolutions.length);
+    console.log('- Is full solution set:', isFullSolutionSet);
+    console.log('- Is refilling buffer:', isRefillingBuffer);
+    console.log('- Requested solutions:', requestedSolutions);
+
+    // If we have the full solution set, show all solutions (displayed + buffer)
+    if (isFullSolutionSet) {
+      console.log('Full solution set detected, showing all solutions');
+      setDisplayedSolutions(prev => [...prev, ...bufferSolutions]);
+      setBufferSolutions([]);
+      return;
+    }
+
+    // Get the next solution from the buffer
+    if (bufferSolutions.length > 0) {
+      const nextSolution = bufferSolutions[0];
+      const remainingBuffer = bufferSolutions.slice(1);
+      
+      console.log('Taking solution from buffer:');
+      console.log('- Next solution index:', displayedSolutions.length + 1);
+      console.log('- Remaining buffer size:', remainingBuffer.length);
+      
+      setDisplayedSolutions(prev => [...prev, nextSolution]);
+      setBufferSolutions(remainingBuffer);
+      
+      // Check if we need to refill the buffer
+      if (remainingBuffer.length === 4 && !isRefillingBuffer && !isFullSolutionSet) {
+        console.log('Buffer has 4 solutions left, triggering refill');
+        setIsRefillingBuffer(true);
+        const currentDisplayed = displayedSolutions.length + 1; // +1 for the solution we just added
+        const nextK = currentDisplayed + 9; // displayed + 4 remaining + 5 new
+        setRequestedSolutions(5); // We're requesting 5 new solutions
+        setRequestedK(nextK); // We're requesting k total solutions
+        console.log('Requesting update with k =', nextK, 'for 5 new solutions');
+        setKSolutions(nextK);
+        await handleUpdate(currentVariables, nextK);
+      } else {
+        console.log('No refill needed, buffer size:', remainingBuffer.length);
+      }
+    } else {
+      console.log('Buffer is empty, no more solutions to display');
+    }
+  };
+
+  const getBufferSize = () => {
+    return bufferSolutions.length;
+  };
+
+  const isButtonDisabled = () => {
+    // Show loading when buffer is empty and refilling
+    return bufferSolutions.length === 0 && isRefillingBuffer;
   };
 
   const handleDownloadDot = () => {
@@ -313,7 +455,7 @@ CONST: /[0-9]+/
             disabled={loading}
             className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Building...' : 'Build Automaton'}
+            {loading ? (isRefillingBuffer ? 'Loading solutions...' : 'Building...') : 'Build Automaton'}
           </button>
         </div>
 
@@ -330,17 +472,22 @@ CONST: /[0-9]+/
         {dotString && (
           <>
             <ExampleSolutions
-              solutions={exampleSolutions}
+              solutions={displayedSolutions}
+              allSolutions={allSolutions}
+              bufferSolutions={bufferSolutions}
               kSolutions={kSolutions}
               onAddExample={handleAddExample}
               loading={loading}
+              isFullSolutionSet={isFullSolutionSet}
+              isRefillingBuffer={isRefillingBuffer}
+              isButtonDisabled={isButtonDisabled()}
             />
             
             {variables.length > 0 && (
               <div className="flex flex-col gap-2 my-4">
                 <span className="font-semibold text-gray-700">Variable order (drag to reorder):</span>
                 <div className="flex flex-wrap items-center gap-2">
-                  {variables.map((v, i) => (
+                  {currentVariables.map((v, i) => (
                     <div
                       key={v}
                       draggable

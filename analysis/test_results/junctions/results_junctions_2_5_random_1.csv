@@ -1,0 +1,16 @@
+expression,count,constant,variable_count,depth,mode,time_ms,num_states,outcome
+(1a -1b = 8) OR (-3a +1b <= 8),2,5,2,0,random,4.27,8,ok
+(1a +2b +1c >= 7) OR (-1a -2b -3c = 10),2,5,3,0,random,4.9,6,ok
+(-3a -2b -2c -2d >= 0) AND (-3a -2b +1c -2d >= 10),2,5,4,0,random,6.32,1,ok
+(-1a -1b < 0) OR (2a +2b = 2) AND (-2a -1b < 0),3,5,2,0,random,7.0,2,ok
+(-1a +1b -3c > 9) OR (-3a -3b +3c < 6) OR (1a +3b -1c = 5),3,5,3,0,random,12.43,19,ok
+(-3a +3b -3c +2d <= 3) AND (1a +3b -2c -3d > 7) AND (1a -3b +2c -1d <= 5),3,5,4,0,random,62.69,262,ok
+(3a -3b >= 8) AND (-1a +2b = 8) OR (1a -2b <= 8) OR (-2a +1b > 5),4,5,2,0,random,10.28,8,ok
+(-1a -1b -1c >= 6) OR (3a +3b +1c <= 7) OR (-1a +2b +1c <= 1) OR (-3a +2b +3c >= 0),4,5,3,0,random,9.22,21,ok
+(3a +1b -2c +2d > 9) AND (-3a -2b +3c +1d > 6) OR (3a +1b -1c -3d <= 8) AND (-2a +1b +1c +2d < 5),4,5,4,0,random,577.62,302,ok
+(1a +2b > 4) OR (-3a -3b <= 10) OR (2a +3b > 3) OR (-3a -3b >= 4) AND (-1a +1b < 2),5,5,2,0,random,10.29,1,ok
+(2a +3b +1c > 0) AND (1a +3b +3c > 6) OR (-2a +2b +2c <= 5) AND (2a +2b +3c < 10) OR (-2a +1b +3c = 2),5,5,3,0,random,26.91,6,ok
+(2a +3b -3c -2d >= 5) AND (2a +2b +2c +1d > 2) OR (-3a -2b -3c +1d < 2) OR (2a -1b +1c +2d <= 7) OR (3a -2b +2c +2d >= 3),5,5,4,0,random,58.59,1,ok
+(-1a +2b <= 10) OR (-2a +1b > 1) OR (-1a -3b >= 1) OR (-2a -1b > 9) AND (-1a +3b = 2) AND (1a -1b < 1),6,5,2,0,random,12.09,19,ok
+(2a +2b +2c < 6) AND (1a +2b -2c < 0) AND (-3a -2b -3c = 3) OR (-1a +1b -3c = 10) OR (-3a -3b -2c > 3) OR (1a +3b -2c > 1),6,5,3,0,random,26.75,6,ok
+(-3a -3b -3c -2d <= 10) OR (1a +2b -3c -3d = 4) OR (2a -2b -1c -2d <= 5) OR (2a -2b -3c +2d <= 4) OR (-3a +1b +2c +2d <= 3) AND (-2a -1b +3c -3d = 8),6,5,4,0,random,151.97,1,ok

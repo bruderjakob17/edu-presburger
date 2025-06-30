@@ -2,7 +2,7 @@ import re
 from collections import defaultdict
 from typing import List, Tuple
 from collections import deque
-from presburger_converter.automaton.core import formula_to_aut
+from presburger_converter.pipeline import formula_to_aut
 
 ###############################################################################
 # Helper utilities                                                             #
@@ -409,28 +409,24 @@ def add_rankdir_auto(dot: str) -> str:
 
     return "\n".join(lines)
 
-###############################################################################
-# Pipeline                                                                     #
-###############################################################################
-def formula_to_dot(formula: str, new_variable_order):
-    aut, original_variable_order = formula_to_aut(formula)
+
+
+def aut_to_dot(aut, variable_order, new_variable_order = None):
     dot = aut.to_dot_str()
-    dot = convert_int_labels_to_bitstrings(dot, len(original_variable_order))
+    dot = convert_int_labels_to_bitstrings(dot, len(variable_order))
     if new_variable_order:
-        if set(new_variable_order) != set(original_variable_order):
+        if set(new_variable_order) != set(variable_order):
             raise AssertionError(
                 "variable_order must be a permutation of the internal "
-                f"variables {original_variable_order}, got {new_variable_order}"
+                f"variables {variable_order}, got {new_variable_order}"
             )
         mapping = {
             old_idx: new_variable_order.index(var)
-            for old_idx, var in enumerate(original_variable_order)
+            for old_idx, var in enumerate(variable_order)
         }
-        dot = reorder_bitstring_labels(dot, mapping, len(original_variable_order))
-    else:
-        new_variable_order = original_variable_order
+        dot = reorder_bitstring_labels(dot, mapping, len(variable_order))
     dot = merge_parallel_edges(dot)
     dot = simplify_automaton_labels(dot)
     dot = add_rankdir_auto(dot)
     dot = optimize_dot_start_arrow(dot)
-    return aut, dot, original_variable_order, new_variable_order
+    return dot

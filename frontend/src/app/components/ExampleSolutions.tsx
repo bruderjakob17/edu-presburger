@@ -10,25 +10,17 @@ interface ExampleSolution {
 
 interface ExampleSolutionsProps {
   solutions: ExampleSolution[];
-  allSolutions: ExampleSolution[];
   bufferSolutions: ExampleSolution[];
-  kSolutions: number;
   onAddExample: () => void;
-  loading: boolean;
   isFullSolutionSet: boolean;
-  isRefillingBuffer: boolean;
   isButtonDisabled: boolean;
 }
 
 export default function ExampleSolutions({ 
   solutions, 
-  allSolutions, 
   bufferSolutions,
-  kSolutions, 
   onAddExample, 
-  loading, 
   isFullSolutionSet, 
-  isRefillingBuffer, 
   isButtonDisabled 
 }: ExampleSolutionsProps) {
   if (!solutions || solutions.length === 0) return null;

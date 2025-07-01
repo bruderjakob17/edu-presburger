@@ -23,7 +23,6 @@ export default function Home() {
   const [variables, setVariables] = useState<string[]>([]);
   const [originalVariables, setOriginalVariables] = useState<string[]>([]);
   const [currentVariables, setCurrentVariables] = useState<string[]>([]);
-  const [exampleSolutions, setExampleSolutions] = useState<ExampleSolution[]>([]);
   const [allSolutions, setAllSolutions] = useState<ExampleSolution[]>([]);
   const [displayedSolutions, setDisplayedSolutions] = useState<ExampleSolution[]>([]);
   const [bufferSolutions, setBufferSolutions] = useState<ExampleSolution[]>([]);
@@ -35,7 +34,6 @@ export default function Home() {
   const [numStates, setNumStates] = useState<number>(0);
   const [numFinalStates, setNumFinalStates] = useState<number>(0);
   const [requestedSolutions, setRequestedSolutions] = useState<number>(0);
-  const [requestedK, setRequestedK] = useState<number>(0);
   const scrollPositionRef = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const allSolutionsRef = useRef<ExampleSolution[]>([]);
@@ -77,7 +75,7 @@ export default function Home() {
     setError(null);
     setDotString(undefined);
     setMataString(undefined);
-    setExampleSolutions([]);
+    setAllSolutions([]);
     try {
       const requestBody = {
         formula: (formulaOverride ?? input).trim(),
@@ -119,7 +117,6 @@ export default function Home() {
         setBufferSolutions((data.example_solutions || []).slice(3));
         setIsFullSolutionSet(false);
       }
-      setExampleSolutions(data.example_solutions || []);
       setNumStates(data.num_states);
       setNumFinalStates(data.num_final_states);
     } catch (err) {
@@ -191,7 +188,7 @@ export default function Home() {
       console.log('Setting full solution set to:', data.solution_set_full);
       setIsFullSolutionSet(data.solution_set_full || false);
       
-      setExampleSolutions(data.example_solutions || []);
+      setAllSolutions(data.example_solutions || []);
       setIsRefillingBuffer(false);
       console.log('Refill completed, isRefillingBuffer set to false');
     } catch (err) {
@@ -267,8 +264,6 @@ export default function Home() {
         const currentDisplayed = displayedSolutions.length + 1; // +1 for the solution we just added
         const nextK = currentDisplayed + 9; // displayed + 4 remaining + 5 new
         setRequestedSolutions(5); // We're requesting 5 new solutions
-        setRequestedK(nextK); // We're requesting k total solutions
-        console.log('Requesting update with k =', nextK, 'for 5 new solutions');
         setKSolutions(nextK);
         await handleUpdate(currentVariables, nextK);
       } else {
@@ -277,10 +272,6 @@ export default function Home() {
     } else {
       console.log('Buffer is empty, no more solutions to display');
     }
-  };
-
-  const getBufferSize = () => {
-    return bufferSolutions.length;
   };
 
   const isButtonDisabled = () => {
@@ -473,13 +464,9 @@ CONST: /[0-9]+/
           <>
             <ExampleSolutions
               solutions={displayedSolutions}
-              allSolutions={allSolutions}
               bufferSolutions={bufferSolutions}
-              kSolutions={kSolutions}
               onAddExample={handleAddExample}
-              loading={loading}
               isFullSolutionSet={isFullSolutionSet}
-              isRefillingBuffer={isRefillingBuffer}
               isButtonDisabled={isButtonDisabled()}
             />
             

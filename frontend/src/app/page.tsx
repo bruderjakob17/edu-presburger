@@ -23,7 +23,6 @@ export default function Home() {
   const [variables, setVariables] = useState<string[]>([]);
   const [originalVariables, setOriginalVariables] = useState<string[]>([]);
   const [currentVariables, setCurrentVariables] = useState<string[]>([]);
-  const [allSolutions, setAllSolutions] = useState<ExampleSolution[]>([]);
   const [displayedSolutions, setDisplayedSolutions] = useState<ExampleSolution[]>([]);
   const [bufferSolutions, setBufferSolutions] = useState<ExampleSolution[]>([]);
   const [isFullSolutionSet, setIsFullSolutionSet] = useState(false);
@@ -75,7 +74,6 @@ export default function Home() {
     setError(null);
     setDotString(undefined);
     setMataString(undefined);
-    setAllSolutions([]);
     try {
       const requestBody = {
         formula: (formulaOverride ?? input).trim(),
@@ -106,7 +104,6 @@ export default function Home() {
       setVariables(data.variables || []);
       setOriginalVariables(data.variables || []);
       setCurrentVariables(data.variables || []);
-      setAllSolutions(data.example_solutions || []);
       allSolutionsRef.current = data.example_solutions || [];
       if ((data.example_solutions || []).length < 9) {
         setDisplayedSolutions(data.example_solutions || []); // Show all if full set
@@ -188,7 +185,6 @@ export default function Home() {
       console.log('Setting full solution set to:', data.solution_set_full);
       setIsFullSolutionSet(data.solution_set_full || false);
       
-      setAllSolutions(data.example_solutions || []);
       setIsRefillingBuffer(false);
       console.log('Refill completed, isRefillingBuffer set to false');
     } catch (err) {

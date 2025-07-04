@@ -66,6 +66,10 @@ postPatch = ''
     dontUseCmakeConfigure = true;
     dontUseCmakeBuild     = true;
 
+    nativeBuildInputs = [
+     pkgs.python3Packages.setuptools
+     pkgs.python3Packages.wheel
+    ];
     propagatedBuildInputs = [
       pkgs.python3Packages.lark
       pkgs.python3Packages.graphviz

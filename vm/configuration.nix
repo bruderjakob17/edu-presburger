@@ -8,30 +8,41 @@
 }:
 
 let
-
     libmataPy = pkgs.python3Packages.buildPythonPackage rec {
-    pname   = "libmata";
-    version = "2025-04-15";          # any tag; it's “unstable” anyway
-    format  = "pyproject";
+  pname   = "libmata";
+  version = "unstable-2025-04-15";
+  format  = "pyproject";
 
-    # The exact commit you already pinned in pyproject.toml
-    src = pkgs.fetchFromGitHub {
-      owner = "verifit";
-      repo  = "mata";
-      rev   = "56a4259c64d619906acd2ac2aed2b3cd26cad345";
-      # Run `nix hash --type sha256 --base32 .` once to fill this:
-      hash  = "sha256-dxqrzaSs1oYD5j/nuMH21b5C16dfoOEX0sxfNhgH0WU=";
-    };
-
-    subPackages = [ "bindings/python" ];
-
-    nativeBuildInputs = [
-      pkgs.cmake pkgs.pkg-config pkgs.swig
-    ];
-    propagatedBuildInputs = [
-      pkgs.graphviz          # Mata calls `dot` at run-time
-    ];
+  # Entire Mata repo, pinned to your commit
+  src = pkgs.fetchFromGitHub {
+    owner = "verifit";
+    repo  = "mata";
+    rev   = "56a4259c64d619906acd2ac2aed2b3cd26cad345";
+    # run once: nix hash fetchFromGitHub verifit mata 56a4…  → paste result
+    hash  = "sha256-dxqrzaSs1oYD5j/nuMH21b5C16dfoOEX0sxfNhgH0WU=";
   };
+
+  /*––– 1. Build only the Python bindings sub-folder –––*/
+  postUnpack = ''
+    # focus on bindings/python as the new sourceRoot
+    sourceRoot="$sourceRoot/bindings/python"
+  '';
+
+  /*––– 2. Tell the generic builder *not* to call cmake itself –––*/
+  dontUseCmakeConfigure = true;
+  dontUseCmakeBuild     = true;
+
+  /*––– 3. Tools the wheel’s own build backend will call –––*/
+  nativeBuildInputs = [
+    pkgs.cmake          # scikit-build / pyproject will run this internally
+    pkgs.pkg-config
+    pkgs.swig
+  ];
+
+  propagatedBuildInputs = [
+    pkgs.graphviz        # runtime needs `dot`
+  ];
+};
 
   presburgerConverter = pkgs.python3Packages.buildPythonPackage rec {
     pname   = "presburger_converter";

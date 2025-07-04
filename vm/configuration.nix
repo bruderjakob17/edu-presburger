@@ -34,7 +34,9 @@ let
 
   /*––– 3. Tools the wheel’s own build backend will call –––*/
   nativeBuildInputs = [
-    pkgs.cmake          # scikit-build / pyproject will run this internally
+    pkgs.python3Packages.setuptools
+    pkgs.python3Packages.wheel
+    pkgs.cmake
     pkgs.pkg-config
     pkgs.swig
   ];

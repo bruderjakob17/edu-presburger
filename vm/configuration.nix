@@ -20,7 +20,7 @@ let
       repo  = "mata";
       rev   = "56a4259c64d619906acd2ac2aed2b3cd26cad345";
       # Run `nix hash --type sha256 --base32 .` once to fill this:
-      hash  = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+      hash  = "sha256-dxqrzaSs1oYD5j/nuMH21b5C16dfoOEX0sxfNhgH0WU=";
     };
 
     subPackages = [ "bindings/python" ];

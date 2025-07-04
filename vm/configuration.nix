@@ -121,6 +121,7 @@ in
 
     serviceConfig = {
       WorkingDirectory = "${appDir}/backend";
+      Environment = "PYTHONPATH=${appDir}/converter";
       ExecStart =
         "${backendEnv}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
       Restart = "always";

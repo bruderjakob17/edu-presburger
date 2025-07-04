@@ -40,6 +40,7 @@ let
     pkgs.cmake
     pkgs.pkg-config
     pkgs.swig
+    pkgs.git
   ];
 
   propagatedBuildInputs = [

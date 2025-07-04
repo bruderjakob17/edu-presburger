@@ -22,17 +22,20 @@ let
     hash  = "sha256-dxqrzaSs1oYD5j/nuMH21b5C16dfoOEX0sxfNhgH0WU=";
   };
 
-  /*––– 1. Build only the Python bindings sub-folder –––*/
   postUnpack = ''
-    # focus on bindings/python as the new sourceRoot
     sourceRoot="$sourceRoot/bindings/python"
   '';
 
-  /*––– 2. Tell the generic builder *not* to call cmake itself –––*/
+
+  postPatch = ''
+    # project_dir inside setup.py = $sourceRoot/../..
+    echo "1.0.0" > "$sourceRoot/../../VERSION"
+  '';
+
+
   dontUseCmakeConfigure = true;
   dontUseCmakeBuild     = true;
 
-  /*––– 3. Tools the wheel’s own build backend will call –––*/
   nativeBuildInputs = [
     pkgs.python3Packages.setuptools
     pkgs.python3Packages.wheel

@@ -1,30 +1,28 @@
 { config
 , pkgs
 , modulesPath
-, frontendPath      # ← injected by flake.nix
+, frontendPath      # ← injected from flake.nix
 , backendPath
 , converterPath
 , ... }:
 
 let
-  # Where the app lives inside the VM
-  appDir = "/etc/opt-app";
+  appDir = "/etc/opt-app";   # everything lives under /etc/opt-app inside the VM
 in
 {
-  # ── Build a VirtualBox image ───────────────────────────────────────
+  # Build a VirtualBox image
   imports = [ "${modulesPath}/virtualisation/virtualbox-image.nix" ];
 
-  # Disable firewall for demo convenience
+  # --- Basic networking / user -------------------------------------------------
   networking.firewall.enable = false;
 
-  # Simple user
   users.users.user = {
     isNormalUser = true;
-    password     = "user";            # change if you like
+    password     = "user";              # change if you like
     extraGroups  = [ "wheel" "networkmanager" ];
   };
 
-  # ── Nginx: static site + proxy /api -> FastAPI ─────────────────────
+  # --- Nginx: static site + proxy /api -> FastAPI ------------------------------
   services.nginx.enable = true;
   services.nginx.virtualHosts."_" = {
     root = "${appDir}/frontend";
@@ -41,29 +39,29 @@ in
     };
   };
 
-  # ── FastAPI backend (runs under systemd) ───────────────────────────
+  # --- FastAPI backend (systemd service) ---------------------------------------
   systemd.services.backend = {
-    description  = "FastAPI backend";
-    after        = [ "network.target" ];
-    wantedBy     = [ "multi-user.target" ];
+    description = "FastAPI backend";
+    after       = [ "network.target" ];
+    wantedBy    = [ "multi-user.target" ];
     serviceConfig = {
       WorkingDirectory = "${appDir}/backend";
       ExecStart        = "${pkgs.python3.withPackages (ps: with ps; [
                             fastapi uvicorn networkx matplotlib lxml numpy
                           ])}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
-      Restart          = "always";
+      Restart = "always";
     };
   };
 
-  # ── Copy project parts into the VM closure ─────────────────────────
+  # --- Copy project artefacts into the image -----------------------------------
   environment.etc."opt-app/frontend".source  = frontendPath;
   environment.etc."opt-app/backend".source   = backendPath;
   environment.etc."opt-app/converter".source = converterPath;
 
-  # Optional: SSH into the VM
+  # SSH (optional)
   services.openssh.enable = true;
 
-  # VM resources / name
+  # VirtualBox resources
   virtualbox.memorySize = 4096;
   virtualbox.vmName     = "presburger-vm";
 }

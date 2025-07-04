@@ -4,10 +4,37 @@
 , frontendPath
 , backendPath
 , converterPath
-, ... }:
+, ...
+}:
 
 let
-  appDir = "/etc/opt-app";  # all app files live here inside the VM
+
+  presburgerConverter = pkgs.python3Packages.buildPythonPackage rec {
+    pname   = "presburger_converter";
+    version = "0.1.0";          # or leave = "unstable-2025-07-04"
+
+    # Tell Nix it's a PEP-517 (pyproject) build, no setup.py
+    format = "pyproject";
+    src    = converterPath;
+
+    # Converter’s pyproject lists lark, graphviz, libmata@Git …
+    # libmata’s build needs CMake, SWIG, etc.  Add them here.
+    nativeBuildInputs = [ pkgs.cmake pkgs.pkg-config pkgs.swig ];
+    propagatedBuildInputs = [ pkgs.graphviz ];  # runtime needs `dot`
+
+    # If the Git checkout in pyproject.toml fetches sub-dir bindings,
+    # buildPythonPackage will handle it automatically.
+  };
+
+  # ──────────────────────────────────────────────────────────────────────
+  # 2. One Python interpreter for the backend *including* the converter
+  # ──────────────────────────────────────────────────────────────────────
+  backendEnv = pkgs.python3.withPackages (ps: with ps; [
+    fastapi uvicorn networkx matplotlib lxml numpy pydantic lark
+    presburgerConverter     # ← pulls in lark, graphviz, libmata, …
+  ]);
+
+  appDir = "/etc/opt-app";
 in
 {
   imports = [ "${modulesPath}/virtualisation/virtualbox-image.nix" ];
@@ -20,7 +47,7 @@ in
     extraGroups  = [ "wheel" "networkmanager" ];
   };
 
-  # ---------- Nginx: static site + proxy /api -> FastAPI -----------------
+  # ─────────── Nginx: static site + /api proxy ─────────────────────────
   services.nginx.enable = true;
   services.nginx.virtualHosts."_" = {
     root = "${appDir}/frontend";
@@ -37,24 +64,27 @@ in
     };
   };
 
-  # ---------- FastAPI backend (systemd service) --------------------------
+  # ─────────── FastAPI backend service ─────────────────────────────────
   systemd.services.backend = {
     description = "FastAPI backend";
     after       = [ "network.target" ];
     wantedBy    = [ "multi-user.target" ];
+
     serviceConfig = {
       WorkingDirectory = "${appDir}/backend";
-      ExecStart = "${pkgs.python3.withPackages (ps: with ps; [
-                    fastapi uvicorn networkx matplotlib lxml numpy
-                  ])}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
+      ExecStart =
+        "${backendEnv}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
       Restart = "always";
     };
   };
 
-  # ---------- Copy artefacts into the image ------------------------------
+  # ─────────── Copy artefacts into the VM image ────────────────────────
   environment.etc."opt-app/frontend".source  = frontendPath;
   environment.etc."opt-app/backend".source   = backendPath;
   environment.etc."opt-app/converter".source = converterPath;
+
+  # Converter calls the `dot` binary → make it available system-wide
+  environment.systemPackages = [ pkgs.graphviz ];
 
   services.openssh.enable = true;
 

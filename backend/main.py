@@ -6,13 +6,10 @@ from pydantic import BaseModel
 from lark import UnexpectedInput
 from typing import List
 from presburger_converter import formula_to_aut
-from fastapi.middleware.cors import CORSMiddleware
 
-from presburger_converter.automaton import build_automaton
 from presburger_converter.solutions import find_example_solutions
 from presburger_converter.automaton.mata_io import nfa_to_mata, nfa_from_mata
 from presburger_converter.viz import aut_to_dot
-import libmata.nfa.nfa as mata_nfa
 
 app = FastAPI()
 

@@ -36,6 +36,7 @@ let
   nativeBuildInputs = [
     pkgs.python3Packages.setuptools
     pkgs.python3Packages.wheel
+    pkgs.python3Packages.cython
     pkgs.cmake
     pkgs.pkg-config
     pkgs.swig

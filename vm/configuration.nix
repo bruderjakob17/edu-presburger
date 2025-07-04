@@ -23,8 +23,10 @@ let
   };
 
   postUnpack = ''
-    sourceRoot="$sourceRoot/bindings/python"
-  '';
+  # Source root will become bindings/python, so go one level above now
+  echo "1.0.0" > "$sourceRoot/VERSION"
+  sourceRoot="$sourceRoot/bindings/python"
+'';
 
 
   postPatch = ''

@@ -22,17 +22,15 @@ let
     hash  = "sha256-dxqrzaSs1oYD5j/nuMH21b5C16dfoOEX0sxfNhgH0WU=";
   };
 
-  postUnpack = ''
-  # Source root will become bindings/python, so go one level above now
-  echo "1.0.0" > "$sourceRoot/VERSION"
+postUnpack = ''
+  # Narrow the build root to bindings/python
   sourceRoot="$sourceRoot/bindings/python"
 '';
 
-
-  postPatch = ''
-    # project_dir inside setup.py = $sourceRoot/../..
-    echo "1.0.0" > "$sourceRoot/../../VERSION"
-  '';
+postPatch = ''
+  # setup.py expects ../../VERSION relative to bindings/python
+  echo "1.0.0" > ../../VERSION
+'';
 
 
   dontUseCmakeConfigure = true;

@@ -1,28 +1,26 @@
 { config
 , pkgs
 , modulesPath
-, frontendPath      # ← injected from flake.nix
+, frontendPath
 , backendPath
 , converterPath
 , ... }:
 
 let
-  appDir = "/etc/opt-app";   # everything lives under /etc/opt-app inside the VM
+  appDir = "/etc/opt-app";  # all app files live here inside the VM
 in
 {
-  # Build a VirtualBox image
   imports = [ "${modulesPath}/virtualisation/virtualbox-image.nix" ];
 
-  # --- Basic networking / user -------------------------------------------------
   networking.firewall.enable = false;
 
   users.users.user = {
     isNormalUser = true;
-    password     = "user";              # change if you like
+    password     = "user";
     extraGroups  = [ "wheel" "networkmanager" ];
   };
 
-  # --- Nginx: static site + proxy /api -> FastAPI ------------------------------
+  # ---------- Nginx: static site + proxy /api -> FastAPI -----------------
   services.nginx.enable = true;
   services.nginx.virtualHosts."_" = {
     root = "${appDir}/frontend";
@@ -39,29 +37,27 @@ in
     };
   };
 
-  # --- FastAPI backend (systemd service) ---------------------------------------
+  # ---------- FastAPI backend (systemd service) --------------------------
   systemd.services.backend = {
     description = "FastAPI backend";
     after       = [ "network.target" ];
     wantedBy    = [ "multi-user.target" ];
     serviceConfig = {
       WorkingDirectory = "${appDir}/backend";
-      ExecStart        = "${pkgs.python3.withPackages (ps: with ps; [
-                            fastapi uvicorn networkx matplotlib lxml numpy
-                          ])}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
+      ExecStart = "${pkgs.python3.withPackages (ps: with ps; [
+                    fastapi uvicorn networkx matplotlib lxml numpy
+                  ])}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
       Restart = "always";
     };
   };
 
-  # --- Copy project artefacts into the image -----------------------------------
+  # ---------- Copy artefacts into the image ------------------------------
   environment.etc."opt-app/frontend".source  = frontendPath;
   environment.etc."opt-app/backend".source   = backendPath;
   environment.etc."opt-app/converter".source = converterPath;
 
-  # SSH (optional)
   services.openssh.enable = true;
 
-  # VirtualBox resources
   virtualbox.memorySize = 4096;
-  virtualbox.vmName     = "presburger-vm";
+  virtualbox.vmName     = "presburger-to-automata-vm";
 }

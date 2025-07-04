@@ -1,5 +1,5 @@
 {
-  description = "Presburger VM (Next.js + FastAPI + converter)";
+  description = "Presburger to Automata Converter VM";
 
   inputs = {
     nixpkgs     .url = "github:NixOS/nixpkgs/nixos-24.05";
@@ -11,33 +11,30 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        # ── 1  Build the static Next.js export inside Nix ───────────
-        frontend = pkgs.buildNpmPackage {
-          pname       = "frontend";
-          version     = "0.1.0";
-          src         = ../frontend;              # ← relative to vm/flake.nix
-          npmDepsHash = "sha256-MURv5TIcfqa++/cTkRzPgrEPCdaG0DS7YVHBAG4zlVo=";
-          installPhase = ''
-            runHook preInstall
-            next build
-            next export -o $out               # produces static site
-            runHook postInstall
-          '';
-          NODE_ENV = "production";
+        # ── 1 Copy artefacts into the Nix store ──────────────────────────
+        frontendOut = pkgs.symlinkJoin {
+          name  = "frontend-out";
+          paths = [ ../frontend/out ];          # <-- pre-built static site
         };
 
-        # ── 2  Copy back-end & converter sources into the store ─────
-        backendSrc   = pkgs.symlinkJoin { name = "backend-src";  paths = [ ../backend ]; };
-        converterSrc = pkgs.symlinkJoin { name = "converter";    paths = [ ../presburger_converter ]; };
+        backendSrc = pkgs.symlinkJoin {
+          name  = "backend-src";
+          paths = [ ../backend ];
+        };
 
-        # ── 3  VM definition, injecting paths via _module.args ──────
+        converterSrc = pkgs.symlinkJoin {
+          name  = "converter";
+          paths = [ ../presburger_converter ];
+        };
+
+        # ── 2 Define the VM, injecting paths via _module.args ────────────
         vmConfig = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./configuration.nix
             ({ ... }: {
               _module.args = {
-                frontendPath  = frontend;
+                frontendPath  = frontendOut;
                 backendPath   = backendSrc;
                 converterPath = converterSrc;
               };
@@ -45,15 +42,15 @@
           ];
         };
       in {
-        # Build targets you can call with `nix build`
+        # `nix build .#vm` produces your .ova
         packages = {
-          frontend  = frontend;
+          frontend  = frontendOut;          # optional convenience outputs
           backend   = backendSrc;
           converter = converterSrc;
           vm        = vmConfig.config.system.build.virtualBoxOVA;
         };
 
-        # Optional: nixos-rebuild convenience
+        # optional: nixos-rebuild convenience
         nixosConfigurations.vm = vmConfig;
       });
 }

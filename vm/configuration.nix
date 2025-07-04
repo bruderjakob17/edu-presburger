@@ -55,6 +55,7 @@ postPatch = ''
 ]) ++ [
   pkgs.graphviz
 ];
+};
 
   presburgerConverter = pkgs.python3Packages.buildPythonPackage rec {
     pname   = "presburger_converter";

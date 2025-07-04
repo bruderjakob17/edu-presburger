@@ -9,7 +9,7 @@ readme = "README.md" # If you have a README.md, include it
 requires-python = ">=3.8" # Adjust this based on your minimum Python version
 
 dependencies = [
-  "lark==1.2.2",
+  "lark>=1.1",
   "graphviz==0.20.3",
   # For the git dependency, we list it here directly.
   # Pip will handle the Git URL from pyproject.toml when installing.

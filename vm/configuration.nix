@@ -46,15 +46,15 @@ postPatch = ''
     pkgs.git
   ];
 
-  propagatedBuildInputs = with python3Packages; [
-  Cython
+  propagatedBuildInputs = (with pkgs.python3Packages; [
   tabulate
   ipython
   pandas
   networkx
   graphviz
+]) ++ [
+  pkgs.graphviz
 ];
-};
 
   presburgerConverter = pkgs.python3Packages.buildPythonPackage rec {
     pname   = "presburger_converter";

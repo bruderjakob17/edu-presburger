@@ -43,7 +43,7 @@ let
     dontUseCmakeBuild     = true;
 
     propagatedBuildInputs = [
-      pkgs.python3Packages.lark-parser
+      pkgs.python3Packages.lark
       pkgs.python3Packages.graphviz
       libmataPy                            # ← use the wheel we just built
     ];

@@ -16,7 +16,7 @@
           pname       = "frontend";
           version     = "0.1.0";
           src         = ../frontend;              # ← relative to vm/flake.nix
-          npmDepsHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+          npmDepsHash = "sha256-MURv5TIcfqa++/cTkRzPgrEPCdaG0DS7YVHBAG4zlVo=";
           installPhase = ''
             runHook preInstall
             next build

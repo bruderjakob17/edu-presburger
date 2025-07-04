@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.6",
     "@hpcc-js/wasm": "^2.22.4",
     "@types/cytoscape": "^3.21.9",
     "@types/dagre": "^0.7.52",
@@ -18,8 +19,8 @@
     "dagre": "^0.8.5",
     "next": "15.3.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-beautiful-dnd": "^13.1.1"
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

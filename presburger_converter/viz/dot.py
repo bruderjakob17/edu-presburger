@@ -2,6 +2,8 @@ import re
 from collections import defaultdict
 from typing import List, Tuple
 from collections import deque
+
+from presburger_converter.automaton.automaton_builder import decode
 from presburger_converter.pipeline import formula_to_aut
 
 ###############################################################################
@@ -175,20 +177,67 @@ def convert_int_labels_to_bitstrings(dot: str, width: int) -> str:
 
 
 def optimize_dot_start_arrow(dot_string: str) -> str:
-    # Ensure layout settings are preserved
-    # Remove existing i0 node + arrow if present
-    dot_string = re.sub(r'node\s*\[shape=none, label=""\];\s*i0\s*->\s*0\s*;', '', dot_string)
-
-    # Add optimized start node and arrow
-    start_arrow = """
-    i0 [shape=point, width=0.01, height=0.01, style=invis];
-    i0 -> 0 [arrowhead=normal, style=solid, weight=0];
     """
+    Consolidate all  iX -> N  start arrows into a single point  i0.
+    Works after your nodes have been renamed/decoded.
+    """
+    # ------------------------------------------------------------------
+    # 1.  Find every  i<number> -> target  edge and collect the targets
+    # ------------------------------------------------------------------
+    # captures: i123   ->   -4   [label="..."];
+    target_pat = re.compile(r'i\d+\s*->\s*([\-]?\d+)\s*(?:\[|;)')
+    targets: List[str] = target_pat.findall(dot_string)
 
-    # Find last closing brace to insert before it
-    dot_string = dot_string.strip()
+    if not targets:               # fallback
+        targets = ['0']
+
+    # ------------------------------------------------------------------
+    # 2.  Strip *all* old invisible-node declarations and arrows
+    # ------------------------------------------------------------------
+    # a) helper line:  node [shape=none, label=""];
+    dot_string = re.sub(
+        r'\s*node\s*\[\s*shape\s*=\s*none\s*,\s*label\s*=\s*""\s*\]\s*;\s*',
+        '',
+        dot_string,
+        flags=re.IGNORECASE,
+    )
+
+    # b) any  iX [shape=point ...];
+    dot_string = re.sub(
+        r'\s*i\d+\s*\[.*?shape\s*=\s*point.*?];\s*',
+        '',
+        dot_string,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    # c) any  iX -> N   arrow (with or without attributes)
+    dot_string = re.sub(
+        r'\s*i\d+\s*->\s*[\-]?\d+\s*(?:\[.*?])?\s*;\s*',
+        '',
+        dot_string,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    # ------------------------------------------------------------------
+    # 3.  Build the new, consolidated start node block
+    # ------------------------------------------------------------------
+    start_block = [
+        '    i0 [shape=point, width=0.01, height=0.01, style=invis];'
+    ]
+    for tgt in dict.fromkeys(targets):          # keep original order, no dups
+        start_block.append(
+            f'    i0 -> {tgt} [arrowhead=normal, style=solid, weight=0];'
+        )
+    start_block_str = "\n".join(start_block) + "\n"
+
+    # ------------------------------------------------------------------
+    # 4.  Insert the block right before the final “}”
+    # ------------------------------------------------------------------
+    dot_string = dot_string.rstrip()
     if dot_string.endswith('}'):
-        dot_string = dot_string[:-1] + start_arrow + "\n}"
+        dot_string = dot_string[:-1] + start_block_str + "}\n"
+    else:                                       # should not happen, but be safe
+        dot_string += "\n" + start_block_str
 
     return dot_string
 
@@ -357,17 +406,13 @@ def decide_rankdir_from_structure(dot_string):
     else:
         return "LR"  # Wide or balanced → horizontal
 
-def add_rankdir_auto(dot: str) -> str:
+def add_rankdir_auto(dot: str, node_count) -> str:
     """
     Inspects the bounding box and node count in the DOT string and inserts:
     - rankdir=LR or TB depending on shape
     - ratio=fill only if node count exceeds a threshold
     """
     lines = dot.strip().splitlines()
-
-    # 2. Count nodes
-    node_lines = [line for line in lines if re.match(r'^\s*\d+\s+\[', line)]
-    node_count = len(node_lines)
 
     # 3. Decide layout direction
     # 3. Decide layout direction
@@ -379,14 +424,16 @@ def add_rankdir_auto(dot: str) -> str:
     ratio = "fill" if node_count > 10 else "auto"
     rankdir = "LR" if node_count < 10 else decide_rankdir_from_structure(dot)
     padding = "0"
-    if node_count <= 3:
+    if node_count <= 10:
+        padding = "0.8"
+    if node_count <= 5:
         padding = "1.2"
     #rankdir = "LR"
     # 4. Insert layout instructions
     for i, line in enumerate(lines):
         if line.strip().startswith("digraph"):
             # Insert after "digraph G {"
-            if node_count < 4:
+            if node_count <= 10:
                 insert_lines = [
                     f'layout={layout};',
                     f'rankdir={rankdir};',
@@ -409,11 +456,52 @@ def add_rankdir_auto(dot: str) -> str:
 
     return "\n".join(lines)
 
+def strip_state_names(dot: str) -> str:
+    pattern = r'node\s*\[\s*shape\s*=\s*circle\s*\]\s*;'
+    return re.sub(pattern, 'node [shape=circle, label=""];', dot, count=1)
+
+def drop_plain_circle_nodes(dot: str) -> str:
+    pattern = r'^\s*\d+\s*\[\s*shape\s*=\s*circle\s*\]\s*;\s*$'
+    # keep every line that does *not* match the pattern
+    return "\n".join(
+        line for line in dot.splitlines()
+        if not re.match(pattern, line)
+    )
 
 
-def aut_to_dot(aut, variable_order, new_variable_order = None):
+# ------------------------------------------------------------------
+def rewrite_nodes_with_decode(dot: str) -> str:
+    """
+    Apply decode(k) to every positive integer token that is
+    * outside double quotes,
+    * not immediately preceded/followed by a letter,
+    * not preceded by a minus sign.
+
+    This handles node declarations, transitions, and “iN → N” start edges.
+    """
+    # regex for a standalone positive integer (no letter, no minus)
+    num_pat = re.compile(r'(?<![A-Za-z\-])(\d+)(?![A-Za-z])')
+
+    def repl(match: re.Match) -> str:
+        return str(decode(int(match.group(1))))
+
+    def transform(chunk: str) -> str:
+        # apply replacement only to chunks *outside* quotes
+        return num_pat.sub(repl, chunk)
+
+    # split line by double quotes so numbers inside labels stay intact
+    parts = re.split(r'(".*?")', dot)
+    for i in range(0, len(parts), 2):          # even indices → outside quotes
+        parts[i] = transform(parts[i])
+    return "".join(parts)
+
+
+def aut_to_dot(aut, variable_order, new_variable_order = None, display_labels = True, display_atomic_construction = False):
     dot = aut.to_dot_str()
+    node_count = len(aut.get_reachable_states())
+    print(dot)
     dot = convert_int_labels_to_bitstrings(dot, len(variable_order))
+    print(dot)
     if new_variable_order:
         if set(new_variable_order) != set(variable_order):
             raise AssertionError(
@@ -425,8 +513,16 @@ def aut_to_dot(aut, variable_order, new_variable_order = None):
             for old_idx, var in enumerate(variable_order)
         }
         dot = reorder_bitstring_labels(dot, mapping, len(variable_order))
+    print(dot)
+    if not display_labels:
+        dot = strip_state_names(dot)
+    if display_atomic_construction:
+        dot = drop_plain_circle_nodes(dot)
+        dot = rewrite_nodes_with_decode(dot)
+    print(dot)
     dot = merge_parallel_edges(dot)
     dot = simplify_automaton_labels(dot)
-    dot = add_rankdir_auto(dot)
+    dot = add_rankdir_auto(dot, node_count)
     dot = optimize_dot_start_arrow(dot)
+    print(dot)
     return dot

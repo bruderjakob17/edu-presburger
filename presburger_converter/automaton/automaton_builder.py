@@ -403,7 +403,7 @@ def count_tree(node):
     #  Walk *left − right* to get everything on the same side.
     helper(node.left, 1)
     helper(node.right, -1)
-    print(f"count_tree: constant={constant}, coeffs={coeffs}")
+    #print(f"count_tree: constant={constant}, coeffs={coeffs}")
     return constant, coeffs
 
 
@@ -431,3 +431,4 @@ def decode(k):
         return k // 2
     else:
         return (k-1) // -2
+

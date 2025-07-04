@@ -14,6 +14,25 @@ type ExampleSolution = {
   var_ints: { [key: string]: number };
 };
 
+type ReorderRequestBody = {
+  aut: string;
+  k_solutions: number;
+  original_variable_order: string[];
+  new_variable_order: string[];
+  display_labels: boolean;
+  display_atomic_construction: boolean;
+  formula?: string;
+};
+
+type SolutionsRequestBody = {
+  aut: string;
+  k_solutions: number;
+  original_variable_order: string[];
+  new_variable_order: string[];
+  display_atomic_construction: boolean;
+  formula?: string;
+};
+
 export default function Home() {
   const [input, setInput] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -32,6 +51,8 @@ export default function Home() {
   const [kSolutions, setKSolutions] = useState(3);
   const [numStates, setNumStates] = useState<number>(0);
   const [numFinalStates, setNumFinalStates] = useState<number>(0);
+  const [displayLabels, setDisplayLabels] = useState<boolean>(true);
+  const [displayAtomicConstruction, setDisplayAtomicConstruction] = useState<boolean>(false);
   const [requestedSolutions, setRequestedSolutions] = useState<number>(0);
   const scrollPositionRef = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -74,9 +95,14 @@ export default function Home() {
     setError(null);
     setDotString(undefined);
     setMataString(undefined);
+    setBufferSolutions([]);
+    setDisplayedSolutions([]);
+    setIsFullSolutionSet(false);
     try {
       const requestBody = {
         formula: (formulaOverride ?? input).trim(),
+        display_labels: displayLabels,
+        display_atomic_construction: displayAtomicConstruction,
       };
 
       const response = await fetch('/api/automaton/dot', {
@@ -127,20 +153,30 @@ export default function Home() {
     }
   };
 
-  const handleUpdate = async (newVariableOrder: string[], kOverride?: number) => {
+  const handleReorder = async (newVariableOrder: string[]) => {
     if (!mataString) return;
     
     setLoading(true);
     setError(null);
     try {
-      const requestBody = {
+      const numDisplayed = displayedSolutions.length;
+      const numBuffered = bufferSolutions.length;
+      const totalNeeded = numDisplayed + numBuffered;
+      const requestBody: ReorderRequestBody = {
         aut: mataString,
-        k_solutions: kOverride ?? kSolutions,
+        k_solutions: totalNeeded,
         original_variable_order: originalVariables,
         new_variable_order: newVariableOrder,
+        display_labels: displayLabels,
+        display_atomic_construction: displayAtomicConstruction,
       };
 
-      const response = await fetch('/api/automaton/update', {
+      // Add formula to request if display atomic construction is enabled
+      if (displayAtomicConstruction) {
+        requestBody.formula = input.trim();
+      }
+
+      const response = await fetch('/api/automaton/reorder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -159,17 +195,85 @@ export default function Home() {
       }
 
       const data = await response.json();
-      console.log('Update API response:', data);
+      console.log('Reorder API response:', data);
+      
+      // Update DOT string if provided
       if (data.dot !== null && data.dot !== undefined) {
         setDotString(data.dot);
       }
       
+      // Replace all solutions with reordered ones, preserving the number of displayed and buffered solutions
+      const reorderedSolutions = data.reordered_solutions || [];
+      const newDisplayed = reorderedSolutions.slice(0, numDisplayed);
+      const newBuffer = reorderedSolutions.slice(numDisplayed, totalNeeded);
+
+      setDisplayedSolutions(newDisplayed);
+      setBufferSolutions(newBuffer);
+
+      // If the backend returned fewer than needed, mark as full set
+      if (reorderedSolutions.length <= numDisplayed) {
+        setIsFullSolutionSet(true);
+      } else {
+        setIsFullSolutionSet(false);
+      }
+      
+    } catch (err) {
+      const errorMsg = (err instanceof Error ? err.message : 'An error occurred')
+        .replace(/\t/g, '    ')
+        .replace(/ /g, '\u00A0');
+      console.log('Error message received:', JSON.stringify(errorMsg));
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGetSolutions = async (kOverride?: number) => {
+    if (!mataString) return;
+    
+    setLoading(true);
+    setError(null);
+    try {
+      const requestBody: SolutionsRequestBody = {
+        aut: mataString,
+        k_solutions: kOverride ?? kSolutions,
+        original_variable_order: originalVariables,
+        new_variable_order: currentVariables,
+        display_atomic_construction: displayAtomicConstruction,
+      };
+
+      // Add formula to request if display atomic construction is enabled
+      if (displayAtomicConstruction) {
+        requestBody.formula = input.trim();
+      }
+
+      const response = await fetch('/api/automaton/solutions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        const errorMsg = errorText
+          .replace(/\t/g, '    ')
+          .replace(/ /g, '\u00A0');
+        console.log('Error message received:', JSON.stringify(errorMsg));
+        setError(errorMsg);
+        return;
+      }
+
+      const data = await response.json();
+      console.log('Solutions API response:', data);
+      
       const newSolutions = data.example_solutions || [];
-      console.log('=== UPDATE RESPONSE RECEIVED ===');
+      console.log('=== SOLUTIONS RESPONSE RECEIVED ===');
       console.log('Response contains', newSolutions.length, 'new solutions');
       console.log('Solution set full:', data.solution_set_full);
       
-      // Backend now returns only the new solutions, so add them directly to buffer
+      // Add new solutions to buffer
       console.log('Adding', newSolutions.length, 'new solutions to buffer');
       
       setBufferSolutions(prev => {
@@ -216,7 +320,7 @@ export default function Home() {
 
     setCurrentVariables(newVariables);
     setDraggedIndex(null);
-    await handleUpdate(newVariables);
+    await handleReorder(newVariables);
   };
 
   const handleFormulaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -261,7 +365,7 @@ export default function Home() {
         const nextK = currentDisplayed + 9; // displayed + 4 remaining + 5 new
         setRequestedSolutions(5); // We're requesting 5 new solutions
         setKSolutions(nextK);
-        await handleUpdate(currentVariables, nextK);
+        await handleGetSolutions(nextK);
       } else {
         console.log('No refill needed, buffer size:', remainingBuffer.length);
       }
@@ -357,6 +461,33 @@ export default function Home() {
                 </button>
               </div>
             )}
+          </div>
+          
+          {/* Display Labels Toggle */}
+          <div className="flex items-center gap-2">
+            <input
+              id="display-labels-toggle"
+              type="checkbox"
+              checked={displayLabels}
+              onChange={() => setDisplayLabels((prev) => !prev)}
+              className="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out"
+            />
+            <label htmlFor="display-labels-toggle" className="text-gray-700 select-none cursor-pointer">
+              Display labels on automaton
+            </label>
+          </div>
+          {/* Display Atomic Construction Toggle */}
+          <div className="flex items-center gap-2">
+            <input
+              id="display-atomic-toggle"
+              type="checkbox"
+              checked={displayAtomicConstruction}
+              onChange={() => setDisplayAtomicConstruction((prev) => !prev)}
+              className="form-checkbox h-5 w-5 text-blue-600 transition duration-150 ease-in-out"
+            />
+            <label htmlFor="display-atomic-toggle" className="text-gray-700 select-none cursor-pointer">
+              Display atomic construction <span className="text-xs text-yellow-600">(Warning: Can result in non-minimal automaton, only works on formulas of the form s &lt;= t)</span>
+            </label>
           </div>
           
           {/* Help Section */}

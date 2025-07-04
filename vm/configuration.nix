@@ -9,30 +9,51 @@
 
 let
 
-  presburgerConverter = pkgs.python3Packages.buildPythonPackage rec {
-    pname   = "presburger_converter";
-    version = "0.1.0";          # or leave = "unstable-2025-07-04"
+    libmataPy = pkgs.python3Packages.buildPythonPackage rec {
+    pname   = "libmata";
+    version = "2025-04-15";          # any tag; it's “unstable” anyway
+    format  = "pyproject";
 
-    # Tell Nix it's a PEP-517 (pyproject) build, no setup.py
-    format = "pyproject";
-    src    = converterPath;
+    # The exact commit you already pinned in pyproject.toml
+    src = pkgs.fetchFromGitHub {
+      owner = "verifit";
+      repo  = "mata";
+      rev   = "56a4259c64d619906acd2ac2aed2b3cd26cad345";
+      # Run `nix hash --type sha256 --base32 .` once to fill this:
+      hash  = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    };
 
-    # Converter’s pyproject lists lark, graphviz, libmata@Git …
-    # libmata’s build needs CMake, SWIG, etc.  Add them here.
-    nativeBuildInputs = [ pkgs.cmake pkgs.pkg-config pkgs.swig ];
-    propagatedBuildInputs = [ pkgs.graphviz ];  # runtime needs `dot`
+    subPackages = [ "bindings/python" ];
 
-    # If the Git checkout in pyproject.toml fetches sub-dir bindings,
-    # buildPythonPackage will handle it automatically.
+    nativeBuildInputs = [
+      pkgs.cmake pkgs.pkg-config pkgs.swig
+    ];
+    propagatedBuildInputs = [
+      pkgs.graphviz          # Mata calls `dot` at run-time
+    ];
   };
 
-  # ──────────────────────────────────────────────────────────────────────
-  # 2. One Python interpreter for the backend *including* the converter
-  # ──────────────────────────────────────────────────────────────────────
+  presburgerConverter = pkgs.python3Packages.buildPythonPackage rec {
+    pname   = "presburger_converter";
+    version = "0.1.0";
+    format  = "pyproject";
+    src     = converterPath;
+
+    dontUseCmakeConfigure = true;
+    dontUseCmakeBuild     = true;
+
+    propagatedBuildInputs = [
+      pkgs.python3Packages.lark-parser
+      pkgs.python3Packages.graphviz
+      libmataPy                            # ← use the wheel we just built
+    ];
+  };
+
   backendEnv = pkgs.python3.withPackages (ps: with ps; [
     fastapi uvicorn networkx matplotlib lxml numpy pydantic lark
-    presburgerConverter     # ← pulls in lark, graphviz, libmata, …
+    presburgerConverter
   ]);
+
 
   appDir = "/etc/opt-app";
 in

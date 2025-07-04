@@ -46,9 +46,14 @@ postPatch = ''
     pkgs.git
   ];
 
-  propagatedBuildInputs = [
-    pkgs.graphviz        # runtime needs `dot`
-  ];
+  propagatedBuildInputs = with python3Packages; [
+  Cython
+  tabulate
+  ipython
+  pandas
+  networkx
+  graphviz
+];
 };
 
   presburgerConverter = pkgs.python3Packages.buildPythonPackage rec {

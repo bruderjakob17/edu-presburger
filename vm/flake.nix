@@ -23,7 +23,7 @@
         };
 
         converterSrc = pkgs.symlinkJoin {
-          name  = "converter";
+          name  = "presburger_converter";
           paths = [ ../presburger_converter ];
         };
 

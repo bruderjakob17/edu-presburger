@@ -19,6 +19,13 @@ dependencies = [
 [build-system]
 requires = ["setuptools>=61.0"] # Setuptools is a common build backend
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true          # copy non-Python files declared below
+
 [tool.setuptools.packages.find]
 where   = ["."]
 include = ["presburger_converter", "presburger_converter.*"]
+
+[tool.setuptools.package-data]
+"presburger_converter.parsing" = ["grammar.lark"]

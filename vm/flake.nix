@@ -22,9 +22,9 @@
           paths = [ ../backend ];
         };
 
-        converterSrc = pkgs.symlinkJoin {
-          name  = "presburger_converter";
-          paths = [ ../presburger_converter ];
+        converterSrc = pkgs.cleanSourceWith {
+          name = "presburger_converter-src";
+          src  = ../.;
         };
 
         # ── 2 Define the VM, injecting paths via _module.args ────────────

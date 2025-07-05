@@ -19,8 +19,8 @@ dependencies = [
 [build-system]
 requires = ["setuptools>=61.0"] # Setuptools is a common build backend
 build-backend = "setuptools.build_meta"
-
 [tool.setuptools.packages.find]
 # This tells setuptools to automatically find packages in your project.
 # Assuming your Python modules are directly under 'presburger_converter/'
 where = ["."] # Search for packages in the current directory (presburger_converter)
+include = ["presburger_converter", "presburger_converter.*"]

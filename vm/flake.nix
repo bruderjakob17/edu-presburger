@@ -22,7 +22,7 @@
           paths = [ ../backend ];
         };
 
-        converterSrc = pkgs.cleanSourceWith {
+        converterSrc = pkgs.lib.cleanSourceWith {
           name = "presburger_converter-src";
           src  = ../.;
         };

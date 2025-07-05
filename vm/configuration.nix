@@ -121,7 +121,7 @@ in
 
     serviceConfig = {
       WorkingDirectory = "${appDir}/backend";
-      Environment = "PYTHONPATH=${appDir}/converter";
+      Environment = "PYTHONPATH=${appDir}/presburger_converter";
       ExecStart =
         "${backendEnv}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
       Restart = "always";
@@ -131,7 +131,7 @@ in
   # ─────────── Copy artefacts into the VM image ────────────────────────
   environment.etc."opt-app/frontend".source  = frontendPath;
   environment.etc."opt-app/backend".source   = backendPath;
-  environment.etc."opt-app/converter".source = converterPath;
+  environment.etc."opt-app/presburger_converter".source = converterPath;
 
   # Converter calls the `dot` binary → make it available system-wide
   environment.systemPackages = [ pkgs.graphviz ];

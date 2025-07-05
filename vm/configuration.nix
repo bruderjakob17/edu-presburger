@@ -63,6 +63,12 @@ postPatch = ''
     format  = "pyproject";
     src     = converterPath;
 
+    postPatch = ''
+    if [ -d converter ]; then
+      mv converter presburger_converter
+    fi
+  '';
+
     pythonImportsCheck = [ "presburger_converter" ];
 
     dontUseCmakeConfigure = true;
@@ -123,7 +129,7 @@ in
 
     serviceConfig = {
       WorkingDirectory = "${appDir}/backend";
-      Environment = "PYTHONPATH=${appDir}/presburger_converter";
+      Environment = "PYTHONPATH";
       ExecStart =
         "${backendEnv}/bin/uvicorn main:app --host 0.0.0.0 --port 8000";
       Restart = "always";

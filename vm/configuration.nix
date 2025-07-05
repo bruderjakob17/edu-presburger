@@ -63,6 +63,8 @@ postPatch = ''
     format  = "pyproject";
     src     = converterPath;
 
+    pythonImportsCheck = [ "presburger_converter" ];
+
     dontUseCmakeConfigure = true;
     dontUseCmakeBuild     = true;
 

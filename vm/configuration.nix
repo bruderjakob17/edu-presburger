@@ -63,20 +63,6 @@ postPatch = ''
     format  = "pyproject";
     src     = converterPath;
 
-    postPatch = ''
-  # We start inside $sourceRoot (whatever its name is)
-  # If a sub-directory already *is* presburger_converter, do nothing.
-  if [ ! -d presburger_converter ] && [ -d converter ]; then
-    mv converter presburger_converter
-  fi
-
-  # Tell setuptools to include that package
-  grep -q '\[tool\.setuptools\.packages\.find\]' pyproject.toml || \
-    printf '\n[tool.setuptools.packages.find]\n' >> pyproject.toml
-  sed -i '/^\[tool\.setuptools\.packages\.find\]/a \
-  include = [“presburger_converter”, “presburger_converter.*”]’ pyproject.toml
-'';
-
     pythonImportsCheck = [ "presburger_converter" ];
 
     dontUseCmakeConfigure = true;

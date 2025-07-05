@@ -62,7 +62,7 @@ postPatch = ''
     version = "0.1.0";
     format  = "pyproject";
     src     = converterPath;
-    sourceRoot = "presburger_converter";
+    #sourceRoot = "presburger_converter";
 
     pythonImportsCheck = [ "presburger_converter" ];
 

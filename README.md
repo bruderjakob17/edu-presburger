@@ -4,7 +4,7 @@ This project contains Module that converts formulas in Presburger Arithemtic int
 If you just want to use this Module, please run to install it:
 
 ```bash
-pip install -e presburger_converter 
+pip install -e .
 ```
 
 It furthermore includes a Webapp with a Python FastAPI backend and a JavaScript frontend.
@@ -24,7 +24,7 @@ npm run dev
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install -e presburger_converter 
+pip install -e .
 pip install -r backend/requirements.txt
 uvicorn backend.main:app --host 0.0.0.0 --port 8000
 ```

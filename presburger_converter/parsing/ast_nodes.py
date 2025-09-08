@@ -78,6 +78,13 @@ class GreaterEqual:
     def __repr__(self):
         return f"({self.left} >= {self.right})"
 
+class NotEqual:
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+    def __repr__(self):
+        return f"({self.left} != {self.right})"
+
 class Exists:
     def __init__(self, var, formula):
         self.var = var

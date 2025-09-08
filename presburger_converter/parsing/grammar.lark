@@ -9,12 +9,12 @@
              | or_expr "<->" equivalence           -> iff
 
 ?or_expr: and_expr
-        | or_expr "OR" and_expr                    -> or_expr
+        | or_expr OR_SYM and_expr                    -> or_expr
 
 ?and_expr: not_expr
-         | and_expr "AND" not_expr                 -> and_expr
+         | and_expr AND_SYM not_expr                 -> and_expr
 
-?not_expr: "NOT" atom                              -> not_expr
+?not_expr: NOT_SYM atom                              -> not_expr
          | atom
 
 ?atom: comparison
@@ -29,6 +29,7 @@
            | term "<" term                         -> less
            | term ">" term                         -> greater
            | term ">=" term                        -> greater_equal
+           | term "!=" term                        -> neq
 
 ?term: sum
 
@@ -46,6 +47,9 @@ product: CONST VAR       -> mult
 
 EX: "EX" | "E"
 ALL: "ALL" | "A"
+AND_SYM: "AND" | "and" | "&"
+OR_SYM: "OR" | "or" | "|"
+NOT_SYM: "NOT" | "not" | "!"
 
 VAR: /[a-z][a-z0-9_]*/i
 CONST: /[0-9]+/

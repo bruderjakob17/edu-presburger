@@ -53,14 +53,17 @@ class ASTTransformer(Transformer):
     def greater_equal(self, left, right):
         return GreaterEqual(left, right)
 
+    def neq(self, left, right):
+        return NotEqual(left, right)
+
     # Logical connectives
-    def or_expr(self, left, right):
+    def or_expr(self, left, _or_token, right):
         return Or(left, right)
 
-    def and_expr(self, left, right):
+    def and_expr(self, left, _and_token, right):
         return And(left, right)
 
-    def not_expr(self, expr):
+    def not_expr(self, _not_token, expr):
         return Not(expr)
 
     def implies(self, left, right):

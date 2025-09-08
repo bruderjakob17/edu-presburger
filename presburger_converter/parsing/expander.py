@@ -63,6 +63,11 @@ def expand_shorthands(node):
         right = expand_shorthands(node.right)
         return LessEqual(expand_shorthands(right), expand_shorthands(left))
 
+    if isinstance(node, NotEqual):
+        left = expand_shorthands(node.left)
+        right = expand_shorthands(node.right)
+        return expand_shorthands(Not(Eq(left, right)))
+
     # --- Logical connectives ----------------------------------------------------
     if isinstance(node, Implies):
         left = expand_shorthands(node.left)

@@ -9,12 +9,12 @@ from lark import UnexpectedInput
 
 
 
-def formula_to_aut(user_input, display_atomic_construction=False):
+def formula_to_aut(user_input, display_atomic_construction=False, base=2):
     formula = macro_preprocessor.process_macros(user_input)
     tree = parser.parse_formula(formula)
     pure_tree = expander.process_syntax_tree(tree)
     #pure_tree = expander.expand_shorthands(tree)
-    aut, variables = build_automaton(pure_tree)
+    aut, variables = build_automaton(pure_tree, base=base)
     aut.get_reachable_states()
     if display_atomic_construction:
         if isinstance(tree, LessEqual):
@@ -27,14 +27,14 @@ def formula_to_aut(user_input, display_atomic_construction=False):
     return aut, aut, variables
 
 
-def test_formula(formula: str, mode = "plain"):
+def test_formula(formula: str, mode = "plain", base=2):
     clean_formula = macro_preprocessor.process_macros(formula)
     tree = parser.parse_formula(clean_formula)
     if mode == "plain":
         pure_tree = expander.expand_shorthands(tree)
     else:
         pure_tree = expander.process_syntax_tree(tree)
-    aut, variables = build_automaton(pure_tree, mode)
+    aut, variables = build_automaton(pure_tree, mode, base)
     if not is_deterministic(aut):
         aut = determinize(aut)
     aut = mata_nfa.minimize(aut)

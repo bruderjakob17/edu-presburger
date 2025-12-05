@@ -67,7 +67,7 @@ def _can_merge(a: str, b: str) -> str | None:
     return "".join(merged)
 
 
-def _compress_digit_patterns(patterns: List[str]) -> List[str]:
+def _compress_digit_patterns(patterns: List[str]) -> List[str]: # this is likely dead code
     """Iteratively merge patterns using the * wildcard.
 
     The algorithm keeps merging two patterns whenever they can be merged until
@@ -95,7 +95,7 @@ def _compress_digit_patterns(patterns: List[str]) -> List[str]:
     return sorted(work)
 
 
-def compress_label_string(label_str: str) -> str:
+def compress_label_string(label_str: str) -> str: # this is likely dead code
     """Compress a comma-separated list of digit-strings using wild-cards.
 
     Example::
@@ -315,50 +315,55 @@ def merge_parallel_edges(dot: str) -> str:
 ###############################################################################
 
 
-def _merge_patterns(patterns):
+def _merge_patterns(patterns, base=2):
     """
-    Repeatedly merge sub-labels that differ in exactly one position,
-    replacing that position with '*, until no further merges are possible.
+    Iteratively merges patterns that form a complete set for the given base.
+    
+    Logic:
+    1. Identify a position `i`.
+    2. Group strings that are identical everywhere *except* at `i`.
+    3. If a group contains exactly `base` distinct concrete digits (or at least one wildcard),
+       at position `i`, we merge them into a single string with `*` at `i`.
     """
-    patterns = set(patterns)
-    changed = True
+    if not patterns:
+        return []
 
+    # Working set
+    current = set(patterns)
+    width = len(next(iter(current)))  # Assume all labels have same width
+    
+    changed = True
     while changed:
         changed = False
-        new_patterns, merged = set(), set()
-        pat_list = list(patterns)
+        
+        # Try to merge at every position index
+        for i in range(width):
+            # Dictionary mapping the "context" (string with char i removed) to the set of characters found at position i.
+            groups = defaultdict(set)
+            
+            for pat in current:
+                key = pat[:i] + '?' + pat[i+1:] # placeholder '?' to represent the position we are analyzing
+                groups[key].add(pat[i])
 
-        for i in range(len(pat_list)):
-            for j in range(i + 1, len(pat_list)):
-                a, b = pat_list[i], pat_list[j]
-                if len(a) != len(b):
-                    continue
+            # Check every group to see if we can merge
+            for key, chars in groups.items():
+                if len(chars) == base or ('*' in chars and len(chars) > 1):
+                    
+                    # Construct the new pattern with wildcard
+                    merged_pat = key.replace('?', '*')
+                    
+                    # Reconstruct the parts that formed this merge and remove them 
+                    # if they haven't been used by a previous iteration of this loop
+                    parts_to_remove = {key.replace('?', c) for c in chars}
+                    
+                    if parts_to_remove.issubset(current):
+                        current.difference_update(parts_to_remove)
+                        current.add(merged_pat)
+                        changed = True
 
-                # Compare character-wise
-                diff, combo = 0, []
-                for c1, c2 in zip(a, b):
-                    if c1 == c2:
-                        combo.append(c1)
-                    else:
-                        diff += 1
-                        combo.append('*')
-                    if diff > 1:
-                        break
+    return sorted(current)
 
-                # Merge if they differed in **exactly** one place
-                if diff == 1:
-                    merged.update({a, b})
-                    new_patterns.add(''.join(combo))
-
-        # Anything not merged stays; add all new combos
-        next_round = (patterns - merged) | new_patterns
-        if next_round != patterns:
-            patterns, changed = next_round, True
-
-    return patterns
-
-
-def simplify_automaton_labels(dot: str) -> str:
+def simplify_automaton_labels(dot: str, base: int) -> str:
     """
     Take a DOT string of a finite automaton, merge the transition
     labels per the given rule, and return the updated DOT string.
@@ -368,7 +373,7 @@ def simplify_automaton_labels(dot: str) -> str:
     def _replace(match):
         raw = match.group(1)
         parts = [p.strip() for p in raw.split(',')]
-        merged = _merge_patterns(parts)
+        merged = _merge_patterns(parts, base)
         return f'[label="{", ".join(sorted(merged))}"]'
 
     return label_re.sub(_replace, dot)
@@ -542,7 +547,7 @@ def aut_to_dot(aut, variable_order, new_variable_order = None, display_labels = 
         dot = rewrite_nodes_with_decode(dot)
     print(dot)
     dot = merge_parallel_edges(dot)
-    dot = simplify_automaton_labels(dot)
+    dot = simplify_automaton_labels(dot, base)
     dot = add_rankdir_auto(dot, node_count)
     dot = optimize_dot_start_arrow(dot)
     print(dot)

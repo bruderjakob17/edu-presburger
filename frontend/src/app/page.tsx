@@ -56,6 +56,7 @@ export default function Home() {
   const [displayLabels, setDisplayLabels] = useState<boolean>(true);
   const [displayAtomicConstruction, setDisplayAtomicConstruction] = useState<boolean>(false);
   const [base, setBase] = useState<number>(2);
+  const [lastGeneratedBase, setLastGeneratedBase] = useState<number>(2);
   const [requestedSolutions, setRequestedSolutions] = useState<number>(0);
   const scrollPositionRef = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -146,6 +147,7 @@ export default function Home() {
       }
       setNumStates(data.num_states);
       setNumFinalStates(data.num_final_states);
+      setLastGeneratedBase(base); // Track the base used for this generation
     } catch (err) {
       const errorMsg = (err instanceof Error ? err.message : 'An error occurred')
         .replace(/\t/g, '    ')
@@ -505,11 +507,11 @@ export default function Home() {
               id="base-input"
               type="number"
               min="2"
-              max="36"
+              max="10"
               value={base}
               onChange={(e) => {
                 const val = parseInt(e.target.value);
-                if (!isNaN(val) && val >= 2) {
+                if (!isNaN(val) && val >= 2 && val <= 10) {
                   setBase(val);
                 }
               }}
@@ -623,7 +625,7 @@ CONST: /[0-9]+/
               onAddExample={handleAddExample}
               isFullSolutionSet={isFullSolutionSet}
               isButtonDisabled={isButtonDisabled()}
-              base={base}
+              base={lastGeneratedBase}
             />
             
             {variables.length > 0 && (

@@ -10,20 +10,21 @@ from libmata.alphabets import *
 
 config = mata_nfa.store()
 
-def setup(k):
+def setup(k, base):
     global config
+    config['base'] = base
     a = OnTheFlyAlphabet()
-    # a = IntAlphabet(0, 2**k - 1)
-    # we need every integer symbol {0,1,…,2**k-1} in its map
-    a.add_symbols_for_names([ str(i) for i in range(2**k) ])
+    # a = IntAlphabet(0, base**k - 1)
+    # we need every integer symbol {0,1,…,base**k-1} in its map
+    a.add_symbols_for_names([ str(i) for i in range(base**k) ])
     #print(f"alphabet: {a.get_alphabet_symbols()}")
     config['alphabet'] = a
 
-def build_automaton(node, mode="determinize") -> (mata_nfa.Nfa, [str]):
+def build_automaton(node, mode="determinize", base=2) -> (mata_nfa.Nfa, [str]):
     global config
     if isinstance(node, LessEqual):
         # Atomic case: build automaton for t <= u
-        aut, variables = build_atomic_automaton(node)
+        aut, variables = build_atomic_automaton(node, base)
         if mode == "always":
             aut = mata_nfa.minimize(aut)
         # print(aut.to_dot_str())
@@ -33,9 +34,9 @@ def build_automaton(node, mode="determinize") -> (mata_nfa.Nfa, [str]):
         return aut, variables
 
     elif isinstance(node, Or):
-        left_automaton, left_variables = build_automaton(node.left, mode)
-        right_automaton, right_variables = build_automaton(node.right, mode)
-        aut, variables = union(left_automaton, right_automaton, left_variables, right_variables)
+        left_automaton, left_variables = build_automaton(node.left, mode, base)
+        right_automaton, right_variables = build_automaton(node.right, mode, base)
+        aut, variables = union(left_automaton, right_automaton, left_variables, right_variables, base)
         if mode == "always":
             aut = mata_nfa.minimize(aut)
         #print(f"automaton for {node}:")
@@ -43,7 +44,7 @@ def build_automaton(node, mode="determinize") -> (mata_nfa.Nfa, [str]):
         return aut, variables
 
     elif isinstance(node, Not):
-        child_automaton, variables = build_automaton(node.expr, mode)
+        child_automaton, variables = build_automaton(node.expr, mode, base)
         #child_automaton = mata_nfa.minimize(child_automaton)
         #print(f"child automaton: {child_automaton.to_dot_str()}")
         if not is_deterministic(child_automaton):
@@ -55,7 +56,7 @@ def build_automaton(node, mode="determinize") -> (mata_nfa.Nfa, [str]):
             #print(f"determinized automaton \n: {child_automaton.to_dot_str()}")
         #child_automaton = mata_nfa.complement(child_automaton, config['alphabet'])
         if mode in ["always", "minimize"]:
-            child_automaton = complete(child_automaton, variables)
+            child_automaton = complete(child_automaton, variables, base)
         #print(f"completed automaton \n: {child_automaton.to_dot_str()}")
         child_automaton = complement(child_automaton)
         #child_automaton = mata_nfa.minimize(child_automaton)
@@ -67,11 +68,11 @@ def build_automaton(node, mode="determinize") -> (mata_nfa.Nfa, [str]):
         return child_automaton, variables
 
     elif isinstance(node, Exists):
-        child_automaton, variables = build_automaton(node.formula, mode)
-        setup(len(variables) - 1)
+        child_automaton, variables = build_automaton(node.formula, mode, base)
+        setup(len(variables) - 1, base)
         index = variables.index(node.var)
         #print(f"automaton for {node}:")
-        aut, variables = project_variable(child_automaton, index, variables)
+        aut, variables = project_variable(child_automaton, index, variables, base)
         if mode == "always":
             aut = mata_nfa.minimize(aut)
         #aut = mata_nfa.minimize(aut)
@@ -82,7 +83,7 @@ def build_automaton(node, mode="determinize") -> (mata_nfa.Nfa, [str]):
         raise ValueError(f"Unsupported node type in build_automaton: {type(node)}")
 
 
-def project_variable(aut : mata_nfa.Nfa , index, variables):
+def project_variable(aut : mata_nfa.Nfa , index, variables, base=2):
     # This function will project the variable out of the automaton
     # You will need to implement this based on your automata library
     # for each transistion, do calculation
@@ -99,7 +100,11 @@ def project_variable(aut : mata_nfa.Nfa , index, variables):
         source = transition.source
         target = transition.target
         symbol = transition.symbol
-        new_symbol = symbol % 2**index + ((symbol - symbol % 2**(index+1)) // 2)
+        # Convert to digit tuple, remove digit at index, convert back
+        num_vars = len(variables)
+        digits = int_to_lsbf(symbol, num_vars, base)
+        new_digits = digits[:index] + digits[index+1:]
+        new_symbol = lsbf_to_int(new_digits, base)
         #print(f"Replaced {symbol} with {new_symbol} from {source} to {target}")
         new_aut.add_transition(source, new_symbol, target)
     transitions = new_aut.get_trans_as_sequence()
@@ -123,14 +128,14 @@ def project_variable(aut : mata_nfa.Nfa , index, variables):
     del variables[index]
     return new_aut, variables
 
-def build_atomic_automaton(node):
+def build_atomic_automaton(node, base=2):
     # This function will build an automaton for the atomic case
     # You will need to implement this based on your automata library
     b, map = count_tree(node)
     x = []
     a = []
     n = len(map)
-    setup(n)
+    setup(n, base)
     for var in map.keys():
         x.append(var)
         a.append(map.get(var))
@@ -147,10 +152,10 @@ def build_atomic_automaton(node):
     worklist.append(sb)
     while worklist:
         state = worklist.popleft()
-        for zeta in itertools.product([0, 1], repeat=n):
+        for zeta in itertools.product(range(base), repeat=n):
             k = decode(state)
             dotproduct = sum(zeta[i] * a[i] for i in range(n))
-            j = floor((k - dotproduct) / 2)
+            j = floor((k - dotproduct) / base)
             if encode(j) not in states:
                 sj = aut.add_state(encode(j))
                 if j >= 0:
@@ -159,7 +164,7 @@ def build_atomic_automaton(node):
                 states.add(sj)
             else:
                 sj = encode(j)
-            aut.add_transition(state, lsbf_to_int(zeta), sj)
+            aut.add_transition(state, lsbf_to_int(zeta, base), sj)
     aut.final_states = final_states
     #print("finished")
     return aut, x
@@ -169,7 +174,7 @@ def union_nfa(automaton1, automaton2):
     pass
 
 
-def expand_transitions(automaton, variables, mapping, old_num_vars):
+def expand_transitions(automaton, variables, mapping, old_num_vars, base=2):
     """
     Expands transitions in an automaton for a new set of variables.
 
@@ -183,6 +188,7 @@ def expand_transitions(automaton, variables, mapping, old_num_vars):
                  So, mapping keys are indices in the *new* variable set,
                  and values are indices in the *old* variable set from which to take the bit.
         old_num_vars: The number of variables the automaton's labels originally corresponded to.
+        base: The base for encoding (default 2 for binary).
     """
     num_vars = len(variables)
 
@@ -228,11 +234,11 @@ def expand_transitions(automaton, variables, mapping, old_num_vars):
         target = data["target"]
         old_label_int = data["symbol"]  # Integer symbol from the original transition
 
-        # Convert the integer label to its bit tuple representation based on old_num_vars
+        # Convert the integer label to its digit tuple representation based on old_num_vars
         try:
-            old_label_tuple = int_to_lsbf(old_label_int, old_num_vars)
+            old_label_tuple = int_to_lsbf(old_label_int, old_num_vars, base)
         except ValueError as e:
-            print(f"Error converting old_label {old_label_int} with {old_num_vars} bits: {e}")
+            print(f"Error converting old_label {old_label_int} with {old_num_vars} digits: {e}")
             continue
 
         # Build a template for the new label tuple (length num_vars)
@@ -254,9 +260,9 @@ def expand_transitions(automaton, variables, mapping, old_num_vars):
                     # Identify positions in the template that are still None (these are new/unmapped variables)
         wildcard_indices = [i for i, val in enumerate(template) if val is None]
 
-        # Generate all combinations of bits (0 or 1) for these wildcard positions
+        # Generate all combinations of digits (0 to base-1) for these wildcard positions
         num_wildcards = len(wildcard_indices)
-        for bits_for_wildcards in itertools.product((0, 1), repeat=num_wildcards):
+        for bits_for_wildcards in itertools.product(range(base), repeat=num_wildcards):
             new_label_list = list(template)  # Create a mutable copy of the template
 
             # Fill in the wildcard positions with the current combination of bits
@@ -271,19 +277,19 @@ def expand_transitions(automaton, variables, mapping, old_num_vars):
                 continue
 
             new_label_tuple = tuple(new_label_list)
-            new_symbol_int = lsbf_to_int(new_label_tuple)
+            new_symbol_int = lsbf_to_int(new_label_tuple, base)
 
             automaton.add_transition(source, new_symbol_int, target)
 
     return automaton
 
 
-def union(automaton1, automaton2, variables1, variables2):
+def union(automaton1, automaton2, variables1, variables2, base=2):
     variables_merged = deepcopy(variables1)
     for var in variables2:
         if var not in variables1:
             variables_merged.append(var)
-    setup(len(variables_merged))
+    setup(len(variables_merged), base)
     map1 = {}
     for i in range(len(variables1)):
         map1[i] = i
@@ -292,14 +298,14 @@ def union(automaton1, automaton2, variables1, variables2):
         new_index = variables_merged.index(var)
         old_index = variables2.index(var)
         map2[new_index] = old_index
-    automaton1 = expand_transitions(automaton1, variables_merged, map1, len(variables1))
+    automaton1 = expand_transitions(automaton1, variables_merged, map1, len(variables1), base)
     #print(f"automaton1 after expansion: {automaton1.to_dot_str()}")
-    automaton2 = expand_transitions(automaton2, variables_merged, map2, len(variables2))
+    automaton2 = expand_transitions(automaton2, variables_merged, map2, len(variables2), base)
     #print(f"automaton2 after expansion: {automaton2.to_dot_str()}")
     return mata_nfa.union(automaton1, automaton2), variables_merged
 
 
-def complete(automaton : mata_nfa.Nfa, variables):
+def complete(automaton : mata_nfa.Nfa, variables, base=2):
     new_transitions = []
     states = automaton.get_reachable_states()
     max_state = 0
@@ -307,7 +313,7 @@ def complete(automaton : mata_nfa.Nfa, variables):
         if max_state < state:
             max_state = state
         transitions = automaton.get_trans_from_state_as_sequence(state)
-        needed_labels = set(range(2**len(variables)))
+        needed_labels = set(range(base**len(variables)))
         for transition in transitions:
             needed_labels.discard(transition.symbol)
         for label in needed_labels:
@@ -319,7 +325,7 @@ def complete(automaton : mata_nfa.Nfa, variables):
         source = transition[0]
         label = transition[1]
         automaton.add_transition(source, label, catch_state)
-    needed_labels = set(range(2**len(variables)))
+    needed_labels = set(range(base**len(variables)))
     for label in needed_labels:
         automaton.add_transition(catch_state, label, catch_state)
     return automaton
@@ -414,11 +420,30 @@ def is_deterministic(aut : mata_nfa.Nfa):
     return aut.is_deterministic()
 
 
-def lsbf_to_int(bits):
-    return sum(bit << i for i, bit in enumerate(bits))
+def lsbf_to_int(digits, base=2):
+    """Convert LSBF digit sequence to integer.
+    
+    Args:
+        digits: Sequence of digits in least-significant-first order
+        base: The base for encoding (default 2 for binary)
+    
+    Returns:
+        Integer value
+    """
+    return sum(digit * (base ** i) for i, digit in enumerate(digits))
 
-def int_to_lsbf(n, width):
-    return tuple((n >> i) & 1 for i in range(width))
+def int_to_lsbf(n, width, base=2):
+    """Convert integer to LSBF digit sequence.
+    
+    Args:
+        n: Integer to convert
+        width: Number of digits in output
+        base: The base for encoding (default 2 for binary)
+    
+    Returns:
+        Tuple of digits in least-significant-first order
+    """
+    return tuple((n // (base ** i)) % base for i in range(width))
 
 def encode(k):
     if k < 0:

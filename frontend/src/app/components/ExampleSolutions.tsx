@@ -14,6 +14,7 @@ interface ExampleSolutionsProps {
   onAddExample: () => void;
   isFullSolutionSet: boolean;
   isButtonDisabled: boolean;
+  base?: number;
 }
 
 export default function ExampleSolutions({ 
@@ -21,7 +22,8 @@ export default function ExampleSolutions({
   bufferSolutions,
   onAddExample, 
   isFullSolutionSet, 
-  isButtonDisabled 
+  isButtonDisabled,
+  base = 2
 }: ExampleSolutionsProps) {
   if (!solutions || solutions.length === 0) return null;
 
@@ -45,7 +47,7 @@ export default function ExampleSolutions({
             {/* Path Information (only show if path_bits is not empty) */}
             {solution.path_bits && solution.path_bits.length > 0 && (
               <div className="mb-2">
-                <div className="text-sm font-medium text-gray-600 mb-1">Path (binary):</div>
+                <div className="text-sm font-medium text-gray-600 mb-1">Path (base {base}):</div>
                 <div className="flex flex-wrap items-center gap-1">
                   {solution.path_bits.map((bit, i) => (
                     <span
@@ -67,7 +69,7 @@ export default function ExampleSolutions({
                     <div className="font-medium text-gray-700">{varName}:</div>
                     <div className="flex items-center gap-2">
                       <div className="flex items-center gap-1">
-                        <span className="text-gray-500 text-sm">Binary:</span>
+                        <span className="text-gray-500 text-sm">{base === 2 ? 'Binary' : `Base ${base}`}:</span>
                         <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded font-mono text-sm">
                           {solution.var_bits[varName] || 'ε'}
                         </span>

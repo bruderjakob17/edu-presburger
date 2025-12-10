@@ -11,12 +11,24 @@ from presburger_converter.pipeline import formula_to_aut
 ###############################################################################
 
 
-def int_to_bitstring(i: int, width: int) -> str:
+def int_to_digitstring(i: int, width: int, base: int = 2) -> str:
     """
-    Return *width*-bit two's-complement binary representation of *i*
-    *little-endian* (LSB-first) so it matches the automaton's encoding.
+    Return *width*-digit base-N representation of *i*
+    *little-endian* (LSD-first) so it matches the automaton's encoding.
+    
+    Args:
+        i: Integer to convert
+        width: Number of digits in output
+        base: The base for encoding (default 2 for binary)
+    
+    Returns:
+        String of digits in least-significant-first order
     """
-    return f"{i:0{width}b}"[::-1]          # <— reverse to LSB-first
+    digits = []
+    for _ in range(width):
+        digits.append(str(i % base) if i % base < 10 else chr(ord('A') + i % base - 10))
+        i //= base
+    return ''.join(digits)
 
 
 ###############################################################################
@@ -25,11 +37,11 @@ def int_to_bitstring(i: int, width: int) -> str:
 
 
 def _can_merge(a: str, b: str) -> str | None:
-    """Return merged pattern if *a* and *b* differ by **exactly one** concrete bit.
+    """Return merged pattern if *a* and *b* differ by **exactly one** concrete digit.
 
     Both patterns must have equal length. The merge is only permitted when the
-    differing position contains concrete bits (``0``/``1``) in both patterns
-    (never ``*``). The result is the pattern with a ``*`` at that position.
+    differing position contains concrete digits (not ``*``) in both patterns.
+    The result is the pattern with a ``*`` at that position.
     Otherwise ``None`` is returned.
     """
     if len(a) != len(b):
@@ -42,7 +54,7 @@ def _can_merge(a: str, b: str) -> str | None:
         # Abort if either side already has a wildcard here.
         if ca == "*" or cb == "*":
             return None
-        # More than one differing bit? no merge.
+        # More than one differing digit? no merge.
         if diff_pos != -1:
             return None
         diff_pos = idx
@@ -55,7 +67,7 @@ def _can_merge(a: str, b: str) -> str | None:
     return "".join(merged)
 
 
-def _compress_bit_patterns(patterns: List[str]) -> List[str]:
+def _compress_digit_patterns(patterns: List[str]) -> List[str]: # this is likely dead code
     """Iteratively merge patterns using the * wildcard.
 
     The algorithm keeps merging two patterns whenever they can be merged until
@@ -83,8 +95,8 @@ def _compress_bit_patterns(patterns: List[str]) -> List[str]:
     return sorted(work)
 
 
-def compress_label_string(label_str: str) -> str:
-    """Compress a comma-separated list of bit-strings using wild-cards.
+def compress_label_string(label_str: str) -> str: # this is likely dead code
+    """Compress a comma-separated list of digit-strings using wild-cards.
 
     Example::
         >>> compress_label_string("01,10,11")
@@ -93,7 +105,7 @@ def compress_label_string(label_str: str) -> str:
     labels = [lbl.strip() for lbl in label_str.split(",") if lbl.strip()]
     if not labels:
         return ""
-    compressed = _compress_bit_patterns(labels)
+    compressed = _compress_digit_patterns(labels)
     return ",".join(compressed)
 
 
@@ -101,18 +113,18 @@ def compress_label_string(label_str: str) -> str:
 # DOT helper: reorder bit-labels after a variable permutation                  #
 ###############################################################################
 
-def _reorder_bit_patterns_in_label(label: str,
+def _reorder_digit_patterns_in_label(label: str,
                                    mapping: dict[int, int],
                                    width: int) -> str:
     """
-    Reorder every bit-pattern inside *label* according to *mapping*.
+    Reorder every digit-pattern inside *label* according to *mapping*.
 
     *label* is the raw string that appears inside `label="..."` – it can contain
     several comma-separated patterns that may include wild-cards (`*`).
 
     Any pattern that
         * has length *width*, **and**
-        * consists only of `0 1 *`
+        * consists only of alphanumeric digits and `*`
     is permuted; everything else (epsilon, 'ε', etc.) is left unchanged.
     """
     parts = [p.strip() for p in label.split(",") if p.strip()]
@@ -121,7 +133,7 @@ def _reorder_bit_patterns_in_label(label: str,
     inv = {new_idx: old_idx for old_idx, new_idx in mapping.items()}
 
     for p in parts:
-        if len(p) == width and all(c in "01*" for c in p):
+        if len(p) == width and all(c.isalnum() or c == '*' for c in p):
             reordered = [""] * width
             for new_idx in range(width):
                 old_idx = inv[new_idx]
@@ -133,18 +145,18 @@ def _reorder_bit_patterns_in_label(label: str,
     return ",".join(new_parts)
 
 
-def reorder_bitstring_labels(dot: str,
+def reorder_digitstring_labels(dot: str,
                              mapping: dict[int, int],
                              width: int) -> str:
     """
-    Apply the bit-position permutation encoded in *mapping* to **all** edge
+    Apply the digit-position permutation encoded in *mapping* to **all** edge
     labels in *dot* and return the updated DOT string.
     """
     label_re = re.compile(r'(\[label=")([^"]*)("\])')
 
     def _repl(m: re.Match[str]) -> str:
         prefix, raw, suffix = m.groups()
-        new_raw = _reorder_bit_patterns_in_label(raw, mapping, width)
+        new_raw = _reorder_digit_patterns_in_label(raw, mapping, width)
         return f'{prefix}{new_raw}{suffix}'
 
     return label_re.sub(_repl, dot)
@@ -159,8 +171,17 @@ _EDGE_LINE = re.compile(r"^(\s*)(\d+)\s*->\s*\{\s*(\d+)\s*\}\s*\[(.*)\];\s*$")
 _LABEL_ATTR = re.compile(r'label\s*=\s*"([^"]*)"')
 
 
-def convert_int_labels_to_bitstrings(dot: str, width: int) -> str:
-    """Replace integer edge labels with binary strings of *width* bits."""
+def convert_int_labels_to_digitstrings(dot: str, width: int, base: int = 2) -> str:
+    """Replace integer edge labels with base-N digit strings of *width* digits.
+    
+    Args:
+        dot: DOT string with integer labels
+        width: Number of digits per label
+        base: The base for encoding (default 2 for binary)
+    
+    Returns:
+        DOT string with digit string labels
+    """
 
     def _repl(match: re.Match[str]) -> str:
         raw = match.group(1)
@@ -168,7 +189,7 @@ def convert_int_labels_to_bitstrings(dot: str, width: int) -> str:
         converted: list[str] = []
         for part in parts:
             if part.isdigit():
-                converted.append(int_to_bitstring(int(part), width))
+                converted.append(int_to_digitstring(int(part), width, base))
             else:  # already something else (epsilon, *, ...)
                 converted.append(part)
         return f'label="{",".join(converted)}"'
@@ -294,50 +315,55 @@ def merge_parallel_edges(dot: str) -> str:
 ###############################################################################
 
 
-def _merge_patterns(patterns):
+def _merge_patterns(patterns, base=2):
     """
-    Repeatedly merge sub-labels that differ in exactly one position,
-    replacing that position with '*, until no further merges are possible.
+    Iteratively merges patterns that form a complete set for the given base.
+    
+    Logic:
+    1. Identify a position `i`.
+    2. Group strings that are identical everywhere *except* at `i`.
+    3. If a group contains exactly `base` distinct concrete digits (or at least one wildcard),
+       at position `i`, we merge them into a single string with `*` at `i`.
     """
-    patterns = set(patterns)
-    changed = True
+    if not patterns:
+        return []
 
+    # Working set
+    current = set(patterns)
+    width = len(next(iter(current)))  # Assume all labels have same width
+    
+    changed = True
     while changed:
         changed = False
-        new_patterns, merged = set(), set()
-        pat_list = list(patterns)
+        
+        # Try to merge at every position index
+        for i in range(width):
+            # Dictionary mapping the "context" (string with char i removed) to the set of characters found at position i.
+            groups = defaultdict(set)
+            
+            for pat in current:
+                key = pat[:i] + '?' + pat[i+1:] # placeholder '?' to represent the position we are analyzing
+                groups[key].add(pat[i])
 
-        for i in range(len(pat_list)):
-            for j in range(i + 1, len(pat_list)):
-                a, b = pat_list[i], pat_list[j]
-                if len(a) != len(b):
-                    continue
+            # Check every group to see if we can merge
+            for key, chars in groups.items():
+                if len(chars) == base or ('*' in chars and len(chars) > 1):
+                    
+                    # Construct the new pattern with wildcard
+                    merged_pat = key.replace('?', '*')
+                    
+                    # Reconstruct the parts that formed this merge and remove them 
+                    # if they haven't been used by a previous iteration of this loop
+                    parts_to_remove = {key.replace('?', c) for c in chars}
+                    
+                    if parts_to_remove.issubset(current):
+                        current.difference_update(parts_to_remove)
+                        current.add(merged_pat)
+                        changed = True
 
-                # Compare character-wise
-                diff, combo = 0, []
-                for c1, c2 in zip(a, b):
-                    if c1 == c2:
-                        combo.append(c1)
-                    else:
-                        diff += 1
-                        combo.append('*')
-                    if diff > 1:
-                        break
+    return sorted(current)
 
-                # Merge if they differed in **exactly** one place
-                if diff == 1:
-                    merged.update({a, b})
-                    new_patterns.add(''.join(combo))
-
-        # Anything not merged stays; add all new combos
-        next_round = (patterns - merged) | new_patterns
-        if next_round != patterns:
-            patterns, changed = next_round, True
-
-    return patterns
-
-
-def simplify_automaton_labels(dot: str) -> str:
+def simplify_automaton_labels(dot: str, base: int) -> str:
     """
     Take a DOT string of a finite automaton, merge the transition
     labels per the given rule, and return the updated DOT string.
@@ -347,7 +373,7 @@ def simplify_automaton_labels(dot: str) -> str:
     def _replace(match):
         raw = match.group(1)
         parts = [p.strip() for p in raw.split(',')]
-        merged = _merge_patterns(parts)
+        merged = _merge_patterns(parts, base)
         return f'[label="{", ".join(sorted(merged))}"]'
 
     return label_re.sub(_replace, dot)
@@ -496,11 +522,11 @@ def rewrite_nodes_with_decode(dot: str) -> str:
     return "".join(parts)
 
 
-def aut_to_dot(aut, variable_order, new_variable_order = None, display_labels = True, display_atomic_construction = False):
+def aut_to_dot(aut, variable_order, new_variable_order = None, display_labels = True, display_atomic_construction = False, base = 2):
     dot = aut.to_dot_str()
     node_count = len(aut.get_reachable_states())
     print(dot)
-    dot = convert_int_labels_to_bitstrings(dot, len(variable_order))
+    dot = convert_int_labels_to_digitstrings(dot, len(variable_order), base)
     print(dot)
     if new_variable_order:
         if set(new_variable_order) != set(variable_order):
@@ -512,7 +538,7 @@ def aut_to_dot(aut, variable_order, new_variable_order = None, display_labels = 
             old_idx: new_variable_order.index(var)
             for old_idx, var in enumerate(variable_order)
         }
-        dot = reorder_bitstring_labels(dot, mapping, len(variable_order))
+        dot = reorder_digitstring_labels(dot, mapping, len(variable_order))
     print(dot)
     if not display_labels:
         dot = strip_state_names(dot)
@@ -521,7 +547,7 @@ def aut_to_dot(aut, variable_order, new_variable_order = None, display_labels = 
         dot = rewrite_nodes_with_decode(dot)
     print(dot)
     dot = merge_parallel_edges(dot)
-    dot = simplify_automaton_labels(dot)
+    dot = simplify_automaton_labels(dot, base)
     dot = add_rankdir_auto(dot, node_count)
     dot = optimize_dot_start_arrow(dot)
     print(dot)

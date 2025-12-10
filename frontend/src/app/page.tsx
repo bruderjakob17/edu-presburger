@@ -22,6 +22,7 @@ type ReorderRequestBody = {
   display_labels: boolean;
   display_atomic_construction: boolean;
   formula?: string;
+  base: number;
 };
 
 type SolutionsRequestBody = {
@@ -31,6 +32,7 @@ type SolutionsRequestBody = {
   new_variable_order: string[];
   display_atomic_construction: boolean;
   formula?: string;
+  base: number;
 };
 
 export default function Home() {
@@ -53,6 +55,8 @@ export default function Home() {
   const [numFinalStates, setNumFinalStates] = useState<number>(0);
   const [displayLabels, setDisplayLabels] = useState<boolean>(true);
   const [displayAtomicConstruction, setDisplayAtomicConstruction] = useState<boolean>(false);
+  const [base, setBase] = useState<number>(2);
+  const [lastGeneratedBase, setLastGeneratedBase] = useState<number>(2);
   const [requestedSolutions, setRequestedSolutions] = useState<number>(0);
   const scrollPositionRef = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -103,6 +107,7 @@ export default function Home() {
         formula: (formulaOverride ?? input).trim(),
         display_labels: displayLabels,
         display_atomic_construction: displayAtomicConstruction,
+        base: base,
       };
 
       const response = await fetch('/api/automaton/dot', {
@@ -142,6 +147,7 @@ export default function Home() {
       }
       setNumStates(data.num_states);
       setNumFinalStates(data.num_final_states);
+      setLastGeneratedBase(base); // Track the base used for this generation
     } catch (err) {
       const errorMsg = (err instanceof Error ? err.message : 'An error occurred')
         .replace(/\t/g, '    ')
@@ -169,6 +175,7 @@ export default function Home() {
         new_variable_order: newVariableOrder,
         display_labels: displayLabels,
         display_atomic_construction: displayAtomicConstruction,
+        base: base,
       };
 
       // Add formula to request if display atomic construction is enabled
@@ -240,6 +247,7 @@ export default function Home() {
         original_variable_order: originalVariables,
         new_variable_order: currentVariables,
         display_atomic_construction: displayAtomicConstruction,
+        base: base,
       };
 
       // Add formula to request if display atomic construction is enabled
@@ -490,6 +498,28 @@ export default function Home() {
             </label>
           </div>
           
+          {/* Base Input */}
+          <div className="flex items-center gap-2">
+            <label htmlFor="base-input" className="text-gray-700 select-none">
+              Encoding Base:
+            </label>
+            <input
+              id="base-input"
+              type="number"
+              min="2"
+              max="10"
+              value={base}
+              onChange={(e) => {
+                const val = parseInt(e.target.value);
+                if (!isNaN(val) && val >= 2 && val <= 10) {
+                  setBase(val);
+                }
+              }}
+              className="w-20 px-3 py-1 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <span className="text-sm text-gray-500">(2 for binary, 10 for decimal, etc.)</span>
+          </div>
+          
           {/* Help Section */}
           <div className="mt-2">
             <button
@@ -595,6 +625,7 @@ CONST: /[0-9]+/
               onAddExample={handleAddExample}
               isFullSolutionSet={isFullSolutionSet}
               isButtonDisabled={isButtonDisabled()}
+              base={lastGeneratedBase}
             />
             
             {variables.length > 0 && (
